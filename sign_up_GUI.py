@@ -33,8 +33,8 @@ class SignUpGUI():
         self.createSignUpUsernamePasswordFrame()
         self.createSecurityQuestionFrame()
 
-        self.exitButton = Button(self.master,text="Close",command=lambda: self.handleCloseEvent(), background="red").grid(row = 5,column=0,sticky="se")
-        self.SignUpButton = Button(self.master,text="Sign Up",command=lambda: self.handleSignUpEvent(), background="lightgreen").grid(row = 5,column=0)
+        self.exitButton = Button(self.master,text="Close",command=lambda: self.handleCloseEvent(), borderwidth=0, highlightthickness=0).grid(row = 5,column=0, sticky='e', padx=60)
+        self.SignUpButton = Button(self.master,text="Sign Up",command=lambda: self.handleSignUpEvent(), borderwidth=0,highlightthickness=0).grid(row = 5,column=0, sticky='w',padx=60)
 
     '''
     Intent: creates frame with SignUp, Username, and Password entries for the sign up GUI
@@ -44,18 +44,17 @@ class SignUpGUI():
     '''
     def createSignUpUsernamePasswordFrame(self):
         # top credentials frame
-        self.signUpcredentials = Frame(self.master, width = 450, height = 180,borderwidth=0, background="LightGray").grid(row = 3,column=0,padx=20)
-        self.usernameLabel = Label( self.signUpcredentials, text="Enter a Username",font='Fixedsys 13 bold',borderwidth=0, background="LightGray").grid(row = 3,column=0,padx=30,pady=25,ipadx=5,ipady=5, sticky="nw")
-        self.passwordLabel = Label( self.signUpcredentials, text="Enter a Password",font='Fixedsys 13 bold',borderwidth=0, background="LightGray").grid(row=3, column=0,padx=30,pady=25, ipadx=5,ipady=5,sticky="w")
-        self.reenterPasswordLabel = Label( self.signUpcredentials, text="Reenter the Password",font='Fixedsys 13 bold',borderwidth=0, background="LightGray").grid(row=3, column=0,padx=25,pady=25, ipadx=3,ipady=5,sticky="sw")
+        self.signUpcredentials = Frame(self.master, width = 450, height = 200,borderwidth=0, background="LightGray").grid(row = 3,column=0,padx=20)
+        self.usernameLabel = Label( self.signUpcredentials, text="Enter a Username",font='Fixedsys 13 bold',borderwidth=0, background="LightGray").grid(row = 3,column=0,padx=50 ,pady=35,ipadx=5,ipady=5, sticky="nw")
+        self.passwordLabel = Label( self.signUpcredentials, text="Enter a Password",font='Fixedsys 13 bold',borderwidth=0, background="LightGray").grid(row=3, column=0,padx=50,pady=25, ipadx=5,ipady=5,sticky="w")
+        self.reenterPasswordLabel = Label( self.signUpcredentials, text="Reenter the Password",font='Fixedsys 13 bold',borderwidth=0, background="LightGray").grid(row=3, column=0,padx=50,pady=25, ipadx=3,ipady=5,sticky="sw")
         self.usernameEntry = Entry(self.signUpcredentials)
-        self.usernameEntry.grid(row = 3,column=0,padx=55,pady=15,ipadx=2,ipady=2, sticky="ne")
+        self.usernameEntry.grid(row = 3,column=0,padx=55,pady=35,ipadx=2,ipady=2, sticky="ne")
         self.passwordEntry = Entry(self.signUpcredentials,show="*")
-        self.passwordEntry.grid(row = 3,column=0,padx=55,pady=15,ipadx=2,ipady=2, sticky="e")
+        self.passwordEntry.grid(row = 3,column=0,padx=55,pady=25,ipadx=2,ipady=2, sticky="e")
         self.reenterPasswordEntry = Entry(self.signUpcredentials,show="*")
         self.reenterPasswordEntry.grid(row = 3,column=0,padx=55,pady=15,ipadx=2,ipady=2, sticky="se")
-        self.requirements = Label(self.master, text="Password should be atleast 10 characters, \n have one uppercase letter, and one special symbol(!, #, $, ^, *)", font='Fixedsys 9', background= "Gray").grid(row = 3,column=0,sticky="s",padx=40)
-        #self.requirement2 = Label(self.master, text="have one uppercase letter, and one special symbol(!, #, $, ^, *)", font='Fixedsys 9', background= "Gray").grid(row = 3,column=0,sticky='s')
+        self.requirements = Label(self.master, text="Password should be atleast 10 characters, \n have one uppercase letter, and one special symbol(!, #, $, ^, *)", font='Fixedsys 9', background= "Gray", foreground="white").grid(row = 3,column=0,sticky="n",padx=40)
         
     '''
     Intent: creates the frame with the security question for the sign up GUI
@@ -66,7 +65,7 @@ class SignUpGUI():
     def createSecurityQuestionFrame(self):
         # security question frame
         self.buttons= Frame(self.master, width = 450, height = 150, borderwidth=0, background="LightGray").grid(row = 4,column=0,padx=20, pady=5)
-        self.securityQuestionLabel = Label( self.signUpcredentials, text="Security Question: What is your  favorite food?",font='Fixedsys 13 bold',borderwidth=0, background="white").grid(row=4, column=0,padx=15,pady=15, ipadx=1,ipady=1,stick="n")
+        self.securityQuestionLabel = Label( self.signUpcredentials, text="Security Question: What is your  favorite food?",font='Fixedsys 13 bold',borderwidth=0, background="LightGray").grid(row=4, column=0,padx=15,pady=15, ipadx=1,ipady=1,stick="n")
         self.securityQuestionEntry = Entry(self.signUpcredentials)
         self.securityQuestionEntry.grid(row = 4,column=0,padx=8,pady=15,ipadx=2,ipady=2)
         
@@ -92,7 +91,7 @@ class SignUpGUI():
     * Post0. signUpUserProcessing() is called by loginlogoutController
     '''
     def handleSignUpEvent(self):
-        self.loginlogoutControllerObject.signUpUserProcessing(self.usernameEntry.get(),self.passwordEntry.get(),self.reenterPasswordEntry.get(),self.securityQuestionEntry.get(), self.signUpMaster)
+        self.loginlogoutControllerObject.signUpUserProcessing(self.usernameEntry.get(),self.passwordEntry.get(),self.reenterPasswordEntry.get(),self.securityQuestionEntry.get(), self.master)
         
             
        

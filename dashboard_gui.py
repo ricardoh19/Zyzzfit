@@ -9,14 +9,15 @@ import dashboard_controller
 # this class controls the graphical user interface of the dashboard window. Its methods include 
 
 class DashboardGUI():
-    def __init__(self, master):
+    def __init__(self, master, userObject, exerciseObject):
         self.master = master
         self.master.configure(background= "#3E3C3C")
         self.master.title("Dashboard")
         self.createMainFrame()
         
-        userObject = None
-        self.dashboardControllerObject = dashboard_controller.DashboardController(userObject)
+        self.userObject = userObject
+        self.exerciseObject = exerciseObject
+        self.dashboardControllerObject = dashboard_controller.DashboardController(userObject, exerciseObject)
 
     '''
     Intent: creates the main frame for the dashboard GUI
@@ -66,10 +67,11 @@ class DashboardGUI():
 
     def createQuoteFrame(self):
         userObject = None
-        self.dashboardControllerObject = dashboard_controller.DashboardController(userObject)
+        exerciseObject = None
+        self.dashboardControllerObject = dashboard_controller.DashboardController(userObject,exerciseObject)
         quote = self.dashboardControllerObject.getQuote()
         print(quote)
-        self.quote = Label(self.master, text="{} \n-{}".format(quote['q'], quote['a']),font='fixedsys 11', height=4, width = 80, borderwidth=0, background='white').grid(row=1,column=1, columnspan=2)
+        self.quote = Label(self.master, text="{} \n-{}".format(quote['q'], quote['a']),font='fixedsys 10', height=4, width = 80, borderwidth=0, background='white').grid(row=1,column=1, columnspan=2)
 
     def createDateFrame(self):
         x = datetime.datetime.now()
@@ -118,7 +120,9 @@ def main():
     
     root = Tk()
     root.geometry("1200x600")
-    dashboardGUIObject = DashboardGUI(root)
+    userObject = None
+    exerciseObject = None
+    dashboardGUIObject = DashboardGUI(root, userObject, exerciseObject)
     root.mainloop()
 
 if __name__ == "__main__":

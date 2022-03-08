@@ -7,10 +7,11 @@ import requests
 
 """This class is the intersection of App traffic after login. """
 class DashboardController():
-    def __init__(self,userObject):
+    def __init__(self,userObject, userExerciseObject):
         self.loginlogout_controller = loginlogout_controller.LoginLogoutControllers()
         self.dashboardGUIObject = None
         self.userObject = userObject
+        self.exerciseObject = userExerciseObject
         self.popup_GUI_object = None
         
     
@@ -24,8 +25,8 @@ class DashboardController():
     def createDashboardGUI(self):
         """This function creates the Dashboard GUI Object"""
         root = Tk()
-        root.geometry("900x600")
-        self.dashboardGUIObject = dashboard_gui.DashboardGUI(root, self.userObject)
+        root.geometry("1200x600")
+        self.dashboardGUIObject = dashboard_gui.DashboardGUI(root, self.userObject, self.exerciseObject)
         root.mainloop()
 
     def openLoginGUI(self):

@@ -4,10 +4,11 @@ import tkinter as tk
 import dashboard_controller 
 from database_manager import DB
 from user import User
+from exerciseData import ExerciseData
 import login_gui
-import dashboard_gui
 import sign_up_GUI
 import forget_password_GUI
+import userInformation_GUI
 
 
 
@@ -33,9 +34,6 @@ class LoginLogoutControllers():
         self.currentUserExerciseData = None
         self.currentUserJunctionData = None
 
-        #self.databaseStockData = None#list of dict: key = stocksymbol :str, values: stockid:int. stockowned:int (number of stock owned)
-        #self.currentUserData = None #list: id:int, username:str, password:str, securityquestionanswer:str
-        #self.currentUserStocks = None #dict: key = stocksymbol:str, values: stockid:int. stockowned:int (number of stock owned)
 
         self.userObject = None
         self.sign_up_gui_object = None
@@ -158,12 +156,12 @@ class LoginLogoutControllers():
                 self.currentUserJunctionData.append(data)
         return self.currentUserJunctionData
 
+
     '''
     Inserts exercises into the User Exercise Info table if user is new.
     Will insert exercises based on how many days user is training.
     For example, if user is training twice per week, it will enter userId, exerciseId, day, sets, and reps 5 times for 
     one day and 5 times for the other.
-
     Algorithm:
     application will insert exercises into user data based on body part. 
     '''
@@ -171,15 +169,104 @@ class LoginLogoutControllers():
         pass
 
 
+
+    '''
+    Intent: logic for signing user up. Displays appropriate message to user.
+    * Preconditions: 
+    * PopUpGUI exists
+    * Postconditions:
+    * Post0. shows user appropriate message based on sign-up status
+    '''
+    def signUpUserProcessing(self, username, password, secondPassword,securityQuestion, signUpGUI):
+        if self.checkUsernameTaken(username):
+            popupGUI = PopUpGUI("Username is taken.")
+            popupGUI.createPopUp()
+            
+        elif password != secondPassword:
+            popupGUI = PopUpGUI("Passwords do not match.")
+            popupGUI.createPopUp()
+
+        elif self.validateUsernamePassword(username,password):
+            signUpGUI.destroy()
+
+            # collect user information and add it to database
+            # then add user information to database
+            self.createUserInformationGUI(username, password,securityQuestion)
+
+            
+        else:
+            popupGUI = PopUpGUI("Username or password is incorrect")
+            popupGUI.createPopUp()
+
+
+    def userInformationProcessing(self, username, password, securityQuestion, age, weight, height, gender, calorieGoal, userInformationGUI):
+        #self.databaseManagerObject.insertDatabaseUserData(username, password, securityQuestion, age, weight, height, gender, calorieGoal)
+        #self.databaseManagerObject.insertTrainingDays(trainingId, userId)
+        userInformationGUI.destroy()
+        self.createDashboardController(username)
     
-        '''
+
+
+    def createUserInformationGUI(self,username, password,securityQuestion):
+        """This function creates the Dashboard GUI Object"""
+        root = Tk()
+        root.geometry("550x550")
+        userInformationGUIObject = userInformation_GUI.UserInformationGUI(root, username, password,securityQuestion)
+        root.mainloop()
+
+
+    """ Do ValidateUsernamePassword. If valid:
+    CreateUserObject then CreateDashboardController.
+    Else error message pop-up GUI."""
+    '''
+    Intent: Logs the User in by creating user object then creating dashboard controller. 
+    * Preconditions: 
+    * self.validateUsernamePassword(username,password) validates the username and password of user.
+    * self.createPopupGui creates the popup GUI with text when called.
+    * self.createDashboardController() creates the dashboard when called.
+    * Postconditions:
+    * Post0. creates user object if username and password validated by the method validateUsernamePassword(username,password)
+    * Post1. does not create the user object. Shows popup GUI with error message.
+    '''
+    def loginUser(self, username, password, loginGUI):
+        if not self.checkUsernameTaken(username):
+            popupGUI = PopUpGUI("Username not found")
+            popupGUI.createPopUp()
+            
+        elif self.validateUsernamePassword(username,password) and self.checkPasswordCorrect(username, password):
+            loginGUI.destroy()
+            self.createDashboardController(username)
+        else:
+            popupGUI = PopUpGUI("Username or password is incorrect")
+            popupGUI.createPopUp()
+            
+           
+
+
+    '''
+    Intent: Creates Dashboard Controller and calls functions to creat user object and dashboard GUI.
+    * Preconditions: 
+    * dashboardController() exists
+    * Postconditions:
+    * Post0. dashboard controller class is created.
+    '''
+    def createDashboardController(self,username):
+        self.userObject = self.createUserObject(username)
+        #self.exerciseUserObject = self.createUserExerciseObject(username)
+        self.exerciseUserObject = None
+
+        dashboardController = dashboard_controller.DashboardController(self.userObject, self.exerciseUserObject)
+        dashboardController.createDashboardGUI()
+    
+    
+    '''
     Intent: Creates User object by passing username parameter. Returns user object
     * Preconditions: 
     * Postconditions:
     * Post0. User object created and returned.
     * Post1. User object is returned as None.
     '''
-    def createUserObject(self,username):
+    def createUserObject(self, username):
         self.currentUserData = self.setCurrentUserData(username)
         #self.currentUserTrainingDays = self.setCurrentTrainingDays(username)
         #self.currentUserExerciseData = self.setCurrentUserExerciseData(username)
@@ -187,12 +274,14 @@ class LoginLogoutControllers():
         return self.userObject
 
 
-    def createUserExerciseObject(self,username):
+    def createUserExerciseObject(self, username):
         self.currentUserExerciseData = self.setCurrentUserExerciseData(username)
         #self.currentUserTrainingDays = self.setCurrentTrainingDays(username)
         #self.currentUserExerciseData = self.setCurrentUserExerciseData(username)
         self.userExerciseObject =  ExerciseData(self.currentUserData)
         return self.userExerciseObject
+
+
 
 
 
@@ -231,7 +320,7 @@ class LoginLogoutControllers():
         if username == None or passwordEntered == None:
             return False
 
-        if len(passwordEntered) < 10:
+        if len(passwordEntered) < 5:
             return False
         
         # check for special characters
@@ -259,7 +348,7 @@ class LoginLogoutControllers():
     * Post1. username is not compared if equal to None.
     '''
     def checkUsernameTaken(self, username):
-        if username == None:
+        if username == None or self.databaseUserData == None:
             return False
         for data in self.databaseUserData:
             for objectData in data: 
@@ -287,48 +376,6 @@ class LoginLogoutControllers():
         return False
         
 
-    """ Do ValidateUsernamePassword. If valid:
-    CreateUserObject then CreateDashboardController.
-    Else error message pop-up GUI."""
-    '''
-    Intent: Logs the User in by creating user object then creating dashboard controller. 
-    * Preconditions: 
-    * self.validateUsernamePassword(username,password) validates the username and password of user.
-    * self.createPopupGui creates the popup GUI with text when called.
-    * self.createDashboardController() creates the dashboard when called.
-    * Postconditions:
-    * Post0. creates user object if username and password validated by the method validateUsernamePassword(username,password)
-    * Post1. does not create the user object. Shows popup GUI with error message.
-    '''
-    def loginUser(self, username, password, loginGUI):
-        if not self.checkUsernameTaken(username):
-            popupGUI = PopUpGUI("Username not found")
-            popupGUI.createPopUp()
-            
-        elif self.validateUsernamePassword(username,password) and self.checkPasswordCorrect(username, password):
-            loginGUI.destroy()
-            self.createDashboardController(username)
-        else:
-            popupGUI = PopUpGUI("Username or password is incorrect")
-            popupGUI.createPopUp()
-            
-           
-    
-
-
-    '''
-    Intent: Creates Dashboard Controller and calls functions to creat user object and dashboard GUI.
-    * Preconditions: 
-    * dashboardController() exists
-    * Postconditions:
-    * Post0. dashboard controller class is created.
-    '''
-    def createDashboardController(self,username):
-        self.userObject = self.createUserObject(username)
-
-        dashboardController = dashboard_controller.DashboardController(self.userObject)
-        dashboardController.createDashboardGUI()
-        
     
     
     '''
@@ -361,32 +408,9 @@ class LoginLogoutControllers():
        
     
     
-    '''
-    Intent: logic for signing user up. Displays appropriate message to user.
-    * Preconditions: 
-    * PopUpGUI exists
-    * Postconditions:
-    * Post0. shows user appropriate message based on sign-up status
-    '''
-    def signUpUserProcessing(self, username, password, secondPassword,securityQuestion, signUpGUI):
-        if self.checkUsernameTaken(username):
-            popupGUI = PopUpGUI("Username is taken.")
-            popupGUI.createPopUp()
             
-        elif password != secondPassword:
-            popupGUI = PopUpGUI("Passwords do not match.")
-            popupGUI.createPopUp()
 
-        elif self.validateUsernamePassword(username,password):
-            signUpGUI.destroy()
-            # add user information to database
-            self.databaseManagerObject.insertDatabaseUserData(username, password, securityQuestion)
-            self.createDashboardController(username)
-            
-        else:
-            popupGUI = PopUpGUI("Username or password is incorrect")
-            popupGUI.createPopUp()
-            
+
     '''
     Intent: verifies user information when using forgot Password feature.
     * Preconditions: 

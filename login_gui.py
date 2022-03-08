@@ -56,7 +56,7 @@ class LoginGUI():
     def createLoginSignUpForgetPasswordFrame(self):
         # bottom button frame
         self.buttons= Frame(self.master, width = 350, height = 150, borderwidth=0, background='LightGray').grid(row = 3,column=0,pady=5, padx=5, ipadx = 5, ipady = 5)
-        self.logInButton = Button(self.buttons, text="Log In", borderwidth=0).grid(row = 3,column=0,padx=100,pady=15,ipadx=2,ipady=2, sticky="nw")
+        self.logInButton = Button(self.buttons, text="Log In", borderwidth=0, command=lambda:self.handleLoginEvent()).grid(row = 3,column=0,padx=100,pady=15,ipadx=2,ipady=2, sticky="nw")
         self.RegisterButton = Button(self.buttons, text="Register", borderwidth=0,command=lambda:self.createSignUpGUI()).grid(row = 3,column=0,padx=100,pady=15,ipadx=2,ipady=2, sticky="ne")
         self.ForgotButton = Button(self.buttons, text="Forgot Password",borderwidth=0, command=lambda:self.createForgetPasswordGUI).grid(row = 3,column=0,padx=30,pady=25,ipadx=2,ipady=2, sticky="s")
     
