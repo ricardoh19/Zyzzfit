@@ -97,7 +97,6 @@ class UserInformationGUI():
 def main():
     root = Tk()
     root.geometry("550x550")
-    
     userInformationGUIObject = UserInformationGUI(root, "ricardo", "password", "pizza")
     root.mainloop()
 if __name__ == "__main__":

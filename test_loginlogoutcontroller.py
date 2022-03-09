@@ -22,7 +22,7 @@ def test_setCurrentUserExerciseData():
 def test_setCurrentUserTrainingDays():
     loginlogoutController = LoginLogoutControllers()
     loginlogoutController.getSnapshotOfDatabase()
-    result = loginlogoutController.setCurrentTrainingDays("ricardoh")
+    result = loginlogoutController.setCurrentTrainingDays("ricardoh81")
     print(result)
 
 def test_setCurrentUserUserExerciseJunctionData():
@@ -35,6 +35,12 @@ def test_createUserObject():
     loginlogoutController = LoginLogoutControllers()
     loginlogoutController.getSnapshotOfDatabase()
     result = loginlogoutController.createUserObject("ricardoh")
+    print(result)
+
+def test_createUserExerciseObject():
+    loginlogoutController = LoginLogoutControllers()
+    loginlogoutController.getSnapshotOfDatabase()
+    result = loginlogoutController.createUserExerciseObject("ricardoh")
     print(result)
 
 
@@ -66,18 +72,21 @@ def test_checkPasswordCorrect():
 def test_loginUser():
     loginlogoutController = LoginLogoutControllers()
     # unique username and validated password
-    result = loginlogoutController.loginUser("johnO", "Passwrd1234#")
+    LoginGUI = None
+    loginlogoutController.getSnapshotOfDatabase()
+    result = loginlogoutController.loginUser("ricardoh19", "Pass1!", LoginGUI)
     print(result)
 
 
 
 if __name__ == "__main__":
-    #test_getSnapshotOfDatabase()
-    test_setCurrentUserData()
+    test_getSnapshotOfDatabase()
+    #test_setCurrentUserData()
     #test_setCurrentUserExerciseData()
     #test_setCurrentUserTrainingDays()
     #test_setCurrentUserUserExerciseJunctionData()
     #test_createUserObject()
+
 
     #test_verifySecurityQuestionAnswerUsername()
     #test_validateUsernamePassword()

@@ -5,20 +5,13 @@ from utils import convert_to_type
 
 """User class holds login details of user """
 class User():
-
-    def __init__(self, current_user_data= None,):
-        #self.databaseManager = database_manager.DB()
+    def __init__(self, current_user_data= None, current_user_training_days=None):
         self.current_user_data = current_user_data
+        self.current_user_training_days = current_user_training_days
         
-
-        #self.check_current_user_data() #checks current user data input is correct type
-        #list: id:int, username:str, password:str, securityquestionanswer:str
-        
-        
-        if current_user_data != None and current_user_data != [] : # don't try to add stock if there is not any associated with our user
-            self.user_data_to_dict(current_user_data)
+        if current_user_data != None and current_user_data != []: 
+            self.user_data_to_dict(current_user_data, current_user_training_days)
             
-        
         else:
             print("Info: No data associated with user.")
 
@@ -26,7 +19,7 @@ class User():
     def __str__(self):
         return f"User Data: {self.current_user_data} \n"
     
-    def user_data_to_dict(self, current_user_data):
+    def user_data_to_dict(self, current_user_data, current_user_training_days):
         userId = current_user_data[0]
         username = current_user_data[1]
         password = current_user_data[2]
@@ -35,6 +28,7 @@ class User():
         height = current_user_data[5]
         maxWeight = current_user_data[6]
         originalWeight = current_user_data[7]
+        trainingDays = [i[1] for i in current_user_training_days]
         
         self.current_user_data = \
             {
@@ -45,66 +39,13 @@ class User():
                 "Weight":weight, 
                 "height": height,
                 "Max Weight": maxWeight,
-                "Original weight": originalWeight
+                "Original weight": originalWeight,
+                "Training days":trainingDays
             }
         
 
 
-    '''
-    def check_current_user_data(self):
-        id = self.current_user_data[0]
-        username = self.current_user_data[1]
-        password = self.current_user_data[2]
-        age = self.current_user_data[3]
-        weight = self.current_user_data[4]
-        height = self.current_user_data[5]
-        gender = self.current_user_data[6]
-        calorieGoal = self.current_user_data[7]
-        # Function in utils.py
-        # Checks if the variable is of the wanted type if not tries to convert it. 
-        #Throws error message if it can't convert it
-        convert_to_type(variable_name= "User id", variable_type= int, variable_value = id)
-        convert_to_type(variable_name= "Username", variable_type= str, variable_value = username)
-        convert_to_type(variable_name= "password", variable_type= str, variable_value = password)
-        convert_to_type(variable_name= "age", variable_type= int, variable_value = age)
-        convert_to_type(variable_name= "weight", variable_type= int, variable_value = weight)
-        convert_to_type(variable_name= "height", variable_type= int, variable_value = height)
-        convert_to_type(variable_name= "gender", variable_type= str, variable_value = gender)
-        convert_to_type(variable_name= "calorieGoal", variable_type= str, variable_value = calorieGoal)
-    '''
-
-    def user_exercise_to_dict(self, current_user_exerciseData):
-        """Take in all users exercises and make them into the format of a dictionary"""
-        for exerciseInfo in current_user_exerciseData:
-            if exerciseInfo[1] == self.current_user_data[0]:
-                sets = exerciseInfo[2]
-                reps = exerciseInfo[3]
-                maxWeight = exerciseInfo[4]
-                originalWeight = exerciseInfo[5]
-
-            self.current_user_exerciseData = \
-                {
-                    "userexerciseId": exerciseInfo[0], 
-                    "userId": exerciseInfo[1],
-                    "sets":sets,
-                    "reps":reps,
-                    "Max Weight": maxWeight,
-                    "Original weight": originalWeight
-                }
-            
-
-    def user_trainingDay_to_dict(self, current_user_trainingDays):
-        """Take in all users exercises and make them into the format of a dictionary"""
-        if current_user_trainingDays[2] == self.current_user_data[0]:
-                day = current_user_trainingDays[1]
-                userId = current_user_trainingDays[2]
-                
-        self.current_user_trainingDays = \
-            {
-                "training day Id": current_user_trainingDays[0], 
-                "day": day,
-                "userId":userId
-            }
+ 
 
 
     def user_junction_to_dict(self, current_user_junctionData):
