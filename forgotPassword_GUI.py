@@ -7,13 +7,12 @@ import loginlogout_controller
 
 
 # this class controls the graphical user interface of the Sign Up window. Its methods include createMainFrame, 
-# createSignUpUsernamePasswordFrame, createSecurityQuestionFrame, handleSignUpEvent, 
+# createSignUpUsernamePasswordFrame, createSecurityQuestionFrame, handleForgotPasswordEvent, and closeWindow 
 # handleCloseEvent.
 class ForgotPasswordGUI():
     def __init__(self, master):
         # will update new methods and attribute in class diagram
         self.master = master
-        
         self.master.configure(background= "#3E3C3C")
         self.loginlogoutControllerObject = loginlogout_controller.LoginLogoutControllers()
         self.master.title("Forgot Password")
@@ -34,7 +33,7 @@ class ForgotPasswordGUI():
         self.createSecurityQuestionFrame()
 
         self.exitButton = Button(self.master,text="Close",command=lambda: self.handleCloseEvent(), borderwidth=0, highlightthickness=0).grid(row = 5,column=0, sticky='e', padx=60)
-        self.ResetPasswordButton = Button(self.master,text="Reset Password",command=lambda: self.handleSignUpEvent(), borderwidth=0,highlightthickness=0).grid(row = 5,column=0, sticky='w',padx=60)
+        self.ResetPasswordButton = Button(self.master,text="Reset Password",command=lambda: self.handleForgotPasswordEvent(), borderwidth=0,highlightthickness=0).grid(row = 5,column=0, sticky='w',padx=60)
 
     '''
     Intent: creates frame with SignUp, Username, and Password entries for the sign up GUI
@@ -84,15 +83,14 @@ class ForgotPasswordGUI():
 
 
     '''
-    Intent: handles the sign up event for sign up GUI
+    Intent: handles the forgot password event for forgot password GUI
     * Preconditions:    
     * loginlogoutController is an instance of the class. 
     * Postconditions:
-    * Post0. signUpUserProcessing() is called by loginlogoutController
+    * Post0. forgotPasswordProcessing() is called by loginlogoutController
     '''
-    def handleSignUpEvent(self):
-        self.loginlogoutControllerObject.signUpUserProcessing(self.usernameEntry.get(),self.passwordEntry.get(),self.reenterPasswordEntry.get(),self.securityQuestionEntry.get(), self.master)
-        
+    def handleForgotPasswordEvent(self):
+        self.loginlogoutControllerObject.forgetPasswordProcessing(self.usernameEntry.get(), self.passwordEntry.get(), self.reenterPasswordEntry.get(),self.securityQuestionEntry.get(), self.master)
             
        
         
