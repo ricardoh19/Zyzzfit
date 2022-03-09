@@ -15,7 +15,8 @@ class MyWorkoutGUI():
         self.createMainFrame()
         
         userObject = None
-        self.dashboardControllerObject = dashboard_controller.DashboardController(userObject)
+        exerciseObject = None
+        self.dashboardControllerObject = dashboard_controller.DashboardController(userObject, exerciseObject)
 
     '''
     Intent: creates the main frame for the My Workouts GUI

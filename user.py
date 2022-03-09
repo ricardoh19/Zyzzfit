@@ -1,7 +1,7 @@
 from collections import UserDict
 import logging 
 import database_manager
-from utils import convert_to_type
+
 
 """User class holds login details of user """
 class User():
@@ -23,11 +23,11 @@ class User():
         userId = current_user_data[0]
         username = current_user_data[1]
         password = current_user_data[2]
-        age = current_user_data[3]
-        weight = current_user_data[4]
-        height = current_user_data[5]
-        maxWeight = current_user_data[6]
-        originalWeight = current_user_data[7]
+        age = current_user_data[4]
+        weight = current_user_data[5]
+        height = current_user_data[6]
+        gender = current_user_data[7]
+        calorieGoal = current_user_data[8]
         trainingDays = [i[1] for i in current_user_training_days]
         
         self.current_user_data = \
@@ -38,35 +38,11 @@ class User():
                 "age":age,
                 "Weight":weight, 
                 "height": height,
-                "Max Weight": maxWeight,
-                "Original weight": originalWeight,
+                "Gender": gender,
+                "Calorie Goal": calorieGoal,
                 "Training days":trainingDays
             }
         
-
-
- 
-
-
-    def user_junction_to_dict(self, current_user_junctionData):
-        if current_user_junctionData[2] == self.current_user_data[0]:
-            userexerciseId = current_user_junctionData[0]
-            exerciseId = current_user_junctionData[1]
-            trainingdayId = current_user_junctionData[2]
-        
-        self.current_user_junctionData = \
-            {
-                "user exercise Id": userexerciseId, 
-                "exercise Id": exerciseId,
-                "trainingday Id":trainingdayId
-            }
-        print(self.current_user_junctionData)
-
-
-    
-
-       
-
 
 
 

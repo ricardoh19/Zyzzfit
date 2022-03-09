@@ -54,7 +54,7 @@ class SignUpGUI():
         self.passwordEntry.grid(row = 3,column=0,padx=55,pady=25,ipadx=2,ipady=2, sticky="e")
         self.reenterPasswordEntry = Entry(self.signUpcredentials,show="*")
         self.reenterPasswordEntry.grid(row = 3,column=0,padx=55,pady=15,ipadx=2,ipady=2, sticky="se")
-        self.requirements = Label(self.master, text="Password should be atleast 10 characters, \n have one uppercase letter, and one special symbol(!, #, $, ^, *)", font='Fixedsys 9', background= "Gray", foreground="white").grid(row = 3,column=0,sticky="n",padx=40)
+        self.requirements = Label(self.master, text="Password should be atleast 5 characters, \n have one uppercase letter, and one special symbol(!, #, $, ^, *)", font='Fixedsys 9', background= "Gray", foreground="white").grid(row = 3,column=0,sticky="n",padx=40)
         
     '''
     Intent: creates the frame with the security question for the sign up GUI
@@ -65,7 +65,7 @@ class SignUpGUI():
     def createSecurityQuestionFrame(self):
         # security question frame
         self.buttons= Frame(self.master, width = 450, height = 150, borderwidth=0, background="LightGray").grid(row = 4,column=0,padx=20, pady=5)
-        self.securityQuestionLabel = Label( self.signUpcredentials, text="Security Question: What is your  favorite food?",font='Fixedsys 13 bold',borderwidth=0, background="LightGray").grid(row=4, column=0,padx=15,pady=15, ipadx=1,ipady=1,stick="n")
+        self.securityQuestionLabel = Label( self.signUpcredentials, text="Security Question: What is your favorite food?",font='Fixedsys 13 bold',borderwidth=0, background="LightGray").grid(row=4, column=0,padx=15,pady=15, ipadx=1,ipady=1,stick="n")
         self.securityQuestionEntry = Entry(self.signUpcredentials)
         self.securityQuestionEntry.grid(row = 4,column=0,padx=8,pady=15,ipadx=2,ipady=2)
         
