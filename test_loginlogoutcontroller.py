@@ -28,7 +28,7 @@ def test_setCurrentUserTrainingDays():
 def test_setCurrentUserUserExerciseJunctionData():
     loginlogoutController = LoginLogoutControllers()
     loginlogoutController.getSnapshotOfDatabase()
-    result = loginlogoutController.setCurrentUserExerciseJunctionData("ricardoh")
+    result = loginlogoutController.setCurrentUserExerciseJunctionData("ricardoh81")
     print(result)
 
 def test_createUserObject():
@@ -80,11 +80,11 @@ def test_loginUser():
 
 
 if __name__ == "__main__":
-    test_getSnapshotOfDatabase()
+    #test_getSnapshotOfDatabase()
     #test_setCurrentUserData()
     #test_setCurrentUserExerciseData()
     #test_setCurrentUserTrainingDays()
-    #test_setCurrentUserUserExerciseJunctionData()
+    test_setCurrentUserUserExerciseJunctionData()
     #test_createUserObject()
 
 

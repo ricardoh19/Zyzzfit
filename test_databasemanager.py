@@ -30,7 +30,7 @@ def test_database_manager():
     #print(databaseTest.getDatabaseUserData())
 
     # insert training days for specific user
-    #databaseTest.insertTrainingDays("Monday", 1)
+    #databaseTest.insertTrainingDays("Tuesday", 3)
     #print(databaseTest.getTrainingDays())
 
     # insert exercise data
@@ -39,9 +39,8 @@ def test_database_manager():
     
 
     # insert user exercise info data into tables
-    #databaseTest.insertDatabaseUserExerciseData(1, 3, 10, 0, 0) # (userId, sets, repetitions, maxWeight, originalWeight)
-    #databaseTest.insertDatabaseUserExerciseData(1, 3, 10, 0, 0) # (userId, sets, repetitions, maxWeight, originalWeight)
-
+    #databaseTest.insertDatabaseUserExerciseData(3, 3, 10, 0, 0) # (userId, sets, repetitions, maxWeight, originalWeight)
+    #print(databaseTest.insertDatabaseUserExerciseJunction(3, 1, 1)) # (userId, exerciseId, trainingdayid)
 
     # get UserExercise data 
     #print(databaseTest.getDatabaseUserExerciseData()) # (userexerciseid, userId, sets, repetitions, maxWeight, originalWeight)
