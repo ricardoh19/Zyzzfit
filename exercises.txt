@@ -1,3 +1,12 @@
-chest, bench press
-shoudlers, Machine Shoulder Press
-chest, Incline Dumbbell Press
+legs,Squat
+chest,Bench Press
+back,Bent Over Row
+legs,romanian deadlift
+shoulders,overhead press
+triceps,Dips
+legs,deadlift
+back,Pull Ups
+legs,Lunges
+biceps,Bicep Curls
+shoudlers,Machine Shoulder Press
+chest,Incline Dumbbell Press

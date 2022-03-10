@@ -143,8 +143,8 @@ class DB():
             "CREATE TABLE `UserExerciseJunction` ("
             "  `userexerciseId` int(11) NOT NULL,"
             "  `exerciseId` int(11) NOT NULL,"
-            "  `trainingdayId` int(11) NOT NULL,"
-            "  FOREIGN KEY (`userexerciseId`) REFERENCES `UserExerciseInfo` (`userexerciseId`), FOREIGN KEY (`exerciseId`) REFERENCES `Exercises` (`exerciseId`), FOREIGN KEY (`trainingdayId`) REFERENCES `TrainingDay` (`trainingdayId`)"
+            "  `trainingday` varchar(15) NOT NULL,"
+            "  FOREIGN KEY (`userexerciseId`) REFERENCES `UserExerciseInfo` (`userexerciseId`), FOREIGN KEY (`exerciseId`) REFERENCES `Exercises` (`exerciseId`)"
             ") ENGINE=InnoDB")
             
         
@@ -354,12 +354,12 @@ class DB():
         cnx.commit()
 
     
-    def insertDatabaseUserExerciseJunction(self, userexerciseId, exerciseId, trainingdayId):
+    def insertDatabaseUserExerciseJunction(self, userexerciseId, exerciseId, trainingday):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
         query = (f"INSERT INTO UserExerciseJunction"
-                    "(userexerciseId, exerciseId, trainingdayId) "
+                    "(userexerciseId, exerciseId, trainingday) "
                     "VALUES (%s, %s, %s)")
-        data = (userexerciseId, exerciseId, trainingdayId)
+        data = (userexerciseId, exerciseId, trainingday)
         cursor.execute(query,data)
         cnx.commit()
 

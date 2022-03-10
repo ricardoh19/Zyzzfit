@@ -124,11 +124,11 @@ class UserInformationGUI():
         if self.varSunday.get() != '0':
             self.listOfDays.append('Sunday')
         
-
+        
         self.loginlogout_ControllerObject.userInformationProcessing(self.username, self.password, self.securityQuestion, self.ageEntry.get(), self.weightEntry.get(), self.heightEntry.get(), self.clickedGender.get(), self.clickedGoal.get(), self.listOfDays, self.master)
         
         
-    
+
   
     '''
     Intent: close the userInformation window .

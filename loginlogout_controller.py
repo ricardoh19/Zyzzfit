@@ -186,8 +186,11 @@ class LoginLogoutControllers():
     Algorithm:
     application will insert exercises into user data based on body part. 
     '''
-    def insertExercisesIfNewUser(self):
-        pass
+    def insertExercisesIfNewUser(self, listOfDays, userId):
+        if len(listOfDays) == 2:
+            # have to insert exercise data and junction data
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            #self.databaseManagerObject.insertDatabaseUserExerciseJunction()
 
 
 
@@ -227,6 +230,8 @@ class LoginLogoutControllers():
     * Post0. user is signed in and information is saved. userInformationGUI is closed and dashboard controller is created
     '''
     def userInformationProcessing(self, username, password, securityQuestion, age, weight, height, gender, calorieGoal, listOfDays, userInformationGUI):
+        if len(listOfDays) < 2:
+            return False
         self.databaseManagerObject.insertDatabaseUserData(username, password, securityQuestion, age, weight, height, gender, calorieGoal)
         self.getSnapshotOfDatabase()
         self.currentUserData = self.setCurrentUserData(username)
@@ -234,7 +239,10 @@ class LoginLogoutControllers():
         
         for day in listOfDays:
             self.databaseManagerObject.insertTrainingDays(day, userId)
-        
+
+        # insert all of users exercises here
+        self.insertExercisesIfNewUser(listOfDays, userId)
+
         self.getSnapshotOfDatabase()
 
         userInformationGUI.destroy()

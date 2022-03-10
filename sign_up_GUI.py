@@ -54,7 +54,7 @@ class SignUpGUI():
         self.passwordEntry.grid(row = 3,column=0,padx=55,pady=25,ipadx=2,ipady=2, sticky="e")
         self.reenterPasswordEntry = Entry(self.signUpcredentials,show="*")
         self.reenterPasswordEntry.grid(row = 3,column=0,padx=55,pady=15,ipadx=2,ipady=2, sticky="se")
-        self.requirements = Label(self.master, text="Password should be atleast 5 characters, \n have one uppercase letter, and one special symbol(!, #, $, ^, *)", font='Fixedsys 9', background= "Gray", foreground="white").grid(row = 3,column=0,sticky="n",padx=40)
+        self.requirements = Label(self.master, text="Password should be atleast 5 characters, \n have one uppercase letter, and one special symbol(!, #, $, ^, *)", font='Fixedsys 9', background= "lightGray", foreground="black").grid(row = 3,column=0,sticky="n",padx=40)
         
     '''
     Intent: creates the frame with the security question for the sign up GUI

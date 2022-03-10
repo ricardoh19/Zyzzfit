@@ -71,7 +71,7 @@ class DashboardGUI():
         self.dashboardControllerObject = dashboard_controller.DashboardController(userObject,exerciseObject)
         quote = self.dashboardControllerObject.getQuote()
         print(quote)
-        self.quote = Label(self.master, text="{} \n-{}".format(quote['q'], quote['a']),font='fixedsys 10', height=4, width = 80, borderwidth=0, background='white').grid(row=1,column=1, columnspan=2)
+        self.quote = Label(self.master, text="{}\n{}\n-{}".format(quote['q'][:100], quote['q'][100:], quote['a']),font='fixedsys 10', height=4, width = 78, borderwidth=0, background='white').grid(row=1,column=1, columnspan=2)
 
     def createDateFrame(self):
         x = datetime.datetime.now()
@@ -80,7 +80,7 @@ class DashboardGUI():
         day = x.day
         date = "{}, {} {}".format(dayWeek ,month, day)
 
-        self.date = Label(self.master, text=date,font='fixedsys 15 bold', height=2, width = 28, background='lightGray', foreground="white").grid(row=1,column=3, columnspan=2)
+        self.date = Label(self.master, text=date,font='fixedsys 17 bold', height=2, width = 29, background='lightGray', foreground="black").grid(row=1,column=3, columnspan=2)
 
     def createDaysFrame(self):
         self.dayNumber = Label(self.master, text="3 day split",font='fixedsys 12', height=12, width = 41, borderwidth=0, background='white').grid(row=2,column=3,columnspan=2)
