@@ -45,43 +45,4 @@ class User():
         
 
 
-
-
-
-
-
-    def delete_stock(self, stockname):
-        """Function deletes specified stockname from current user stoccks"""
-        try:
-            del self.current_user_stocks[stockname]
-        except KeyError:
-            print(f"Unable to remove {stockname} from User because it does not exist as a key in the dictionary.")
-            return False
-        return True
-
-    def append_stock(self, stocksymbol, userId, stockid = -1, stockOwnedDef = 0):
-        """Appends a stock to the users collection of stocks. If not specified the stockid is -1
-        to be changed when pushed to DB. Default stock owned is 0. """
-        stock = {"stockid": stockid, "stockowned": stockOwnedDef}
-        self.current_user_stocks[stocksymbol]= stock
-
-        #stockOwned = stockOwnedDef
-        #self.databaseManager.insertDatabaseStockData(stocksymbol,userId,stockOwned)
-
-    def update_stock_owned(self, stocksymbol, stockowned = 0):
-        """Changes the amount of a certain stock that the user owns."""
-        try:
-            # self.current_user_stocks[stocksymbol]
-            self.current_user_stocks[stocksymbol]["stockowned"] = stockowned
-        except KeyError:
-            print(f"Unable to remove {stocksymbol} from User because it does not exist as a key in the dictionary.")
-            return False
-        return True
-
-
-    def return_users_stock_symbols(self):
-        """Returns a list of all user stocksymbols."""
-        return self.current_user_stocks.keys()
-    
-
     

@@ -52,8 +52,7 @@ class UserInformationGUI():
 
         self.createDaysFrame()
 
-        self.saveButton = Button(self.master,text="Save", borderwidth=0, command=lambda:self.handleSaveInformationEvent(),  highlightthickness=0).grid(row = 14,column=1, pady=1, sticky="w")
-        self.exitButton = Button(self.master,text="Cancel", command=lambda:self.closeWindow(), borderwidth=0,  highlightthickness=0).grid(row = 14,column=1, pady=10)
+        self.saveButton = Button(self.master,text="Finish Set Up", borderwidth=0, command=lambda:self.handleSaveInformationEvent(),  highlightthickness=0).grid(row = 14,column=1, pady=1, sticky="w")
 
     
     '''

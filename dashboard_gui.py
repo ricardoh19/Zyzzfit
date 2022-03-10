@@ -62,9 +62,10 @@ class DashboardGUI():
 
         
         
-        
-        #self.workouts = Label(self.master, text="workouts",font='fixedsys 12',  width = 55, height=25, borderwidth=0, background='white').grid(row=2,column=1, padx=5, columnspan=2, rowspan=2)
+    def openMyWorkoutsGUI(self):
+        self.dashboardControllerObject.createMyWorkoutsController()
 
+        
     def createQuoteFrame(self):
         userObject = None
         exerciseObject = None
@@ -116,8 +117,9 @@ class DashboardGUI():
     def closeWindow(self):
         self.master.destroy()
 
+
+
 def main():
-    
     root = Tk()
     root.geometry("1200x600")
     userObject = None

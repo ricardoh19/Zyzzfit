@@ -39,9 +39,10 @@ class LoginLogoutControllers():
 
         #Load data from db
         self.getSnapshotOfDatabase()
-
-        #insert all exercise if user is new
         
+        # insert all exercises into system
+        self.databaseManagerObject.insertAllExercisesIntoDatabase()
+
 
         
        
@@ -155,28 +156,7 @@ class LoginLogoutControllers():
         return self.currentUserExerciseData
         
 
-    '''
-    Intent: compares userId to all userId's in the database to get user exercise junction data. Returns a list of the corresponding exercise junction data.
-    * Returns None if nothing is found for specific userId.
-    * Preconditions: 
-    * setCurrentUserData() has returned a user object. 
-    * userId is taken from setCurrentUserData().
-    * Postconditions:
-    * Post0. An object of the exercise junction data pertaining to specific user with userId is set.
-    '''
-    def setCurrentUserExerciseJunctionData(self,username):
-        if self.setCurrentUserData(username) == None:
-            return self.currentUserJunctionData
-
-        userData = self.setCurrentUserData(username)
-        userId = userData[0]
-        
-        self.currentUserJunctionData = []
-        for data in self.databaseUserJunctionData:
-            if data[0] == userId:
-                self.currentUserJunctionData.append(data)
-        return self.currentUserJunctionData
-
+  
 
     '''
     Inserts exercise data and junction data into the tables if user is new.
@@ -186,13 +166,48 @@ class LoginLogoutControllers():
     Algorithm:
     application will insert exercises into user data based on body part. 
     '''
-    def insertExercisesIfNewUser(self, listOfDays, userId):
+    def insertExercisesIfNewUser(self, listOfDays, username ,userId):
         if len(listOfDays) == 2:
             # have to insert exercise data and junction data
             self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
-            #self.databaseManagerObject.insertDatabaseUserExerciseJunction()
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, 1, listOfDays[0])
+            self.getSnapshotOfDatabase()
+           
+
+            # have to insert exercise data and junction data
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, 2, listOfDays[0])
+            self.getSnapshotOfDatabase()
+           
 
 
+    '''
+    Intent: compares userExerciseId in current user exercise data and junction data to build a list for current user. Returns a list of the corresponding exercise junction data.
+    * Preconditions: 
+    * setCurrentUserData() has returned a user object. 
+    * Postconditions:
+    * Post0. An object of the junction data pertaining to current user  is set.
+    '''
+    def setCurrentUserJunctionData(self):
+        # iterate through User Exercise Data 
+        # iterate through junction data and if userExerciseId match, append to self.currentJunctionData
+        self.currentUserJunctionData = []
+        for data in self.currentUserExerciseData:
+            for junctData in self.databaseUserJunctionData:
+                if data[0] == junctData[0]:
+                    self.currentUserJunctionData.append(junctData)
+        return self.currentUserJunctionData
+        
+            
+          
 
     '''
     Intent: logic for signing user up. Displays appropriate message to user.
@@ -202,10 +217,14 @@ class LoginLogoutControllers():
     * Post0. shows user appropriate message based on sign-up status
     '''
     def signUpUserProcessing(self, username, password, secondPassword,securityQuestion, signUpGUI):
-        if self.checkUsernameTaken(username):
+        if len(securityQuestion) == 0:
+            popupGUI = PopUpGUI("Please answer security question.")
+            popupGUI.createPopUp()
+
+        elif self.checkUsernameTaken(username):
             popupGUI = PopUpGUI("Username is taken.")
             popupGUI.createPopUp()
-            
+
         elif password != secondPassword:
             popupGUI = PopUpGUI("Passwords do not match.")
             popupGUI.createPopUp()
@@ -221,6 +240,7 @@ class LoginLogoutControllers():
             popupGUI = PopUpGUI("Username or password is incorrect")
             popupGUI.createPopUp()
 
+    
 
     '''
     Intent: logic for processing user information.
@@ -231,6 +251,8 @@ class LoginLogoutControllers():
     '''
     def userInformationProcessing(self, username, password, securityQuestion, age, weight, height, gender, calorieGoal, listOfDays, userInformationGUI):
         if len(listOfDays) < 2:
+            popupGUI = PopUpGUI("Please choose atleast two days to exercise.")
+            popupGUI.createPopUp()
             return False
         self.databaseManagerObject.insertDatabaseUserData(username, password, securityQuestion, age, weight, height, gender, calorieGoal)
         self.getSnapshotOfDatabase()
@@ -241,7 +263,7 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertTrainingDays(day, userId)
 
         # insert all of users exercises here
-        self.insertExercisesIfNewUser(listOfDays, userId)
+        self.insertExercisesIfNewUser(listOfDays, username, userId)
 
         self.getSnapshotOfDatabase()
 
@@ -284,6 +306,7 @@ class LoginLogoutControllers():
             
         elif self.validateUsernamePassword(username,password) and self.checkPasswordCorrect(username, password):
             loginGUI.destroy()
+            
             self.createDashboardController(username)
         else:
             popupGUI = PopUpGUI("Username or password is incorrect")
@@ -302,7 +325,6 @@ class LoginLogoutControllers():
     def createDashboardController(self,username):
         self.userObject = self.createUserObject(username)
         self.exerciseUserObject = self.createUserExerciseObject(username)
-
         dashboardController = dashboard_controller.DashboardController(self.userObject, self.exerciseUserObject)
         dashboardController.createDashboardGUI()
     
@@ -317,7 +339,6 @@ class LoginLogoutControllers():
     def createUserObject(self, username):
         self.currentUserData = self.setCurrentUserData(username)
         self.currentUserTrainingDays = self.setCurrentTrainingDays(username)
-
         self.userObject =  User(self.currentUserData, self.currentUserTrainingDays)
         print(self.userObject)
         return self.userObject
@@ -332,8 +353,10 @@ class LoginLogoutControllers():
     '''
     def createUserExerciseObject(self, username):
         self.currentUserExerciseData = self.setCurrentUserExerciseData(username)
-        self.currentUserJunctionData = self.setCurrentUserExerciseJunctionData(username)
-        self.userExerciseObject =  ExerciseData(self.currentUserExerciseData, self.currentUserJunctionData)
+        self.currentUserJunctionData = self.setCurrentUserJunctionData()
+
+        allExercises = self.databaseManagerObject.getDatabaseExerciseData()
+        self.userExerciseObject =  ExerciseData(self.currentUserExerciseData, self.currentUserJunctionData, allExercises)
         print(self.userExerciseObject)
         return self.userExerciseObject
 
@@ -404,8 +427,6 @@ class LoginLogoutControllers():
     * Post1. username is not compared if equal to None.
     '''
     def checkUsernameTaken(self, username):
-        #if username == None or self.databaseUserData == None:
-           # return False
         for data in self.databaseUserData:
             if data[1] == username:
                     return True

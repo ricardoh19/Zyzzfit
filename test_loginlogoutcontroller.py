@@ -3,33 +3,30 @@ from test_user import test_user_object
 
 def test_getSnapshotOfDatabase():
     loginlogoutController = LoginLogoutControllers()
+    loginlogoutController.getSnapshotOfDatabase()
     result = loginlogoutController.getSnapshotOfDatabase()
     print(result)
 
 def test_setCurrentUserData():
     loginlogoutController = LoginLogoutControllers()
     loginlogoutController.getSnapshotOfDatabase()
-    result = loginlogoutController.setCurrentUserData("ricardoh")
+    result = loginlogoutController.setCurrentUserData("ricardoh19")
     print(result)
 
 def test_setCurrentUserExerciseData():
     loginlogoutController = LoginLogoutControllers()
     loginlogoutController.getSnapshotOfDatabase()
-    result = loginlogoutController.setCurrentUserExerciseData("ricardoh")
+    result = loginlogoutController.setCurrentUserExerciseData("ricardoh19")
     print(result)
 
 
 def test_setCurrentUserTrainingDays():
     loginlogoutController = LoginLogoutControllers()
     loginlogoutController.getSnapshotOfDatabase()
-    result = loginlogoutController.setCurrentTrainingDays("ricardoh81")
+    result = loginlogoutController.setCurrentTrainingDays("ricardoh19")
     print(result)
 
-def test_setCurrentUserUserExerciseJunctionData():
-    loginlogoutController = LoginLogoutControllers()
-    loginlogoutController.getSnapshotOfDatabase()
-    result = loginlogoutController.setCurrentUserExerciseJunctionData("ricardoh81")
-    print(result)
+
 
 def test_createUserObject():
     loginlogoutController = LoginLogoutControllers()
@@ -42,6 +39,12 @@ def test_createUserExerciseObject():
     loginlogoutController.getSnapshotOfDatabase()
     result = loginlogoutController.createUserExerciseObject("ricardoh")
     print(result)
+
+def test_insertExercisesIfNewUser():
+    loginlogoutController = LoginLogoutControllers()
+    loginlogoutController.getSnapshotOfDatabase()
+    loginlogoutController.insertExercisesIfNewUser(["Monday", "Tuesday"],1)
+    
 
 
 
@@ -84,9 +87,8 @@ if __name__ == "__main__":
     #test_setCurrentUserData()
     #test_setCurrentUserExerciseData()
     #test_setCurrentUserTrainingDays()
-    test_setCurrentUserUserExerciseJunctionData()
     #test_createUserObject()
-
+    test_insertExercisesIfNewUser()
 
     #test_verifySecurityQuestionAnswerUsername()
     #test_validateUsernamePassword()

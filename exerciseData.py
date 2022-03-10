@@ -9,7 +9,6 @@ class ExerciseData():
 
         if current_user_exerciseData != None and current_user_exerciseData != [] : # don't try to add stock if there is not any associated with our user
             self.user_exercise_data_to_dict(current_user_exerciseData, current_user_junctionData, allExerciseData)
-               
         else:
             print("Info: No exercise data associated with user.")
 
@@ -20,7 +19,6 @@ class ExerciseData():
 
     def user_exercise_data_to_dict(self, current_user_exerciseData, current_user_junctionData, allExerciseData):
         """Take in all users exercises and make them into the format of a dictionary"""
-        
         # make it into list of lists because user will have multiple exercises
         for junct in current_user_junctionData:
             for exerciseInfo in current_user_exerciseData:
@@ -30,8 +28,7 @@ class ExerciseData():
                 maxWeight = exerciseInfo[4]
                 originalWeight = exerciseInfo[5]
 
-
-                trainingDayId = junct[2]
+                trainingDay = junct[2]
                 #exerciseId = current_user_junctionData[1]
 
                 # iterate through allExerciseData and match the exerciseId with exerciseName and grab that
@@ -39,11 +36,10 @@ class ExerciseData():
                     if data[0] == junct[1]:
                         exerciseName = data[2]
 
-
                 self.currentExerciseData[exerciseName] = \
                     {
                         "userexerciseId": userExerciseId, 
-                        "trainingDayId": trainingDayId,
+                        "training Day": trainingDay,
                         "sets":sets,
                         "reps":reps,
                         "Max Weight": maxWeight,

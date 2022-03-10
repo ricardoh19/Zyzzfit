@@ -21,7 +21,7 @@ def create_valid_user_exercise_object():
     databaseTest = DB()
 
     current_user_trainingDays = [1, "Monday", 1]
-    current_user_junctionData = [[1, 1, 1], [2, 2, 1]] # userExerciseId, exerciseId, trainingDayId
+    current_user_junctionData = [[1, 1, "Monday"], [2, 2, "Monday"]] # userExerciseId, exerciseId, trainingDayId
 
     allExercises = databaseTest.getDatabaseExerciseData()
     #note: user id of exercise must be the same as user_id in user data otherwise it wont be added.

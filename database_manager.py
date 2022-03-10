@@ -2,7 +2,6 @@ from __future__ import print_function
 import sys
 import mysql.connector
 from mysql.connector import errorcode
-
 import os
 
 #export variables to environment
@@ -13,10 +12,8 @@ os.environ['SQLHost'] = "localhost"
 os.environ['DB_NAME'] ='ZyzzfitDB'
 
 
-
 # This class creates and maintains the Genius Finance database with methods: 
 # connect_to_db, createDatabaseManager,create_database, getDatabaseUserData, 
-# getDatabaseStockData, insertDatabaseUserData, insertDatabaseStockData.
 class DB():
     def __init__(self):
         #creates db if necessary
@@ -70,7 +67,6 @@ class DB():
     Intent: Creates database and tables in that database.
     * Preconditions: 
     * Connection to database is established.
-    * Tables User and Stock are already formatted and ready to be created.
     * Postconditions:
     * Post0. Database is created successfully if database does not exist already.
     * Post1. Tables are created successfully if tables do not exist already.
@@ -191,7 +187,7 @@ class DB():
 
 
 
-   # Get data
+   # GET Methods
 
     '''
     Intent: Query User data from database. Return a list of all User data from database
@@ -211,12 +207,12 @@ class DB():
         
 
     '''
-    Intent: Query all Stock data from database,return a list of all Stock data from database. 
+    Intent: Query all exercise data from database,return a list of all exercise data from database. 
     * Preconditions: 
     * cursor is connected to correct database (GeniusFinanceDB)
-    * Stock table already exists.
+    * Exercises table already exists.
     * Postconditions:
-    * Post0. Selects all data from the Stock table if connection to database if successful.
+    * Post0. Selects all data from the Exercises table if connection to database if successful.
     * Post1. Displays None if connection to database is not successful.
     '''
     def getDatabaseExerciseData(self):
@@ -230,9 +226,9 @@ class DB():
     Intent:
     * Preconditions: 
     * cursor is connected to correct database (GeniusFinanceDB)
-    * Stock table already exists.
+    * Exercises table already exists.
     * Postconditions:
-    * Post0. Selects all data from the Stock table if connection to database if successful.
+    * Post0. Selects all data from the Exercises table if connection to database if successful.
     * Post1. Displays None if connection to database is not successful.
     '''
     def getExerciseBasedOnBodyPart(self, bodyPart):
@@ -271,10 +267,7 @@ class DB():
 
 
 
-
-
-
-    # insertion
+    # INSERTION METHODS
 
 
     '''
@@ -312,10 +305,10 @@ class DB():
     * Preconditions: 
     * userId matches with userID that is currently logged in.
     * DB_Name is equal to 'ZyzzfitDB'.
-    * Table that is being inserted to is "Stock" and already exists.
+    * Table that is being inserted to is "Exercises" and already exists.
     * cursor is connected to correct database (GeniusFinanceDB)
     * Postconditions:
-    * PostO. stockName and stockOwnedAmount is inserted into the database if connection to database is successful.
+    * PostO. exerciseName, and bodyPart is inserted into the database if connection to database is successful.
     * Post1. Data is not inserted into the database if connection to database fails.
     * Post2. Data is not inserted into the database if a parameter or all parameters are equal to None.
     '''
@@ -383,36 +376,7 @@ class DB():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    '''
-    Intent: Deletes data from Exercise table
-    * Preconditions: 
-    * DB_Name is equal to 'GeniusFinanceDB'.
-    * Table that is being deleted from is "Stock" and already exists.
-    * cursor is connected to correct database (GeniusFinanceDB)
-    * Postconditions:
-    * PostO. stockName and stockOwnedAmount is inserted into the database if connection to database is successful.
-    * Post1. Data is not deleted from the database if connection to database fails.
-    * Post2. Data is not deleted from the database if a parameter or all parameters are equal to None.
-    '''
-    def deleteDatabaseStockData(self, stockName):
-        cursor, cnx = self.connect_to_db(db=self.DB_NAME)
-        query = (f"DELETE FROM Stock WHERE stockName = '{stockName}'")
-        cursor.execute(query)
-        cnx.commit()
-
-
+    #UPDATE Methods
 
 
     '''
@@ -454,23 +418,5 @@ class DB():
     def updateUserJunctionData(self):
         pass
     
-    '''
-    Intent: Updates data into Stock table
-    * Preconditions: 
-    * userId matches with userID that is currently logged in.
-    * DB_Name is equal to 'GeniusFinanceDB'.
-    * Table that is being updated to is "Stock" and already exists.
-    * cursor is connected to correct database (GeniusFinanceDB)
-    * stockOwnedAmount is an integer and the only value from Stock table that can being changed.
-    * Postconditions:
-    * PostO. stockOwnedAmount is updated in the database if connection to database is successful.
-    * Post1. Data is not updated in the database if connection to database fails.
-    * post2. Data is not updated in the database if stockOwnedAmount input type is not an integer
-    '''
-    def updateDatabaseStockData(self, username,stockOwnedAmount):
-        cursor, cnx = self.connect_to_db(db=self.DB_NAME)
-        query = (f"UPDATE Stock SET stockOwnedAmount = {stockOwnedAmount} WHERE username = '{username}'")
-        cursor.execute(query)
-        cnx.commit()
-        
+   
     

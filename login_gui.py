@@ -6,7 +6,7 @@ import loginlogout_controller
 
 
 # this class controls the graphical user interface of the Log In window. Its methods include createMainFrame, createUsernamePasswordFrame,
-# createLoginSignUpForgetPasswordFrame, handleLoginEvent, createSignUpGUI, closeWindow, and createForgetPassword.
+# createLoginSignUpForgetPasswordFrame, handleLoginEvent, createSignUpGUI, closeWindow, and createForgetPasswordGUI.
 class LoginGUI():
     def __init__(self, master):
         self.loginlogout_ControllerObject = loginlogout_controller.LoginLogoutControllers()
