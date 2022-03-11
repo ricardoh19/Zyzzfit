@@ -38,7 +38,7 @@ class LoginGUI():
     '''
     def createUsernamePasswordFrame(self):
             # top credentials frame
-        self.credentials = Frame(self.master, width = 350, height = 170,borderwidth=0, background='LightGray').grid(row = 2,column=0, ipadx = 5, ipady = 5)
+        self.credentials = Frame(self.master, width = 500, height = 170,borderwidth=0, background='LightGray').grid(row = 2,column=0, ipadx = 5, ipady = 5)
         self.usernameLabel = Label(self.credentials, text="Username",font='Helvetica 13 bold',borderwidth=0, background='LightGray').grid(row = 2,column=0, padx=100, pady=15, ipadx=5, ipady=5, sticky='nw')
         self.passwordLabel = Label(self.credentials, text="Password",font='Helvetica 13 bold',borderwidth=0, background='LightGray').grid(row=2, column=0, padx=100, pady=15, ipadx=5, ipady=5,sticky="sw")
         
@@ -55,7 +55,7 @@ class LoginGUI():
     '''
     def createLoginSignUpForgetPasswordFrame(self):
         # bottom button frame
-        self.buttons= Frame(self.master, width = 350, height = 150, borderwidth=0, background='LightGray').grid(row = 3,column=0,pady=5, padx=5, ipadx = 5, ipady = 5)
+        self.buttons= Frame(self.master, width = 500, height = 150, borderwidth=0, background='LightGray').grid(row = 3,column=0,pady=5, padx=5, ipadx = 5, ipady = 5)
         self.logInButton = Button(self.buttons, text="Log In", borderwidth=0, command=lambda:self.handleLoginEvent()).grid(row = 3,column=0,padx=100,pady=15,ipadx=2,ipady=2, sticky="nw")
         self.RegisterButton = Button(self.buttons, text="Register", borderwidth=0,command=lambda:self.createSignUpGUI()).grid(row = 3,column=0,padx=100,pady=15,ipadx=2,ipady=2, sticky="ne")
         self.ForgotButton = Button(self.buttons, text="Forgot Password",borderwidth=0, command=lambda:self.createForgetPasswordGUI()).grid(row = 3,column=0,padx=30,pady=25,ipadx=2,ipady=2, sticky="s")
@@ -107,7 +107,7 @@ class LoginGUI():
 
 def main():
     root = Tk()
-    root.geometry("550x550")
+    root.geometry("650x550")
     loginGUIObject = LoginGUI(root)
     root.mainloop()
 if __name__ == "__main__":

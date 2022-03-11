@@ -121,7 +121,7 @@ class DashboardGUI():
 
 def main():
     root = Tk()
-    root.geometry("1200x600")
+    root.geometry("1400x700")
     userObject = None
     exerciseObject = None
     dashboardGUIObject = DashboardGUI(root, userObject, exerciseObject)

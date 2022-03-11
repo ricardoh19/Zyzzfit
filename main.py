@@ -16,7 +16,7 @@ def main():
     set_env_variables()
     
     root = Tk()
-    root.geometry("550x550")
+    root.geometry("650x550")
     loginGUIObject = LoginGUI(root)
     root.mainloop()
 

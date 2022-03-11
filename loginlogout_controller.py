@@ -8,7 +8,7 @@ from exerciseData import ExerciseData
 import login_gui
 import sign_up_GUI
 import forgotPassword_GUI
-import userInformation_GUI
+import userInformation_gui
 
 
 
@@ -55,7 +55,7 @@ class LoginLogoutControllers():
     '''
     def createLoginGUI(self):
         root = Tk()
-        root.geometry("550x550")
+        root.geometry("650x550")
         self.loginGUIObject = login_gui.LoginGUI(root)
         root.mainloop()
         
@@ -257,7 +257,7 @@ class LoginLogoutControllers():
             popupGUI = PopUpGUI("Please provide an appropriate age, weight, or height.")
             popupGUI.createPopUp()
             return False
-        print(gender)
+
         self.databaseManagerObject.insertDatabaseUserData(username, password, securityQuestion, age, weight, height, gender, calorieGoal)
         self.getSnapshotOfDatabase()
 
@@ -285,8 +285,8 @@ class LoginLogoutControllers():
     def createUserInformationGUI(self,username, password,securityQuestion):
         """This function creates the Dashboard GUI Object"""
         root = Tk()
-        root.geometry("550x550")
-        userInformationGUIObject = userInformation_GUI.UserInformationGUI(root, username, password,securityQuestion)
+        root.geometry("650x550")
+        userInformationGUIObject = userInformation_gui.UserInformationGUI(root, username, password,securityQuestion)
         root.mainloop()
 
 
@@ -478,7 +478,7 @@ class LoginLogoutControllers():
     '''
     def createSignUpGUI(self):
         root = Tk()
-        root.geometry("550x600")
+        root.geometry("650x600")
         self.sign_up_gui_object = sign_up_GUI.SignUpGUI(root)
         root.mainloop()
        
@@ -531,7 +531,7 @@ class LoginLogoutControllers():
     '''
     def createForgottenPasswordGUI(self):
         root = Tk()
-        root.geometry("550x600")
+        root.geometry("650x600")
         forgotPasswordObject = forgotPassword_GUI.ForgotPasswordGUI(root)
         root.mainloop()
 

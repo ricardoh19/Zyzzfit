@@ -62,7 +62,7 @@ class UserInformationGUI():
     * Post0. day frame for userInformationGUI is created
     '''
     def createDaysFrame(self):
-        self.days = Label(self.master, text="How many days are you\n exercising?",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=7,column=0, sticky='w')
+        self.days = Label(self.master, text="How many days are you\n exercising?",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=7,column=0, sticky='w', ipadx=10)
         
         self.varMonday = StringVar()
         self.monday= Checkbutton(self.master, text = "Monday", background='#3E3C3C', foreground='white', variable=self.varMonday, onvalue="Monday", offvalue="0")
@@ -142,7 +142,7 @@ class UserInformationGUI():
 
 def main():
     root = Tk()
-    root.geometry("550x550")
+    root.geometry("650x550")
     userInformationGUIObject = UserInformationGUI(root, "ricardoh81", "Pass1!", "pizza")
     root.mainloop()
 if __name__ == "__main__":

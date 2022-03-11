@@ -44,7 +44,7 @@ class SignUpGUI():
     '''
     def createSignUpUsernamePasswordFrame(self):
         # top credentials frame
-        self.signUpcredentials = Frame(self.master, width = 450, height = 200,borderwidth=0, background="LightGray").grid(row = 3,column=0,padx=20)
+        self.signUpcredentials = Frame(self.master, width = 600, height = 200,borderwidth=0, background="LightGray").grid(row = 3,column=0,padx=20)
         self.usernameLabel = Label( self.signUpcredentials, text="Enter a Username",font='Fixedsys 13 bold',borderwidth=0, background="LightGray").grid(row = 3,column=0,padx=50 ,pady=35,ipadx=5,ipady=5, sticky="nw")
         self.passwordLabel = Label( self.signUpcredentials, text="Enter a Password",font='Fixedsys 13 bold',borderwidth=0, background="LightGray").grid(row=3, column=0,padx=50,pady=25, ipadx=5,ipady=5,sticky="w")
         self.reenterPasswordLabel = Label( self.signUpcredentials, text="Reenter the Password",font='Fixedsys 13 bold',borderwidth=0, background="LightGray").grid(row=3, column=0,padx=50,pady=25, ipadx=3,ipady=5,sticky="sw")
@@ -64,7 +64,7 @@ class SignUpGUI():
     '''
     def createSecurityQuestionFrame(self):
         # security question frame
-        self.buttons= Frame(self.master, width = 450, height = 150, borderwidth=0, background="LightGray").grid(row = 4,column=0,padx=20, pady=5)
+        self.buttons= Frame(self.master, width = 600, height = 150, borderwidth=0, background="LightGray").grid(row = 4,column=0,padx=20, pady=5)
         self.securityQuestionLabel = Label( self.signUpcredentials, text="Security Question: What is your favorite food?",font='Fixedsys 13 bold',borderwidth=0, background="LightGray").grid(row=4, column=0,padx=15,pady=15, ipadx=1,ipady=1,stick="n")
         self.securityQuestionEntry = Entry(self.signUpcredentials)
         self.securityQuestionEntry.grid(row = 4,column=0,padx=8,pady=15,ipadx=2,ipady=2)
@@ -100,7 +100,7 @@ class SignUpGUI():
 
 def main():
     root = Tk()
-    root.geometry("550x600")
+    root.geometry("650x600")
     signupGUIObject = SignUpGUI(root)
     root.mainloop()
 if __name__ == "__main__":

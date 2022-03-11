@@ -25,7 +25,7 @@ class DashboardController():
     def createDashboardGUI(self):
         """This function creates the Dashboard GUI Object"""
         root = Tk()
-        root.geometry("1200x600")
+        root.geometry("1400x700")
         self.dashboardGUIObject = dashboard_gui.DashboardGUI(root, self.userObject, self.exerciseObject)
         root.mainloop()
 
