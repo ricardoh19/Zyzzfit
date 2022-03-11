@@ -254,19 +254,29 @@ class LoginLogoutControllers():
             popupGUI = PopUpGUI("Please choose atleast two days to exercise.")
             popupGUI.createPopUp()
             return False
+        if gender == "?":
+            popupGUI = PopUpGUI("Please provide a gender.")
+            popupGUI.createPopUp()
+            return False
+        try: 
+            age = int(age)
+            weight = int(weight)
+            height = int(height)
+        except ValueError:
+            popupGUI = PopUpGUI("Please provide an appropriate age, weight, or height.")
+            popupGUI.createPopUp()
+            return False
+        print(gender)
         self.databaseManagerObject.insertDatabaseUserData(username, password, securityQuestion, age, weight, height, gender, calorieGoal)
         self.getSnapshotOfDatabase()
+
         self.currentUserData = self.setCurrentUserData(username)
         userId = self.currentUserData[0]
-        
         for day in listOfDays:
             self.databaseManagerObject.insertTrainingDays(day, userId)
 
-        # insert all of users exercises here
-        self.insertExercisesIfNewUser(listOfDays, username, userId)
-
+        self.insertExercisesIfNewUser(listOfDays, username, userId)  # insert all of users exercises here
         self.getSnapshotOfDatabase()
-
         userInformationGUI.destroy()
         self.createDashboardController(username)
 

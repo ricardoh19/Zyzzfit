@@ -40,7 +40,7 @@ class UserInformationGUI():
         
         self.gender = Label(self.master, text="Gender",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=5,column=0, sticky='w')
         self.clickedGender = StringVar()
-        self.clickedGender.set("???")
+        self.clickedGender.set("?")
         self.chooseGender = OptionMenu(self.master, self.clickedGender, "Man", "Woman", "Other")
         self.chooseGender.grid(row=5,column=1)
 
