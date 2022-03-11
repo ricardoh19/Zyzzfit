@@ -163,29 +163,20 @@ class LoginLogoutControllers():
     Will insert exercises based on how many days user is training.
     For example, if user is training twice per week, it will enter userId, exerciseId, day, sets, and reps 5 times for 
     one day and 5 times for the other.
-    Algorithm:
-    application will insert exercises into user data based on body part. 
+    
     '''
     def insertExercisesIfNewUser(self, listOfDays, username ,userId):
         if len(listOfDays) == 2:
             # have to insert exercise data and junction data
-            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
-            self.getSnapshotOfDatabase()
-            self.setCurrentUserExerciseData(username)
+            for i in range(1,7):
+                self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+                self.getSnapshotOfDatabase()
+                self.setCurrentUserExerciseData(username)
 
-            userExerciseId = self.currentUserExerciseData[-1][0]
-            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, 1, listOfDays[0])
-            self.getSnapshotOfDatabase()
+                userExerciseId = self.currentUserExerciseData[-1][0]
+                self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[0])
+                self.getSnapshotOfDatabase()
            
-
-            # have to insert exercise data and junction data
-            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
-            self.getSnapshotOfDatabase()
-            self.setCurrentUserExerciseData(username)
-
-            userExerciseId = self.currentUserExerciseData[-1][0]
-            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, 2, listOfDays[0])
-            self.getSnapshotOfDatabase()
            
 
 
