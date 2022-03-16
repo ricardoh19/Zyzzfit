@@ -42,7 +42,7 @@ class MyWorkoutGUI():
         self.menu = Label(self.menuFrame, text="Zyzzfit",font='Ubuntu 25 bold', background='white').grid(row=0,column=0)
         self.dashboardButton = Button(self.menuFrame, text="Dashboard",font='Ubuntu 10 bold', highlightthickness=0,borderwidth=0).grid(row=1,column=0, sticky='ne', padx=20) 
         self.myWorkoutsButton = Button(self.menuFrame, text="My Workouts",font='Ubuntu 10 bold', highlightthickness=0,borderwidth=0).grid(row=1,column=0, sticky='se', padx=20)
-        image = Image.open("dashboard.png")
+        image = Image.open("assets/dashboard.png")
         resize_image = image.resize((15,15))
         img = ImageTk.PhotoImage(resize_image)
     

@@ -1,12 +1,33 @@
 legs,Squat
 chest,Bench Press
 back,Bent Over Row
-legs,romanian deadlift
-shoulders,overhead press
+legs,Romanian Deadlift
+shoulders,Overhead Press
 triceps,Dips
-legs,deadlift
+legs,Deadlift
+shoulders,Overhead Press
 back,Pull Ups
 legs,Lunges
 biceps,Bicep Curls
-shoudlers,Machine Shoulder Press
+chest,Bench Press
 chest,Incline Dumbbell Press
+chest,Cable Fly
+chest,Dips
+shoulders,Lateral Raises
+triceps,Tricep Extension
+back,Pull Ups
+biceps,Hammer Curls
+biceps,Cable Curls
+back,Cable Rows
+biceps,Dumbbell Curls
+legs,Deadlift
+legs,Leg Press
+legs,RDLs
+legs,Leg Extension
+legs,Hamstring Curls
+triceps,Tricep Extension
+shoulders,Dumbbell Shoulder Press
+biceps,Preacher Curl Machine
+shoulders,Shoulder Press Machine
+biceps,Cable Curls
+biceps,Rope Bicep Curls

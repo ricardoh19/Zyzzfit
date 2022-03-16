@@ -35,14 +35,62 @@ class User():
                 "userId": userId, 
                 "username": username,
                 "password":password,
-                "age":age,
+                "age": age,
                 "Weight":weight, 
                 "height": height,
-                "Gender": gender,
+                "gender": gender,
                 "Calorie Goal": calorieGoal,
                 "Training days":trainingDays
             }
         
+    def updateAge(self, newAge):
+        """Updates age of user"""
+        try:
+            self.current_user_data["age"] = newAge
+        except KeyError:
+            print(f"Unable to change age")
+            return False
+        return True
+
+    def updateWeight(self, newWeight):
+        """Updates weight of user"""
+        try:
+            self.current_user_data["weight"] = newWeight
+        except KeyError:
+            print(f"Unable to change weight")
+            return False
+        return True
+
+    def updateHeight(self, newHeight):
+        """Updates height of user"""
+        try:
+            self.current_user_data["height"] = newHeight
+        except KeyError:
+            print(f"Unable to change height")
+            return False
+        return True
+
+    def updateGender(self, newGender):
+        """Updates gender of user"""
+        try:
+            self.current_user_data["gender"] = newGender
+        except KeyError:
+            print(f"Unable to change gender")
+            return False
+        return True
+
+    def updateGoal(self, newGoal):
+        """Updates calorie goal of user"""
+        try:
+            self.current_user_data["Calorie Goal"] = newGoal
+        except KeyError:
+            print(f"Unable to change calorie goal")
+            return False
+        return True
+
+
+    
+
 
 
     

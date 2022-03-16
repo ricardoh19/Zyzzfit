@@ -167,17 +167,104 @@ class LoginLogoutControllers():
     '''
     def insertExercisesIfNewUser(self, listOfDays, username ,userId):
         if len(listOfDays) == 2:
-            # have to insert exercise data and junction data
-            for i in range(1,7):
-                self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
-                self.getSnapshotOfDatabase()
-                self.setCurrentUserExerciseData(username)
+            self.insertExercisesFor2Days(listOfDays, username ,userId)
 
-                userExerciseId = self.currentUserExerciseData[-1][0]
-                self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[0])
-                self.getSnapshotOfDatabase()
-           
-           
+        if len(listOfDays) == 3:
+            self.insertExercisesFor3Days(listOfDays, username ,userId)
+
+        if len(listOfDays) == 4:
+            self.insertExercisesFor4Days(listOfDays, username ,userId)
+
+
+
+
+    def insertExercisesFor2Days(self,listOfDays, username ,userId):
+        # have to insert exercise data and junction data
+        for i in range(1,7):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[0])
+            self.getSnapshotOfDatabase()
+
+        for i in range(7,11):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[1])
+            self.getSnapshotOfDatabase()
+
+    def insertExercisesFor3Days(self, listOfDays, username ,userId):
+        # have to insert exercise data and junction data
+        for i in range(12,18):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[0])
+            self.getSnapshotOfDatabase()
+
+        for i in range(18,23):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[1])
+            self.getSnapshotOfDatabase()
+
+        for i in range(23,28):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[2])
+            self.getSnapshotOfDatabase()
+
+    def insertExercisesFor4Days(self,listOfDays, username ,userId):
+        # have to insert exercise data and junction data
+        for i in range(12,18):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[0])
+            self.getSnapshotOfDatabase()
+
+        for i in range(18,23):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[1])
+            self.getSnapshotOfDatabase()
+
+        for i in range(23,28):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[2])
+            self.getSnapshotOfDatabase()
+        
+        for i in range(28,34):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[3])
+            self.getSnapshotOfDatabase()
+    
 
 
     '''
@@ -326,6 +413,7 @@ class LoginLogoutControllers():
     def createDashboardController(self,username):
         self.userObject = self.createUserObject(username)
         self.exerciseUserObject = self.createUserExerciseObject(username)
+
         dashboardController = dashboard_controller.DashboardController(self.userObject, self.exerciseUserObject)
         dashboardController.createDashboardGUI()
     
@@ -342,7 +430,7 @@ class LoginLogoutControllers():
         self.currentUserTrainingDays = self.setCurrentTrainingDays(username)
         self.userObject =  User(self.currentUserData, self.currentUserTrainingDays)
         print(self.userObject)
-        return self.userObject
+        return self.userObject.current_user_data
 
 
     '''
@@ -359,7 +447,7 @@ class LoginLogoutControllers():
         allExercises = self.databaseManagerObject.getDatabaseExerciseData()
         self.userExerciseObject =  ExerciseData(self.currentUserExerciseData, self.currentUserJunctionData, allExercises)
         print(self.userExerciseObject)
-        return self.userExerciseObject
+        return self.userExerciseObject.currentExerciseData
 
 
 

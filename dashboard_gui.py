@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 import datetime
 import dashboard_controller
+from PIL import ImageTk,Image 
 
 
 
@@ -13,10 +14,10 @@ class DashboardGUI():
         self.master = master
         self.master.configure(background= "#3E3C3C")
         self.master.title("Dashboard")
-        self.createMainFrame()
-        
         self.userObject = userObject
+       
         self.exerciseObject = exerciseObject
+        self.createMainFrame()
         self.dashboardControllerObject = dashboard_controller.DashboardController(userObject, exerciseObject)
 
     '''
@@ -45,12 +46,27 @@ class DashboardGUI():
         self.menu = Label(self.menuFrame, text="Zyzzfit",font='fixedsys 25 bold', background='white').grid(row=0,column=0)
         self.dashboardButton = Button(self.menuFrame, text="Dashboard",font='fixedsys 10 bold', borderwidth=0).grid(row=1,column=0, sticky='ne', padx=20) 
         self.myWorkoutsButton = Button(self.menuFrame, text="My Workouts",font='fixedsys 10 bold', borderwidth=0).grid(row=1,column=0, sticky='se', padx=20) 
+        image = Image.open("assets/dashboard.png")
+        resize_image = image.resize((15,15))
+        img = ImageTk.PhotoImage(resize_image)
+        panel = Label(self.master, image = img, width=15, height=15)
+        panel.image = img
+        panel.grid(row=1,column=0, sticky='nw', padx=20)
+
+        image = Image.open("assets/workout.png")
+        resize_image = image.resize((15,15))
+        img = ImageTk.PhotoImage(resize_image)
+        panel = Label(self.master, image = img, width=15, height=15)
+        panel.image = img
+        panel.grid(row=1,column=0, sticky='sw', padx=20)
 
 
     def createWorkoutFrame(self):
-        self.tree = ttk.Treeview(self.master, column=("Exercise", "Sets","Reps"), show='headings', height=19)
-        self.tree.grid(row=2,column=1, padx=5, columnspan=2, rowspan=2)
+        self.title = Label(self.master, text="Today's Workout",font='fixedsys 12 bold', height=2, width = 20, borderwidth=0, background='#3E3C3C', foreground="white").grid(row=2,column=1)
 
+        self.tree = ttk.Treeview(self.master, column=("Exercise", "Sets","Reps"), show='headings', height=10)
+        self.tree.grid(row=3,column=1, padx=5, columnspan=2, rowspan=2)
+        
         self.tree.heading('Exercise', text='Exercise')
         self.tree.column("Exercise", stretch=NO, width=400)
 
@@ -60,6 +76,16 @@ class DashboardGUI():
         self.tree.heading('Reps', text='Reps')
         self.tree.column("Reps", stretch=NO, width=75)
 
+        for i in self.exerciseObject:
+            try:
+                self.sets = self.exerciseObject[i]["sets"]
+                self.reps = self.exerciseObject[i]["reps"]
+                self.tree.insert('', 'end', text=i, values=(i, self.sets, self.reps))
+            except KeyError:
+                
+                self.tree.insert('', 'end', text=i, values=(i, "N/A", "N/A"))
+
+        
         
         
     def openMyWorkoutsGUI(self):
@@ -72,19 +98,21 @@ class DashboardGUI():
         self.dashboardControllerObject = dashboard_controller.DashboardController(userObject,exerciseObject)
         quote = self.dashboardControllerObject.getQuote()
         print(quote)
-        self.quote = Label(self.master, text="{}\n{}\n-{}".format(quote['q'][:100], quote['q'][100:], quote['a']),font='fixedsys 10', height=4, width = 78, borderwidth=0, background='white').grid(row=1,column=1, columnspan=2)
+        self.quote = Label(self.master, text="{}\n{}\n-{}".format(quote['q'][:100], quote['q'][100:], quote['a']),font='fixedsys 10 bold', height=4, width = 78, borderwidth=0, background='white').grid(row=1,column=1, columnspan=2)
 
     def createDateFrame(self):
         x = datetime.datetime.now()
         dayWeek = x.strftime("%A")
         month = x.strftime("%B")
-        day = x.day
-        date = "{}, {} {}".format(dayWeek ,month, day)
+        self.day = x.day
+        date = "{}, {} {}".format(dayWeek ,month, self.day)
 
         self.date = Label(self.master, text=date,font='fixedsys 17 bold', height=2, width = 29, background='lightGray', foreground="black").grid(row=1,column=3, columnspan=2)
 
     def createDaysFrame(self):
-        self.dayNumber = Label(self.master, text="3 day split",font='fixedsys 12', height=12, width = 41, borderwidth=0, background='white').grid(row=2,column=3,columnspan=2)
+        daySplit = len(self.userObject["Training days"])
+        self.dayNumber = Label(self.master, text="{} Day Split".format(daySplit),font='fixedsys 12', height=12, width = 41, borderwidth=0, background='white').grid(row=2,column=3,columnspan=2)
+
 
     def createCaloriesFrame(self):
         self.calories = Label(self.master, text="Calories",font='fixedsys 12', height=12, width = 41,borderwidth=0, background='white').grid(row=3,column=3, columnspan=2)
