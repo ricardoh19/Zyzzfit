@@ -82,17 +82,20 @@ class DashboardGUI():
 
         self.day = self.dashboardControllerObject.getDay()
 
+        DayCount = 0
         if self.exerciseObject != None:
             for i in self.exerciseObject:
                 if self.exerciseObject[i]["training Day"] == self.day:
+                    DayCount +=1 
                     try:
                         self.sets = self.exerciseObject[i]["sets"]
                         self.reps = self.exerciseObject[i]["reps"]
                         self.tree.insert('', 'end', text=i, values=(i, self.sets, self.reps))
                     except KeyError:
-                        
                         self.tree.insert('', 'end', text=i, values=(i, "N/A", "N/A"))
-
+                
+        if DayCount == 0:
+            self.tree.insert('', 'end', text=i, values=("No Exercises Today", "N/A", "N/A"))
         
         
     
