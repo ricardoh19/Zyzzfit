@@ -5,14 +5,14 @@ from mysql.connector import errorcode
 import os
 
 #export variables to environment
-os.environ["GENIUS_FINC_DB_NAME"]= "ZyzzfitDB"
+os.environ["ZYZZFIT_DB_NAME"]= "ZyzzfitDB"
 os.environ['SQLUser']='root'
 os.environ['SQLPassword']= 'Rhern_19'
 os.environ['SQLHost'] = "localhost"
 os.environ['DB_NAME'] ='ZyzzfitDB'
 
 
-# This class creates and maintains the Genius Finance database with methods: 
+# This class creates and maintains the Zyzzfit database with methods: 
 # connect_to_db, createDatabaseManager,create_database, getDatabaseUserData, 
 class DB():
     def __init__(self):
@@ -79,7 +79,7 @@ class DB():
         * Preconditions: 
         * DB_name variable is created and set to correct database name.
         * Postconditions:
-        * Post0. Database GeniusFinanceDB is created successfully if no exception is thrown.
+        * Post0. Database ZyzzfitDB is created successfully if no exception is thrown.
         * post1. if exception (mysql.connector.Error) is thrown, database can not created
         '''
         def create_database(cursor):
@@ -192,7 +192,7 @@ class DB():
     '''
     Intent: Query User data from database. Return a list of all User data from database
     * Preconditions: 
-    * cursor is connected to correct database (GeniusFinanceDB)
+    * cursor is connected to correct database (ZyzzfitDB)
     * User table already exists.
     * Postconditions:
      * Post0. Selects all data from the User table if connection to database if successful.
@@ -209,7 +209,7 @@ class DB():
     '''
     Intent: Query all exercise data from database,return a list of all exercise data from database. 
     * Preconditions: 
-    * cursor is connected to correct database (GeniusFinanceDB)
+    * cursor is connected to correct database (ZyzzfitDB)
     * Exercises table already exists.
     * Postconditions:
     * Post0. Selects all data from the Exercises table if connection to database if successful.
@@ -223,12 +223,12 @@ class DB():
         return result
 
     '''
-    Intent:
+    Intent: Query exercise data based on body part passed as a parameter. Returns exercises based on that body part.
     * Preconditions: 
-    * cursor is connected to correct database (GeniusFinanceDB)
+    * cursor is connected to correct database (ZyzzfitDB)
     * Exercises table already exists.
     * Postconditions:
-    * Post0. Selects all data from the Exercises table if connection to database if successful.
+    * Post0. Selects exercise data based on body part from the Exercises table if connection to database if successful.
     * Post1. Displays None if connection to database is not successful.
     '''
     def getExerciseBasedOnBodyPart(self, bodyPart):
@@ -238,7 +238,15 @@ class DB():
         result = [list(i) for i in cursor]
         return result
 
-
+    '''
+    Intent: Query all user exercise data from database,return a list of all exercise data from database. 
+    * Preconditions: 
+    * cursor is connected to correct database (ZyzzfitDB)
+    * UserExerciseInfo table already exists.
+    * Postconditions:
+    * Post0. Selects all user exercise data from the Exercises table if connection to database if successful.
+    * Post1. Displays None if connection to database is not successful.
+    '''
     def getDatabaseUserExerciseData(self):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
         query = ("SELECT * FROM UserExerciseInfo")
@@ -246,6 +254,15 @@ class DB():
         result = [list(i) for i in cursor]
         return result
 
+    '''
+    Intent: Query all user exercise junction data from database,return a list of all user exercise junction data from database. 
+    * Preconditions: 
+    * cursor is connected to correct database (ZyzzfitDB)
+    * UserExerciseJunctionData table already exists.
+    * Postconditions:
+    * Post0. Selects all user exercise junction data from the Exercises table if connection to database if successful.
+    * Post1. Displays None if connection to database is not successful.
+    '''
     def getDatabaseUserExerciseJunctionData(self):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
         query = ("SELECT * FROM UserExerciseJunction")
@@ -254,7 +271,15 @@ class DB():
         return result
 
    
-
+    '''
+    Intent: Query all training day data from database,return a list of all training day data from database. 
+    * Preconditions: 
+    * cursor is connected to correct database (ZyzzfitDB)
+    * TrainingDay table already exists.
+    * Postconditions:
+    * Post0. Selects all training day data from the Exercises table if connection to database if successful.
+    * Post1. Displays None if connection to database is not successful.
+    '''
     def getTrainingDays(self):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
         query = ("SELECT * FROM TrainingDay")
@@ -291,6 +316,16 @@ class DB():
         cursor.execute(query, data)
         cnx.commit()
 
+    '''
+    Intent: Inserts training day data into TrainingDay table
+    * Preconditions: 
+    * cursor is connected to correct database
+    * TrainingDay table already exists.
+    * Postconditions:
+    * PostO. trainingDay and userId is inserted into the database if connection to database is successful.
+    * Post1. Data is not inserted into the database if connection to database fails.
+    * Post2. Data is not inserted into the database if a parameter or all parameters are equal to None.
+    '''
     def insertTrainingDays(self, trainingDay, userId):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
         query = (f"INSERT INTO TrainingDay"
@@ -303,10 +338,9 @@ class DB():
     '''
     Intent: Inserts data into Exercise table
     * Preconditions: 
-    * userId matches with userID that is currently logged in.
     * DB_Name is equal to 'ZyzzfitDB'.
     * Table that is being inserted to is "Exercises" and already exists.
-    * cursor is connected to correct database (GeniusFinanceDB)
+    * cursor is connected to correct database (ZyzzfitDB)
     * Postconditions:
     * PostO. exerciseName, and bodyPart is inserted into the database if connection to database is successful.
     * Post1. Data is not inserted into the database if connection to database fails.
@@ -321,7 +355,19 @@ class DB():
         cursor.execute(query,data)
         cnx.commit()
 
-
+    '''
+    Intent: Inserts all exercise data from exercise text file.
+    * Preconditions: 
+    * DB_Name is equal to 'ZyzzfitDB'.
+    * Table that is being inserted to is "Exercises" and already exists.
+    * cursor is connected to correct database (ZyzzfitDB)
+    * exercise.txt exists and is in current directory. 
+    * Postconditions:
+    * PostO. exerciseName, and bodyPart is inserted into the database if connection to database is successful.
+    * Post1. Data is not inserted into the database if connection to database fails.
+    * Post2. Data is not inserted into the database if a parameter or all parameters are equal to None.
+    * Post3. Data is not inserted if text file does not contain data.
+    '''
     def insertAllExercisesIntoDatabase(self):
         with open('exercises.txt') as f:
             lines = f.readlines()
@@ -360,7 +406,7 @@ class DB():
 
 
 
-
+    # testing purposes
     def deleteDatabase(self):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
         query = (f"DROP DATABASE {self.DB_NAME}")
@@ -383,9 +429,9 @@ class DB():
     Intent: Updates data into User table
     * Preconditions: 
     * userId matches with userID that is currently logged in.
-    * DB_Name is equal to 'GeniusFinanceDB'.
+    * DB_Name is equal to 'ZyzzfitDB'.
     * Table that is being updated to is "User" and already exists.
-    * cursor is connected to correct database (GeniusFinanceDB)
+    * cursor is connected to correct database (ZyzzfitDB)
     * usernameOrPassword is a string that is either equal to "username" or "password"
     * newValue is a validated username or password
     * username or password are the only valued from User table that can be changed.
@@ -413,7 +459,7 @@ class DB():
         pass
 
     '''
-    Can update exerciseId if user hcanges the exercise
+    Can update exerciseId if user changes the exercise
     '''
     def updateUserJunctionData(self):
         pass

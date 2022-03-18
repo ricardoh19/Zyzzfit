@@ -7,15 +7,13 @@ import loginlogout_controller
 
 # this class controls the graphical user interface of the userInformation window. Its methods include createMainFrame, createDaysFrame,
 # handleSaveInformationEvent, and closeWindow
-class UserInformationGUI():
-    def __init__(self, master, username, password,securityQuestion):
+class MyProfileGUI():
+    def __init__(self, master):
         self.loginlogout_ControllerObject = loginlogout_controller.LoginLogoutControllers()
         self.master = master
         self.master.configure(background= "#3E3C3C")
-        self.master.title("User Information")
-        self.username = username
-        self.password = password
-        self.securityQuestion = securityQuestion
+        self.master.title("My Profile Information")
+        
 
         self.createMainFrame()
 
@@ -26,7 +24,7 @@ class UserInformationGUI():
     * Post0. main frame for userInformation is created
     '''
     def createMainFrame(self): 
-        self.title = Label(self.master, text="User Information",font=("Fixedsys", 40, "bold"),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=1,column=0, columnspan=2, pady=0, padx=0)
+        self.title = Label(self.master, text="My Profile",font=("Fixedsys", 40, "bold"),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=1,column=0, columnspan=2, pady=0, padx=0)
         
         self.age = Label(self.master, text="Age",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=2,column=0, sticky='w')
         self.ageEntry = Entry(self.master)
@@ -44,7 +42,7 @@ class UserInformationGUI():
         self.chooseGender = OptionMenu(self.master, self.clickedGender, "Man", "Woman", "Other")
         self.chooseGender.grid(row=5,column=1)
 
-        self.goal = Label(self.master, text="What is your goal?",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=6,column=0, sticky='w')
+        self.goal = Label(self.master, text="What is your goal?",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=6,column=1, sticky='w')
         self.clickedGoal = StringVar()
         self.clickedGoal.set("Maintain")
         self.chooseGoal = OptionMenu(self.master, self.clickedGoal, "Lose", "Maintain", "Gain")
@@ -52,7 +50,8 @@ class UserInformationGUI():
 
         self.createDaysFrame()
 
-        self.saveButton = Button(self.master,text="Finish Set Up", borderwidth=0, command=lambda:self.handleSaveInformationEvent(),  highlightthickness=0).grid(row = 14,column=1, pady=1, sticky="e")
+        self.saveButton = Button(self.master,text="Save", borderwidth=0, command=lambda:self.handleSaveInformationEvent(),  highlightthickness=0).grid(row = 14,column=1, pady=1, sticky="e")
+        self.cancelButton = Button(self.master,text="Cancel", borderwidth=0,  highlightthickness=0).grid(row = 14,column=2, pady=1, sticky="e")
 
     
     '''
@@ -143,7 +142,7 @@ class UserInformationGUI():
 def main():
     root = Tk()
     root.geometry("650x550")
-    userInformationGUIObject = UserInformationGUI(root, "ricardoh81", "Pass1!", "pizza")
+    userInformationGUIObject = MyProfileGUI(root)
     root.mainloop()
 if __name__ == "__main__":
     main()

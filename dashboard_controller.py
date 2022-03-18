@@ -2,7 +2,9 @@ from tkinter import *
 from popup_gui import PopUpGUI
 import dashboard_gui
 import loginlogout_controller
+import myProfile_controller
 import requests
+import datetime
 
 
 """This class is the intersection of App traffic after login. """
@@ -34,21 +36,34 @@ class DashboardController():
         self.loginlogout_controller.createLoginGUI()
 
 
+    '''
+    Intent: Creates My Workouts Controller and calls functions to create My Workouts GUI.
+    * Preconditions: 
+    * MyWorkoutsController() exists
+    * Postconditions:
+    * Post0. My Workouts controller class is created and My Workouts GUI is created and displayed.
+    '''
     def createMyWorkoutsController(self):
         pass
     
     def createMyProfileController(self):
-        pass
+        myWorkoutsControllerObject = myProfile_controller.MyProfileController(self.userObject)
+        myWorkoutsControllerObject.createMyProfileGUI()
 
-    def getUserWorkoutsForDay(self):
-        pass
 
 
     def getFullDate(self):
-        pass
+        x = datetime.datetime.now()
+        dayWeek = x.strftime("%A")
+        month = x.strftime("%B")
+        day = x.day
+        date = "{}, {} {}".format(dayWeek ,month, day)
+        return date
 
     def getDay(self):
-        pass
+        x = datetime.datetime.now()
+        dayWeek = x.strftime("%A")
+        return dayWeek
 
 
     def getQuote(self):
@@ -61,9 +76,7 @@ class DashboardController():
     def calculateCalorieIntake(self):
         pass
 
-    def getDaysAmountExercise(self):
-        pass
-
+    
     def getUsername(self):
         pass
     

@@ -88,6 +88,8 @@ class User():
             return False
         return True
 
+    def updateDaysExercising(self):
+        pass
 
     
 
