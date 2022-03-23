@@ -1,5 +1,4 @@
 from tkinter import *
-from dashboard_gui import DashboardGUI
 import os
 from login_gui import LoginGUI
 

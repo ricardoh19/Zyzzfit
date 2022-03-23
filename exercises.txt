@@ -31,3 +31,13 @@ biceps,Preacher Curl Machine
 shoulders,Shoulder Press Machine
 biceps,Cable Curls
 biceps,Rope Bicep Curls
+back,Pull Ups
+back,Cable Rows
+back,Cable Pullovers
+biceps,Cable Curls
+biceps,Rope Bicep Curls
+triceps,Tricep Extension
+triceps,Tricep Kickback
+shoulders,Shoulder Press Machine
+shoulders,Lateral Raises
+shoulders,Rear Delt Flies

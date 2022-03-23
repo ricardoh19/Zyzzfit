@@ -42,7 +42,7 @@ class MyProfileGUI():
         self.chooseGender = OptionMenu(self.master, self.clickedGender, "Man", "Woman", "Other")
         self.chooseGender.grid(row=5,column=1)
 
-        self.goal = Label(self.master, text="What is your goal?",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=6,column=1, sticky='w')
+        self.goal = Label(self.master, text="What is your goal?",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=6,column=0, sticky='w')
         self.clickedGoal = StringVar()
         self.clickedGoal.set("Maintain")
         self.chooseGoal = OptionMenu(self.master, self.clickedGoal, "Lose", "Maintain", "Gain")

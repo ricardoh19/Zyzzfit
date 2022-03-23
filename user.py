@@ -19,6 +19,7 @@ class User():
     def __str__(self):
         return f"User Data: {self.current_user_data} \n"
     
+    """Takes in user information such as userId, username, password, age, weight, height, gender, calorieGoal, and trainingDays. Turns it into the format of a dictionary"""
     def user_data_to_dict(self, current_user_data, current_user_training_days):
         userId = current_user_data[0]
         username = current_user_data[1]
@@ -43,8 +44,8 @@ class User():
                 "Training days":trainingDays
             }
         
+    """Updates age of user"""
     def updateAge(self, newAge):
-        """Updates age of user"""
         try:
             self.current_user_data["age"] = newAge
         except KeyError:
@@ -52,8 +53,8 @@ class User():
             return False
         return True
 
+    """Updates weight of user"""
     def updateWeight(self, newWeight):
-        """Updates weight of user"""
         try:
             self.current_user_data["weight"] = newWeight
         except KeyError:
@@ -61,8 +62,8 @@ class User():
             return False
         return True
 
+    """Updates height of user"""
     def updateHeight(self, newHeight):
-        """Updates height of user"""
         try:
             self.current_user_data["height"] = newHeight
         except KeyError:
@@ -70,8 +71,8 @@ class User():
             return False
         return True
 
+    """Updates gender of user"""
     def updateGender(self, newGender):
-        """Updates gender of user"""
         try:
             self.current_user_data["gender"] = newGender
         except KeyError:
@@ -79,8 +80,8 @@ class User():
             return False
         return True
 
+    """Updates calorie goal of user"""
     def updateGoal(self, newGoal):
-        """Updates calorie goal of user"""
         try:
             self.current_user_data["Calorie Goal"] = newGoal
         except KeyError:
@@ -88,6 +89,7 @@ class User():
             return False
         return True
 
+    """Updates the days the user is exercising"""
     def updateDaysExercising(self):
         pass
 

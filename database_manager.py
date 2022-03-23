@@ -382,7 +382,17 @@ class DB():
                 cursor.execute(query,data)
                 cnx.commit()
             
-
+    '''
+    Intent: Inserts data into userExerciseTable
+    * Preconditions: 
+    * DB_Name is equal to 'ZyzzfitDB'.
+    * Table that is being inserted to is "UserExerciseInfo" and already exists.
+    * cursor is connected to correct database (ZyzzfitDB)
+    * Postconditions:
+    * PostO. userId, sets, repetitions, maxWeight, originalWeight is inserted into the database if connection to database is successful.
+    * Post1. Data is not inserted into the database if connection to database fails.
+    * Post2. Data is not inserted into the database if a parameter or all parameters are equal to None.
+    '''
     def insertDatabaseUserExerciseData(self, userId, sets, repetitions, maxWeight, originalWeight):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
         query = (f"INSERT INTO UserExerciseInfo"
@@ -392,7 +402,17 @@ class DB():
         cursor.execute(query,data)
         cnx.commit()
 
-    
+    '''
+    Intent: Inserts data into UserExerciseJunction
+    * Preconditions: 
+    * DB_Name is equal to 'ZyzzfitDB'.
+    * Table that is being inserted to is "UserExerciseJunction" and already exists.
+    * cursor is connected to correct database (ZyzzfitDB)
+    * Postconditions:
+    * PostO. userexerciseId, exerciseId, trainingday is inserted into the database if connection to database is successful.
+    * Post1. Data is not inserted into the database if connection to database fails.
+    * Post2. Data is not inserted into the database if a parameter or all parameters are equal to None.
+    '''
     def insertDatabaseUserExerciseJunction(self, userexerciseId, exerciseId, trainingday):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
         query = (f"INSERT INTO UserExerciseJunction"
@@ -401,7 +421,6 @@ class DB():
         data = (userexerciseId, exerciseId, trainingday)
         cursor.execute(query,data)
         cnx.commit()
-
 
 
 
@@ -419,11 +438,7 @@ class DB():
 
 
 
-
-
-
     #UPDATE Methods
-
 
     '''
     Intent: Updates data into User table
@@ -435,7 +450,6 @@ class DB():
     * usernameOrPassword is a string that is either equal to "username" or "password"
     * newValue is a validated username or password
     * username or password are the only valued from User table that can be changed.
-
     * Postconditions:
     * PostO. username is updated in the database if connection to database is successful.
     * Post1. password is updated in the database if connection to database is successful.
@@ -465,4 +479,21 @@ class DB():
         pass
     
    
-    
+    def updateUserTrainingDays(self):
+        pass
+
+
+    def updateUserExerciseSets(self):
+        pass
+
+
+    def updateUserExerciseReps(self):
+        pass
+
+
+    def updateUserExerciseMaxWeight(self):
+        pass
+
+
+    def updateUserExerciseOriginalWeight(self):
+        pass
