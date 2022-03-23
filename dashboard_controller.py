@@ -78,11 +78,20 @@ class DashboardController():
         weight = self.userObject["Weight"]
         height = self.userObject["height"]
         gender = self.userObject['gender']
+        goal = self.userObject["Calorie Goal"]
+        
 
         if gender == "Man":
             result = 66.47 + (6.24 * float(weight)) + (12.7 * float(height)) - (6.755 * float(age))
         else:
             result = 655.1 + (4.35 * float(weight)) + (4.7 * float(height)) - (4.7 * float(age))
+            
+        if goal =="Maintain":
+                result *= 1.5
+        if goal == "Lose":
+            result *= 1.15
+        if goal == "Gain":
+            result *= 1.65
         return int(result)
 
     

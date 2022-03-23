@@ -5,7 +5,7 @@ import loginlogout_controller
 
 
 
-# this class controls the graphical user interface of the userInformation window. Its methods include createMainFrame, createDaysFrame,
+# this class controls the graphical user interface of the My Profile window. Its methods include createMainFrame, createDaysFrame,
 # handleSaveInformationEvent, and closeWindow
 class MyProfileGUI():
     def __init__(self, master):

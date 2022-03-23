@@ -21,7 +21,6 @@ def changeAge():
     trainingDays = [[1, "Monday",1]]
     current_user_data = [user_id, username, password, sec, age, weight, height, gender, calorieGoal]
     myuser = User(current_user_data, trainingDays)
-
     myuser.updateAge(30)
     print(myuser)
     return myuser

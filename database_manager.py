@@ -12,10 +12,10 @@ os.environ['SQLHost'] = "localhost"
 os.environ['DB_NAME'] ='ZyzzfitDB'
 
 
-# This class creates and maintains the Zyzzfit database with methods: 
-# connect_to_db, createDatabaseManager,create_database, getDatabaseUserData, 
+# This class creates and maintains the Zyzzfit database with methods
 class DB():
     def __init__(self):
+        
         #creates db if necessary
         #get db name from environment 
         try:

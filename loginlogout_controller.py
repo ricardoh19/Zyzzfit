@@ -13,8 +13,7 @@ import userInformation_gui
 
 
 # this class controls the logic of loginGUI, signUpGUI, userInformationGUI, and forgetPassword. 
-# It is the coordinator between these classes the its GUI classes. The methods in this class are createLoginGUI, 
-# getSnapshotOfDatabase, setCurrentUserData
+# It is the coordinator between these classes the its GUI classes. 
 class LoginLogoutControllers():
     def __init__(self):
         #initializes and pulls data from DB
@@ -178,6 +177,11 @@ class LoginLogoutControllers():
         if len(listOfDays) == 5:
             self.insertExercisesFor5Days(listOfDays, username ,userId)
 
+        if len(listOfDays) == 6:
+            self.insertExercisesFor6Days(listOfDays, username ,userId)
+        if len(listOfDays) == 7:
+            self.insertExercisesFor7Days(listOfDays, username ,userId)
+
 
 
 
@@ -319,9 +323,126 @@ class LoginLogoutControllers():
 
 
 
+    def insertExercisesFor6Days(self, listOfDays, username ,userId):
+        # have to insert exercise data and junction data
+        for i in range(12,18):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
 
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[0])
+            self.getSnapshotOfDatabase()
 
+        for i in range(18,23):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
 
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[1])
+            self.getSnapshotOfDatabase()
+
+        for i in range(23,28):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[2])
+            self.getSnapshotOfDatabase()
+
+        for i in range(12,18):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[3])
+            self.getSnapshotOfDatabase()
+
+        for i in range(18,23):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[4])
+            self.getSnapshotOfDatabase()
+
+        for i in range(23,28):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[5])
+            self.getSnapshotOfDatabase()
+
+    def insertExercisesFor7Days(self, listOfDays, username ,userId):
+        # have to insert exercise data and junction data
+        for i in range(12,18):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[0])
+            self.getSnapshotOfDatabase()
+
+        for i in range(18,23):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[1])
+            self.getSnapshotOfDatabase()
+
+        for i in range(23,28):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[2])
+            self.getSnapshotOfDatabase()
+
+        for i in range(12,18):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[3])
+            self.getSnapshotOfDatabase()
+
+        for i in range(18,23):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[4])
+            self.getSnapshotOfDatabase()
+
+        for i in range(23,28):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[5])
+            self.getSnapshotOfDatabase()
+
+        for i in range(44,45):
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 0, 0, 0, 0)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[6])
+            self.getSnapshotOfDatabase()
 
 
     '''

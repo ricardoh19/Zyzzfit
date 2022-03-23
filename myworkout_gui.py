@@ -5,7 +5,7 @@ import datetime
 import dashboard_controller 
 from PIL import ImageTk,Image 
 
-# this class controls the graphical user interface of the My workouts window. Its methods include 
+# this class controls the graphical user interface of the My workouts window. 
 
 class MyWorkoutGUI():
     def __init__(self, master):

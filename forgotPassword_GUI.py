@@ -6,7 +6,7 @@ import login_gui
 import loginlogout_controller 
 
 
-# this class controls the graphical user interface of the Sign Up window. Its methods include createMainFrame, 
+# this class controls the graphical user interface of the forgot password window. Its methods include createMainFrame, 
 # createSignUpUsernamePasswordFrame, createSecurityQuestionFrame, handleForgotPasswordEvent, and closeWindow 
 # handleCloseEvent.
 class ForgotPasswordGUI():

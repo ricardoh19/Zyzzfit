@@ -147,7 +147,7 @@ class DashboardGUI():
 
     def createCaloriesFrame(self):
         caloriesResult = self.dashboardControllerObject.calculateCalorieIntake()
-        self.calories = Label(self.master, text="{} Calories \nto {}".format(caloriesResult, self.userObject["Calorie Goal"]), font="fixedsys 21 bold", height=7, width = 24,borderwidth=0, background='white').grid(row=3,column=3, columnspan=2)
+        self.calories = Label(self.master, text="Eat {} Calories \n a day to meet \n{}".format(caloriesResult, self.userObject["Calorie Goal"]), font="fixedsys 21 bold", height=7, width = 24,borderwidth=0, background='red').grid(row=3,column=3, columnspan=2)
 
 
 
@@ -177,14 +177,3 @@ class DashboardGUI():
         self.master.destroy()
 
 
-
-def main():
-    root = Tk()
-    root.geometry("1400x700")
-    userObject = None
-    exerciseObject = None
-    dashboardGUIObject = DashboardGUI(root, userObject, exerciseObject)
-    root.mainloop()
-
-if __name__ == "__main__":
-    main()

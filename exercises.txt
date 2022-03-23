@@ -41,3 +41,4 @@ triceps,Tricep Kickback
 shoulders,Shoulder Press Machine
 shoulders,Lateral Raises
 shoulders,Rear Delt Flies
+cardio,Light or Heavy Cardio
