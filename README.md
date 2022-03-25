@@ -7,6 +7,7 @@
 + msvc-runtime==14.29.30133
 + python-dateutil==2.8.2
 + Python Version: 3.10.0
++ Pillow - pip install Pillow
 + Download MySQL following the instructions here: https://www.mysql.com/de/downloads/
 
 

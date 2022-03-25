@@ -11,7 +11,7 @@ class MyProfileController():
 
     def createMyProfileGUI(self):
         root = Tk()
-        root.geometry("650x550")
+        root.geometry("710x550")
         userInformationGUIObject = myProfile_GUI.MyProfileGUI(root, self.userObject)
         root.mainloop()
 

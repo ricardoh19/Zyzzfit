@@ -9,6 +9,6 @@ class MyWorkoutsController():
 
     def createMyWorkoutsGUI(self):
         root = Tk()
-        root.geometry("1200x600")
+        root.geometry("1200x650")
         myWorkoutsGUIObject = myworkout_gui.MyWorkoutGUI(root, self.userObject, self.exerciseObject)
         root.mainloop()

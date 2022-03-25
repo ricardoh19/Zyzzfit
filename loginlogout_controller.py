@@ -553,7 +553,7 @@ class LoginLogoutControllers():
     def createUserInformationGUI(self,username, password,securityQuestion):
         """This function creates the Dashboard GUI Object"""
         root = Tk()
-        root.geometry("650x550")
+        root.geometry("675x550")
         userInformationGUIObject = userInformation_gui.UserInformationGUI(root, username, password,securityQuestion)
         root.mainloop()
 
