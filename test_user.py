@@ -30,5 +30,5 @@ def changeAge():
 
 if __name__ == "__main__":
     # test_input()
-    #test_user_object()
-    changeAge()
+    create_valid_user_object()
+    #changeAge()

@@ -435,15 +435,16 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[5])
             self.getSnapshotOfDatabase()
 
-        for i in range(44,45):
-            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 0, 0, 0, 0)
-            self.getSnapshotOfDatabase()
-            self.setCurrentUserExerciseData(username)
+        
+        
+        self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 0, 0, 0, 0)
+        self.getSnapshotOfDatabase()
+        self.setCurrentUserExerciseData(username)
 
-            userExerciseId = self.currentUserExerciseData[-1][0]
-            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[6])
-            self.getSnapshotOfDatabase()
-
+        userExerciseId = self.currentUserExerciseData[-1][0]
+        self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, 44, listOfDays[6])
+        self.getSnapshotOfDatabase()
+        
 
     '''
     Intent: compares userExerciseId in current user exercise data and junction data to build a list for current user. Returns a list of the corresponding exercise junction data.
@@ -526,8 +527,10 @@ class LoginLogoutControllers():
         self.databaseManagerObject.insertDatabaseUserData(username, password, securityQuestion, age, weight, height, gender, calorieGoal)
         self.getSnapshotOfDatabase()
 
+        # get userId
         self.currentUserData = self.setCurrentUserData(username)
         userId = self.currentUserData[0]
+        # insert training day for user
         for day in listOfDays:
             self.databaseManagerObject.insertTrainingDays(day, userId)
 
@@ -806,7 +809,7 @@ class LoginLogoutControllers():
 
 
     '''
-    Intent: 
+    Intent: Check what has to be changed in objects.
     * Preconditions: 
     * username and finalUserObject exists
     * self.createUserObejct creates the initial user object
@@ -814,5 +817,4 @@ class LoginLogoutControllers():
     * Post0. 
     '''
     def logout_push_changes_to_database(self,username, finalUserObject):
-        """Check what has to be changed in objects. """
         pass

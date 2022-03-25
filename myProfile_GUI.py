@@ -1,3 +1,4 @@
+from cgitb import text
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
@@ -8,17 +9,17 @@ import loginlogout_controller
 # this class controls the graphical user interface of the My Profile window. Its methods include createMainFrame, createDaysFrame,
 # handleSaveInformationEvent, and closeWindow
 class MyProfileGUI():
-    def __init__(self, master):
+    def __init__(self, master, userObject):
         self.loginlogout_ControllerObject = loginlogout_controller.LoginLogoutControllers()
         self.master = master
         self.master.configure(background= "#3E3C3C")
         self.master.title("My Profile Information")
-        
+        self.userObject = userObject
 
         self.createMainFrame()
 
     '''
-    Intent: creates the main frame for the userInformation GUI
+    Intent: creates the main frame for the My profile GUI
     * Preconditions: master is connected to TKinter. 
     * Postconditions:
     * Post0. main frame for userInformation is created
@@ -26,39 +27,45 @@ class MyProfileGUI():
     def createMainFrame(self): 
         self.title = Label(self.master, text="My Profile",font=("Fixedsys", 40, "bold"),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=1,column=0, columnspan=2, pady=0, padx=0)
         
+        
         self.age = Label(self.master, text="Age",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=2,column=0, sticky='w')
         self.ageEntry = Entry(self.master)
+        self.ageEntry.insert(0, self.userObject["age"])
+
         self.ageEntry.grid(row = 2,column=1)
         self.weight = Label(self.master, text="Weight (Lbs.)",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=3,column=0, sticky='w')
         self.weightEntry = Entry(self.master)
         self.weightEntry.grid(row = 3,column=1)
+        self.weightEntry.insert(0, self.userObject["Weight"])
+
         self.height = Label(self.master, text="Height (Inches)",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=4,column=0, sticky='w')
         self.heightEntry = Entry(self.master)
         self.heightEntry.grid(row = 4,column=1)
+        self.heightEntry.insert(0, self.userObject["height"])
         
         self.gender = Label(self.master, text="Gender",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=5,column=0, sticky='w')
         self.clickedGender = StringVar()
-        self.clickedGender.set("?")
+        self.clickedGender.set(str(self.userObject["gender"]))
         self.chooseGender = OptionMenu(self.master, self.clickedGender, "Man", "Woman", "Other")
         self.chooseGender.grid(row=5,column=1)
 
         self.goal = Label(self.master, text="What is your goal?",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=6,column=0, sticky='w')
         self.clickedGoal = StringVar()
-        self.clickedGoal.set("Maintain")
+        self.clickedGoal.set(str(self.userObject["Calorie Goal"]))
         self.chooseGoal = OptionMenu(self.master, self.clickedGoal, "Lose", "Maintain", "Gain")
         self.chooseGoal.grid(row=6,column=1)
 
         self.createDaysFrame()
 
         self.saveButton = Button(self.master,text="Save", borderwidth=0, command=lambda:self.handleSaveInformationEvent(),  highlightthickness=0).grid(row = 14,column=1, pady=1, sticky="e")
-        self.cancelButton = Button(self.master,text="Cancel", borderwidth=0,  highlightthickness=0).grid(row = 14,column=2, pady=1, sticky="e")
+        self.cancelButton = Button(self.master,text="Cancel", borderwidth=0,  highlightthickness=0, command=lambda:self.closeWindow()).grid(row = 14,column=2, pady=1, sticky="e")
 
     
     '''
-    Intent: creates the frame with days checkboxes for the userInformation GUI
+    Intent: creates the frame with days checkboxes for the My profile GUI
     * Preconditions: master is connected to TKinter. 
     * Postconditions:
-    * Post0. day frame for userInformationGUI is created
+    * Post0. day frame for My Profile GUI is created
     '''
     def createDaysFrame(self):
         self.days = Label(self.master, text="How many days are you\n exercising?",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=7,column=0, sticky='w', ipadx=10)
@@ -99,10 +106,10 @@ class MyProfileGUI():
         self.sunday.deselect()
 
     '''
-    Intent: Calls method in loginlogoutController to save information inputted by user.
+    Intent: 
     * Preconditions: loginlogout_ControllerObject is an instance of loginlogoutController class
     * Postconditions:
-    * Post0. loginlogoutController calls userInformationProcessing().
+    * Post0. 
     '''
     def handleSaveInformationEvent(self):
         self.listOfDays = []
@@ -122,9 +129,8 @@ class MyProfileGUI():
         if self.varSunday.get() != '0':
             self.listOfDays.append('Sunday')
         
-        
-        self.loginlogout_ControllerObject.userInformationProcessing(self.username, self.password, self.securityQuestion, self.ageEntry.get(), self.weightEntry.get(), self.heightEntry.get(), self.clickedGender.get(), self.clickedGoal.get(), self.listOfDays, self.master)
-        
+        self.newUserObject = [self.ageEntry.get(), self.weightEntry.get(), self.heightEntry.get(), self.clickedGender.get(), self.clickedGoal.get(), self.listOfDays]
+        print(self.newUserObject)
         
 
   

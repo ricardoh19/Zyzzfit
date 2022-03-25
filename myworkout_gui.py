@@ -6,17 +6,17 @@ import dashboard_controller
 from PIL import ImageTk,Image 
 
 # this class controls the graphical user interface of the My workouts window. 
-
 class MyWorkoutGUI():
-    def __init__(self, master):
+    def __init__(self, master, userObject, exerciseObject):
         self.master = master
         self.master.configure(background= "#3E3C3C")
         self.master.title("My Workouts")
-        self.createMainFrame()
-        
+        self.userObject = userObject
+        self.exerciseObject = exerciseObject
+        self.dashboardControllerObject = dashboard_controller.DashboardController(userObject, exerciseObject)
         userObject = None
         exerciseObject = None
-        self.dashboardControllerObject = dashboard_controller.DashboardController(userObject, exerciseObject)
+        self.createMainFrame()
 
     '''
     Intent: creates the main frame for the My Workouts GUI
@@ -45,14 +45,19 @@ class MyWorkoutGUI():
         image = Image.open("assets/dashboard.png")
         resize_image = image.resize((15,15))
         img = ImageTk.PhotoImage(resize_image)
-    
         panel = Label(self.master, image = img, width=15, height=15)
         panel.image = img
         panel.grid(row=1,column=0, sticky='nw', padx=20)
         
+        image = Image.open("assets/workout.png")
+        resize_image = image.resize((15,15))
+        img = ImageTk.PhotoImage(resize_image)
+        panel = Label(self.master, image = img, width=15, height=15)
+        panel.image = img
+        panel.grid(row=1,column=0, sticky='sw', padx=20)
 
     def createProfileButton(self):
-        self.profile = Button(self.master, text="My Profile",font='fixedsys 12',  height=3, width = 15, borderwidth=3, relief="solid", background='white').grid(row=0,column=4, sticky='e')
+        self.profile = Button(self.master, text="My Profile",font='fixedsys 12',  height=3, width = 10, borderwidth=3, relief="solid", background='white').grid(row=0,column=4, sticky='e')
 
 
     def createSuggestionFrame(self):
@@ -78,32 +83,44 @@ class MyWorkoutGUI():
         self.tree.heading('Original_Weight', text='Original Weight(Lbs.)')
         self.tree.column("Original_Weight", stretch=NO, width=120)
 
-        #self.workouts = Label(self.master, text="workouts",  width = 80, height=20, borderwidth=0, background='white').grid(row=2,column=1, columnspan=3, rowspan=5)
+        self.day = self.dashboardControllerObject.getDay()
 
+        DayCount = 0
+        if self.exerciseObject != None:
+            for i in self.exerciseObject:
+                if self.exerciseObject[i]["training Day"] == self.day:
+                    DayCount +=1 
+                    try:
+                        self.sets = self.exerciseObject[i]["sets"]
+                        self.reps = self.exerciseObject[i]["reps"]
+                        self.tree.insert('', 'end', text=i, values=(i, self.sets, self.reps))
+                    except KeyError:
+                        self.tree.insert('', 'end', text=i, values=(i, "N/A", "N/A"))
+                
+        if DayCount == 0:
+            self.tree.insert('', 'end', text='', values=("No Exercises Today", "N/A", "N/A"))
     
+
     def createDaysFrame(self):
-        self.workout1 = Button(self.master, text="Workout 1",font='fixedsys 12', height=1, width =10, highlightthickness=0, borderwidth=0, background='white').grid(row=1,column=4)
-        self.workout2 = Button(self.master, text="Workout 2",font='fixedsys 12', height=1, width =10, highlightthickness=0, borderwidth=0, background='white').grid(row=2,column=4)
-        self.workout3 = Button(self.master, text="Workout 3",font='fixedsys 12', height=1, width =10, highlightthickness=0, borderwidth=0, background='white').grid(row=3,column=4)
-        self.workout4 = Button(self.master, text="Workout 4",font='fixedsys 12', height=1, width =10, highlightthickness=0, borderwidth=0, background='white').grid(row=4,column=4)
-        self.workout5 = Button(self.master, text="Workout 5",font='fixedsys 12', height=1, width =10, highlightthickness=0, borderwidth=0, background='white').grid(row=5,column=4)
-        self.workout6 = Button(self.master, text="Workout 6",font='fixedsys 12', height=1, width =10, highlightthickness=0, borderwidth=0, background='white').grid(row=6,column=4)
-        self.workout7 = Button(self.master, text="Workout 7",font='fixedsys 12', height=1, width =10, highlightthickness=0, borderwidth=0, background='white').grid(row=7,column=4)
-
+        button_dict = {}
+        for i in range(len(self.userObject["Training days"])):
+            button_dict[i] = Button(self.master, text="Workout" + str(i+1),font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(i), height=1, width =10, highlightthickness=0, borderwidth=0, background='white').grid(row=i+1,column=4)
+        print(button_dict)
 
     
+    def changeWorkoutDisplayed(self, day):
+        print(day)
+
     '''
     Intent: handles the logic for the user clicking logout button.
-    * Preconditions: 
+    * Preconditions: dashboard controller object exists
     * Postconditions: 
     * Post0. changes are pushed to database, dashboard window is closed and login window is opened.
     * Post1. Changes are not pushed to database beacause connection to database could not be estbalished.
-    
     '''
     def handleLogoutEvent(self):
         #username = self.userObject.current_user_data[1]
         #self.dashboardControllerObject.logOutPushChanges(username, self.userObject)
-
         self.closeWindow()
         self.dashboardControllerObject.openLoginGUI()
         
@@ -117,13 +134,3 @@ class MyWorkoutGUI():
     '''
     def closeWindow(self):
         self.master.destroy()
-
-def main():
-    
-    root = Tk()
-    root.geometry("1200x600")
-    MyWorkoutgui = MyWorkoutGUI(root)
-    root.mainloop()
-
-if __name__ == "__main__":
-    main()

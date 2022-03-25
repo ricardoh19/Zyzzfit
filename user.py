@@ -90,8 +90,13 @@ class User():
         return True
 
     """Updates the days the user is exercising"""
-    def updateDaysExercising(self):
-        pass
+    def updateDaysExercising(self, newDaysList):
+        try:
+            self.current_user_data["Training days"] = newDaysList
+        except KeyError:
+            print(f"Unable to change training days")
+            return False
+        return True
 
     
 

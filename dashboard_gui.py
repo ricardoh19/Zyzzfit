@@ -68,6 +68,7 @@ class DashboardGUI():
     '''
     Intent: creates the date frame for GUI
     * Preconditions: master is connected to TKinter. 
+    * dashboard controller object exists
     * Postconditions:
     * Post0. date frame for dashboard GUI is created
     '''
@@ -115,10 +116,11 @@ class DashboardGUI():
         
         
     '''
-    Intent: creates the My Workout controller
+    Intent: creates the My Workouts controller
     * Preconditions: master is connected to TKinter. 
+    * dashboard controller object exists
     * Postconditions:
-    * Post0. creates My Workout Controller
+    * Post0. creates My Workouts Controller
     '''
     def openMyWorkoutsGUI(self):
         self.dashboardControllerObject.createMyWorkoutsController(self.master)
@@ -126,28 +128,51 @@ class DashboardGUI():
     '''
     Intent: creates the My Profile controller
     * Preconditions: master is connected to TKinter. 
+    * dashboard controller object exists
     * Postconditions:
     * Post0. creates My Profile Controller
     '''
     def openMyProfileGUI(self):
         self.dashboardControllerObject.createMyProfileController()
         
+    '''
+    Intent: creates the quotes frame
+    * Preconditions: 
+    * master is connected to TKinter. 
+    * dashboard controller object exists
+    * Postconditions:
+    * Post0. creates frame with quote and author
+    '''
     def createQuoteFrame(self):
-        quote = self.dashboardControllerObject.getQuote()
-        print(quote)
-        self.quote = Label(self.master, text="{}\n{}\n-{}".format(quote['q'][:100], quote['q'][100:], quote['a']),font='fixedsys 10 bold', height=4, width = 78, borderwidth=0, background='white').grid(row=1,column=1, columnspan=2)
+        quoteAPI = self.dashboardControllerObject.getQuote()
+        print(quoteAPI)
+        self.quote = Label(self.master, text="{}\n{}\n-{}".format(quoteAPI['q'][:100], quoteAPI['q'][100:], quoteAPI['a']),font='fixedsys 10 bold', height=4, width = 78, borderwidth=0, background='white').grid(row=1,column=1, columnspan=2)
 
     
-
+    '''
+    Intent: creates the quotes frame
+    * Preconditions: 
+    * master is connected to TKinter. 
+    * dashboard controller object exists
+    * Postconditions:
+    * Post0. creates frame with quote and author
+    '''
     def createDaysFrame(self):
         if self.userObject != None:
             daySplit = len(self.userObject["Training days"])
             self.dayNumber = Label(self.master, text="{} Day Split".format(daySplit),font='fixedsys 21 bold', height=7, width = 24, borderwidth=0, background='white').grid(row=2,column=3,columnspan=2)
 
-
+    '''
+    Intent: creates the calories frame
+    * Preconditions: 
+    * master is connected to TKinter. 
+    * dashboard controller object exists
+    * Postconditions:
+    * Post0. creates frame with calories number 
+    '''
     def createCaloriesFrame(self):
         caloriesResult = self.dashboardControllerObject.calculateCalorieIntake()
-        self.calories = Label(self.master, text="Eat {} Calories \n a day to meet \n{}".format(caloriesResult, self.userObject["Calorie Goal"]), font="fixedsys 21 bold", height=7, width = 24,borderwidth=0, background='red').grid(row=3,column=3, columnspan=2)
+        self.calories = Label(self.master, text="Eat {} Calories \n a day to \n{} weight".format(caloriesResult, self.userObject["Calorie Goal"]), font="fixedsys 21 bold", height=7, width = 24,borderwidth=0, background='red').grid(row=3,column=3, columnspan=2)
 
 
 
@@ -161,6 +186,7 @@ class DashboardGUI():
     def handleLogoutEvent(self):
         #username = self.userObject.current_user_data[1]
         #self.dashboardControllerObject.logOutPushChanges(username, self.userObject)
+        # supposed to be 
 
         self.closeWindow()
         self.dashboardControllerObject.openLoginGUI()

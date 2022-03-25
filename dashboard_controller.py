@@ -17,12 +17,6 @@ class DashboardController():
         self.exerciseObject = userExerciseObject
         self.popup_GUI_object = None
         
-    
-    """In Dashboard GUI logout button is pressed.
-    The controller passes the control back to login/logout controller.
-    Login logout controller function is called which pushes the changes to the database"""
-    def logOutPushChanges(self, username, finalUserObject):
-        self.loginlogout_controller.logout_push_changes_to_database(username,finalUserObject)
         
 
     """This function creates the Dashboard GUI Object"""
@@ -39,7 +33,7 @@ class DashboardController():
 
     """This function creates the My Workouts Controller"""
     def createMyWorkoutsController(self, dashboardGUI):
-        myWorkoutsControllerObject = myworkout_controller.MyWorkoutsController(self.userObject)
+        myWorkoutsControllerObject = myworkout_controller.MyWorkoutsController(self.userObject, self.exerciseObject)
         dashboardGUI.destroy()
         myWorkoutsControllerObject.createMyWorkoutsGUI()
     
@@ -95,4 +89,8 @@ class DashboardController():
         return int(result)
 
     
-
+    """In Dashboard GUI logout button is pressed.
+    The controller passes the control back to login/logout controller.
+    Login logout controller function is called which pushes the changes to the database"""
+    def logOutPushChanges(self, username, finalUserObject):
+        self.loginlogout_controller.logout_push_changes_to_database(username,finalUserObject)

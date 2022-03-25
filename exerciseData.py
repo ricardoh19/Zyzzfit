@@ -20,29 +20,29 @@ class ExerciseData():
     def user_exercise_data_to_dict(self, current_user_exerciseData, current_user_junctionData, allExerciseData):
         """Take in all users exercises and make them into the format of a dictionary"""
         # make it into list of lists because user will have multiple exercises
-        for junct in current_user_junctionData:
-            for exerciseInfo in current_user_exerciseData:
-                userExerciseId = exerciseInfo[0]
-                sets = exerciseInfo[2]
-                reps = exerciseInfo[3]
-                maxWeight = exerciseInfo[4]
-                originalWeight = exerciseInfo[5]
+        
+        for i in range(len(current_user_exerciseData)):
+            userExerciseId = current_user_exerciseData[i][0]
+            sets = current_user_exerciseData[i][2]
+            reps = current_user_exerciseData[i][3]
+            maxWeight = current_user_exerciseData[i][4]
+            originalWeight = current_user_exerciseData[i][5]
+            trainingDay = current_user_junctionData[i][2]
 
-                trainingDay = junct[2]
-                #exerciseId = current_user_junctionData[1]
+            # iterate through allExerciseData and match the exerciseId with exerciseName and grab that
+            for data in allExerciseData:
+                if data[0] == current_user_junctionData[i][1]:
+                    exerciseName = data[2]
+            
 
-                # iterate through allExerciseData and match the exerciseId with exerciseName and grab that
-                for data in allExerciseData:
-                    if data[0] == junct[1]:
-                        exerciseName = data[2]
+            self.currentExerciseData[exerciseName] = \
+                {
+                    "userexerciseId": userExerciseId, 
+                    "training Day": trainingDay,
+                    "sets":sets,
+                    "reps":reps,
+                    "Max Weight": maxWeight,
+                    "Original weight": originalWeight
+                }
 
-                self.currentExerciseData[exerciseName] = \
-                    {
-                        "userexerciseId": userExerciseId, 
-                        "training Day": trainingDay,
-                        "sets":sets,
-                        "reps":reps,
-                        "Max Weight": maxWeight,
-                        "Original weight": originalWeight
-                    }
-    
+        

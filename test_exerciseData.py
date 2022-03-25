@@ -27,7 +27,7 @@ def create_valid_user_exercise_object():
     #note: user id of exercise must be the same as user_id in user data otherwise it wont be added.
     
     row1 = [1, 1, 3, 10, 0, 0] # userexerciseid, userId, sets, repetitions, maxWeight, originalWeight
-    row2 = [2, 1, 3, 10, 0, 0]
+    row2 = [2, 1, 4, 10, 0, 0]
     current_user_exerciseData = [row1, row2]
 
     myuser = ExerciseData(current_user_exerciseData, current_user_junctionData, allExercises)
