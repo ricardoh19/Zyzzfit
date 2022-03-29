@@ -3,18 +3,22 @@ from tkinter import *
 import tkinter as tk
 from tkinter import ttk
 import loginlogout_controller 
+import myProfile_controller
 
 
 
 # this class controls the graphical user interface of the My Profile window. Its methods include createMainFrame, createDaysFrame,
 # handleSaveInformationEvent, and closeWindow
 class MyProfileGUI():
-    def __init__(self, master, userObject):
+    def __init__(self, master, userObject, exerciseObject):
         self.loginlogout_ControllerObject = loginlogout_controller.LoginLogoutControllers()
         self.master = master
         self.master.configure(background= "#3E3C3C")
         self.master.title("My Profile Information")
+        self.myProfileController = myProfile_controller.MyProfileController(userObject ,exerciseObject)
         self.userObject = userObject
+        self.exerciseObject = exerciseObject
+        self.userObjectToCompare = {"age":self.userObject.getAge(), "Weight":self.userObject.getWeight(), "height": self.userObject.getHeight(),"gender": self.userObject.getGender(), "Calorie Goal": self.userObject.getCalorieGoal(), "Training days":self.userObject.getTrainingDays()}
 
         self.createMainFrame()
 
@@ -30,28 +34,28 @@ class MyProfileGUI():
         
         self.age = Label(self.master, text="Age",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=2,column=0, sticky='w')
         self.ageEntry = Entry(self.master)
-        self.ageEntry.insert(0, self.userObject["age"])
+        self.ageEntry.insert(0, self.userObject.getAge())
 
         self.ageEntry.grid(row = 2,column=1)
         self.weight = Label(self.master, text="Weight (Lbs.)",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=3,column=0, sticky='w')
         self.weightEntry = Entry(self.master)
         self.weightEntry.grid(row = 3,column=1)
-        self.weightEntry.insert(0, self.userObject["Weight"])
+        self.weightEntry.insert(0, self.userObject.getWeight())
 
         self.height = Label(self.master, text="Height (Inches)",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=4,column=0, sticky='w')
         self.heightEntry = Entry(self.master)
         self.heightEntry.grid(row = 4,column=1)
-        self.heightEntry.insert(0, self.userObject["height"])
+        self.heightEntry.insert(0, self.userObject.getHeight())
         
         self.gender = Label(self.master, text="Gender",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=5,column=0, sticky='w')
         self.clickedGender = StringVar()
-        self.clickedGender.set(str(self.userObject["gender"]))
+        self.clickedGender.set(str(self.userObject.getGender()))
         self.chooseGender = OptionMenu(self.master, self.clickedGender, "Man", "Woman", "Other")
         self.chooseGender.grid(row=5,column=1)
 
         self.goal = Label(self.master, text="What is your goal?",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=6,column=0, sticky='w')
         self.clickedGoal = StringVar()
-        self.clickedGoal.set(str(self.userObject["Calorie Goal"]))
+        self.clickedGoal.set(str(self.userObject.getCalorieGoal()))
         self.chooseGoal = OptionMenu(self.master, self.clickedGoal, "Lose", "Maintain", "Gain")
         self.chooseGoal.grid(row=6,column=1)
 
@@ -113,7 +117,7 @@ class MyProfileGUI():
     '''
     def handleSaveInformationEvent(self):
         self.listOfDays = []
-        
+    
         if self.varMonday.get() != '0':
             self.listOfDays.append('Monday')
         if self.varTuesday.get() != '0':
@@ -129,9 +133,16 @@ class MyProfileGUI():
         if self.varSunday.get() != '0':
             self.listOfDays.append('Sunday')
         
-        self.newUserObject = [self.ageEntry.get(), self.weightEntry.get(), self.heightEntry.get(), self.clickedGender.get(), self.clickedGoal.get(), self.listOfDays]
-        print(self.newUserObject)
+        if len(self.listOfDays) == 0:
+            self.listOfDays = self.userObject.getTrainingDays()
+        self.newUserObject = {"age": int(self.ageEntry.get()), "Weight":int(self.weightEntry.get()), "height":int(self.heightEntry.get()), "gender":self.clickedGender.get(), "Calorie Goal":self.clickedGoal.get(),"Training days": self.listOfDays}
         
+        
+        self.userObject = self.myProfileController.compareObjects(self.userObjectToCompare, self.newUserObject, self.master)
+        
+
+        #return userObject and pass it into dashboard controller
+        self.myProfileController.createDashboardController(self.userObjectToCompare, self.exerciseObject)
 
   
     '''
@@ -142,13 +153,4 @@ class MyProfileGUI():
     '''
     def closeWindow(self):
         self.master.destroy()
-
-
-
-def main():
-    root = Tk()
-    root.geometry("650x550")
-    userInformationGUIObject = MyProfileGUI(root)
-    root.mainloop()
-if __name__ == "__main__":
-    main()
+        self.myProfileController.createDashboardController(self.userObject, self.exerciseObject)

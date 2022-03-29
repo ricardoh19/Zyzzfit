@@ -133,7 +133,7 @@ class DashboardGUI():
     * Post0. creates My Profile Controller
     '''
     def openMyProfileGUI(self):
-        self.dashboardControllerObject.createMyProfileController()
+        self.dashboardControllerObject.createMyProfileController(self.master)
         
     '''
     Intent: creates the quotes frame
@@ -159,7 +159,8 @@ class DashboardGUI():
     '''
     def createDaysFrame(self):
         if self.userObject != None:
-            daySplit = len(self.userObject["Training days"])
+            trainingDays = self.userObject.getTrainingDays()
+            daySplit = len(trainingDays)
             self.dayNumber = Label(self.master, text="{} Day Split".format(daySplit),font='fixedsys 21 bold', height=7, width = 24, borderwidth=0, background='white').grid(row=2,column=3,columnspan=2)
 
     '''
@@ -172,7 +173,7 @@ class DashboardGUI():
     '''
     def createCaloriesFrame(self):
         caloriesResult = self.dashboardControllerObject.calculateCalorieIntake()
-        self.calories = Label(self.master, text="Eat {} Calories \n a day to \n{} weight".format(caloriesResult, self.userObject["Calorie Goal"]), font="fixedsys 21 bold", height=7, width = 24,borderwidth=0, background='red').grid(row=3,column=3, columnspan=2)
+        self.calories = Label(self.master, text="Eat {} Calories \n a day to \n{} weight".format(caloriesResult, self.userObject.getCalorieGoal()), font="fixedsys 21 bold", height=7, width = 24,borderwidth=0, background='red').grid(row=3,column=3, columnspan=2)
 
 
 

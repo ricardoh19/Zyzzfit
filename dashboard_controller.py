@@ -38,8 +38,9 @@ class DashboardController():
         myWorkoutsControllerObject.createMyWorkoutsGUI()
     
     """This function creates the My Profile Controller"""
-    def createMyProfileController(self):
-        myProfileControllerObject = myProfile_controller.MyProfileController(self.userObject)
+    def createMyProfileController(self, dashboardGUI):
+        myProfileControllerObject = myProfile_controller.MyProfileController(self.userObject, self.exerciseObject)
+        dashboardGUI.destroy()
         myProfileControllerObject.createMyProfileGUI()
 
 
@@ -68,11 +69,11 @@ class DashboardController():
 
     """This function calculates and returns amount of calories user should be intaking in a day to meet their goal."""
     def calculateCalorieIntake(self):
-        age = self.userObject["age"]
-        weight = self.userObject["Weight"]
-        height = self.userObject["height"]
-        gender = self.userObject['gender']
-        goal = self.userObject["Calorie Goal"]
+        age = self.userObject.getAge()
+        weight = self.userObject.getWeight()
+        height = self.userObject.getHeight()
+        gender = self.userObject.getGender()
+        goal = self.userObject.getCalorieGoal()
         
 
         if gender == "Man":

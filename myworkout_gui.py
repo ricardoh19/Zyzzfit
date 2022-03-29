@@ -102,12 +102,76 @@ class MyWorkoutGUI():
     
 
     def createDaysFrame(self):
-        button_dict = {}
-        for i in range(len(self.userObject["Training days"])):
-            button_dict[i] = Button(self.master, text="Workout" + str(i+1),font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(i), height=1, width =10, highlightthickness=0, borderwidth=0, background='white').grid(row=i+1,column=4)
-        print(button_dict)
+        trainingDays = self.userObject.getTrainingDays()
+        length = len(trainingDays)
+        if length == 2:
+            self.button1 = Button(self.master, text="Workout 1" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(1), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button1.grid(row=1,column=4)
+            self.button2 = Button(self.master, text="Workout 2" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(2), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button2.grid(row=2,column=4)
 
-    
+        elif length ==3:
+            self.button1 = Button(self.master, text="Workout 1" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(1), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button1.grid(row=1,column=4)
+            self.button2 = Button(self.master, text="Workout 2" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(2), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button2.grid(row=2,column=4)
+            self.button3 = Button(self.master, text="Workout 3" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(3), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button3.grid(row=4,column=4)
+        
+        elif length ==4:
+            self.button1 = Button(self.master, text="Workout 1" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(1), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button1.grid(row=1,column=4)
+            self.button2 = Button(self.master, text="Workout 2" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(2), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button2.grid(row=2,column=4)
+            self.button3 = Button(self.master, text="Workout 3" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(3), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button3.grid(row=4,column=4)
+            self.button4 = Button(self.master, text="Workout 4",font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(4), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button4.grid(row=5,column=4)
+
+        elif length ==5:
+            self.button1 = Button(self.master, text="Workout 1" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(1), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button1.grid(row=1,column=4)
+            self.button2 = Button(self.master, text="Workout 2" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(2), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button2.grid(row=2,column=4)
+            self.button3 = Button(self.master, text="Workout 3" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(3), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button3.grid(row=4,column=4)
+            self.button4 = Button(self.master, text="Workout 4",font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(4), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button4.grid(row=5,column=4)
+            self.button5 = Button(self.master, text="Workout 5" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(5), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button5.grid(row=6,column=4)
+
+        elif length ==6:
+            self.button1 = Button(self.master, text="Workout 1" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(1), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button1.grid(row=1,column=4)
+            self.button2 = Button(self.master, text="Workout 2" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(2), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button2.grid(row=2,column=4)
+            self.button3 = Button(self.master, text="Workout 3" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(3), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button3.grid(row=4,column=4)
+            self.button4 = Button(self.master, text="Workout 4",font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(4), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button4.grid(row=5,column=4)
+            self.button5 = Button(self.master, text="Workout 5" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(5), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button5.grid(row=6,column=4)
+            self.button6 = Button(self.master, text="Workout 6" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(6), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button6.grid(row=7,column=4)
+
+        elif length ==7:
+            self.button1 = Button(self.master, text="Workout 1" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(1), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button1.grid(row=1,column=4)
+            self.button2 = Button(self.master, text="Workout 2" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(2), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button2.grid(row=2,column=4)
+            self.button3 = Button(self.master, text="Workout 3" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(3), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button3.grid(row=4,column=4)
+            self.button4 = Button(self.master, text="Workout 4",font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(4), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button4.grid(row=5,column=4)
+            self.button5 = Button(self.master, text="Workout 5" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(5), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button5.grid(row=6,column=4)
+            self.button6 = Button(self.master, text="Workout 6" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(6), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button6.grid(row=7,column=4)
+            self.button7 = Button(self.master, text="Workout 7" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(7), height=1, width =10, highlightthickness=0, borderwidth=0, background='white')
+            self.button7.grid(row=8,column=4)
+
+
+       
     def changeWorkoutDisplayed(self, day):
         print(day)
 

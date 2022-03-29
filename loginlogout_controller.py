@@ -611,7 +611,7 @@ class LoginLogoutControllers():
         self.currentUserTrainingDays = self.setCurrentTrainingDays(username)
         self.userObject =  User(self.currentUserData, self.currentUserTrainingDays)
         print(self.userObject)
-        return self.userObject.current_user_data
+        return self.userObject
 
 
     '''
