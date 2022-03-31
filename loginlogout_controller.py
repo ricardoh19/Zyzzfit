@@ -609,6 +609,8 @@ class LoginLogoutControllers():
     def createUserObject(self, username):
         self.currentUserData = self.setCurrentUserData(username)
         self.currentUserTrainingDays = self.setCurrentTrainingDays(username)
+        print(self.currentUserData)
+        self.currentUserTrainingDays = [i[1] for i in self.currentUserTrainingDays]
         self.userObject =  User(self.currentUserData, self.currentUserTrainingDays)
         print(self.userObject)
         return self.userObject
@@ -628,7 +630,7 @@ class LoginLogoutControllers():
         allExercises = self.databaseManagerObject.getDatabaseExerciseData()
         self.userExerciseObject =  ExerciseData(self.currentUserExerciseData, self.currentUserJunctionData, allExercises)
         print(self.userExerciseObject)
-        return self.userExerciseObject.currentExerciseData
+        return self.userExerciseObject
 
 
 

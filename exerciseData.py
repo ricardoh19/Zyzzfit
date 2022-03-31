@@ -12,7 +12,14 @@ class ExerciseData():
         else:
             print("Info: No exercise data associated with user.")
 
+    def __iter__(self):
+        return iter(self.currentExerciseData)
 
+    def keys(self):
+        return self.currentExerciseData.keys()
+
+   
+        
     def __str__(self):
         return f"User Exercise Data: {self.current_user_exerciseData} \n {self.currentExerciseData}"
 
@@ -45,4 +52,26 @@ class ExerciseData():
                     "Original weight": originalWeight
                 }
 
-        
+    "returns userexerciseID based on exerciseName"
+    def getUserExerciseId(self, exerciseName):
+        return self.currentExerciseData[exerciseName]["userexerciseId"]
+    
+    "returns sets based on exerciseName"
+    def getSets(self, exerciseName):
+        return self.currentExerciseData[exerciseName]["sets"]
+
+    "returns reps based on exerciseName"
+    def getReps(self, exerciseName):
+        return self.currentExerciseData[exerciseName]["reps"]
+    
+    "returns max weight based on exerciseName"
+    def getMaxWeight(self, exerciseName):
+        return self.currentExerciseData[exerciseName]["Max Weight"]
+
+    "returns original weight based on exerciseName"
+    def getOriginalWeight(self, exerciseName):
+        return self.currentExerciseData[exerciseName]["Original weight"]
+     
+    "returns training day based on exerciseName"
+    def getTrainingDay(self, exerciseName):
+        return self.currentExerciseData[exerciseName]["training Day"]

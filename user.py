@@ -28,7 +28,7 @@ class User():
         height = current_user_data[6]
         gender = current_user_data[7]
         calorieGoal = current_user_data[8]
-        trainingDays = [i[1] for i in current_user_training_days]
+        trainingDays = current_user_training_days
         
         self.user_data = \
             {
