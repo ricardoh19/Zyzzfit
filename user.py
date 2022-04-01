@@ -30,6 +30,7 @@ class User():
         calorieGoal = current_user_data[8]
         trainingDays = current_user_training_days
         
+        # create dictionary containning user data obtained from above.
         self.user_data = \
             {
                 "userId": userId, 
@@ -43,6 +44,7 @@ class User():
                 "Training days":trainingDays
             }
 
+    # GET methods
     """return userId """
     def getUserId(self):
         return self.user_data["userId"]
@@ -81,6 +83,8 @@ class User():
         return self.user_data["Training days"]
 
 
+    # SET methods
+    
     """Updates age of user"""
     def updateAge(self, newAge):
         try:

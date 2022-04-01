@@ -2,6 +2,7 @@ from cgitb import text
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
+from popup_gui import PopUpGUI
 import loginlogout_controller 
 import myProfile_controller
 
@@ -18,8 +19,9 @@ class MyProfileGUI():
         self.myProfileController = myProfile_controller.MyProfileController(userObject ,exerciseObject)
         self.userObject = userObject
         self.exerciseObject = exerciseObject
-        self.userObjectToCompare = {"age":self.userObject.getAge(), "Weight":self.userObject.getWeight(), "height": self.userObject.getHeight(),"gender": self.userObject.getGender(), "Calorie Goal": self.userObject.getCalorieGoal(), "Training days":self.userObject.getTrainingDays()}
+        self.originalUserObject = {"age":self.userObject.getAge(), "Weight":self.userObject.getWeight(), "height": self.userObject.getHeight(),"gender": self.userObject.getGender(), "Calorie Goal": self.userObject.getCalorieGoal(), "Training days":self.userObject.getTrainingDays()}
 
+        self.currentUserData = [self.userObject.getUserId(), self.userObject.getUsername(), self.userObject.getPassword(), "DummyData", self.userObject.getAge(), self.userObject.getWeight(),  self.userObject.getHeight(),self.userObject.getGender(), self.userObject.getCalorieGoal()]
         self.createMainFrame()
 
     '''
@@ -110,10 +112,11 @@ class MyProfileGUI():
         self.sunday.deselect()
 
     '''
-    Intent: 
+    Intent: handles the save button. Saves information by calling function in My Profile controller.
     * Preconditions: loginlogout_ControllerObject is an instance of loginlogoutController class
     * Postconditions:
-    * Post0. 
+    * Post0. create dashboard Controller is callled in My Profile controller.
+    * Post1. appropriate rrror message is displayed if information is not entered correctly. 
     '''
     def handleSaveInformationEvent(self):
         self.listOfDays = []
@@ -132,25 +135,35 @@ class MyProfileGUI():
             self.listOfDays.append('Saturday')
         if self.varSunday.get() != '0':
             self.listOfDays.append('Sunday')
-        
         if len(self.listOfDays) == 0:
             self.listOfDays = self.userObject.getTrainingDays()
-        self.newUserObject = {"age": int(self.ageEntry.get()), "Weight":int(self.weightEntry.get()), "height":int(self.heightEntry.get()), "gender":self.clickedGender.get(), "Calorie Goal":self.clickedGoal.get(),"Training days": self.listOfDays}
-        
-        
-        self.userObject = self.myProfileController.compareObjects(self.userObjectToCompare, self.newUserObject, self.master)
-        
 
-        #return userObject and pass it into dashboard controller
-        self.myProfileController.createDashboardController(self.userObjectToCompare, self.exerciseObject)
+        elif len(self.listOfDays) == 1:
+            popupGUI = PopUpGUI("Please choose atleast two days to exercise.")
+            popupGUI.createPopUp()
+            return False
+
+        try: 
+            age = int(self.ageEntry.get())
+            weight = int(self.weightEntry.get())
+            height = int(self.heightEntry.get())
+            self.newCurrentUserData = [self.userObject.getUserId(), self.userObject.getUsername(), self.userObject.getPassword(), "DummyData", age, weight, height, self.clickedGender.get(), self.clickedGoal.get()]
+            #return userObject and pass it into dashboard controller
+            self.myProfileController.createDashboardController(self.newCurrentUserData, self.listOfDays, self.exerciseObject, self.master)
+        except ValueError:
+            popupGUI = PopUpGUI("Please provide an appropriate age, weight, or height.")
+            popupGUI.createPopUp()
+            
+
+
+        
 
   
     '''
-    Intent: close the userInformation window .
+    Intent: close the My Profile window .
     * Preconditions: master is connected to TKinter.
     * Postconditions:
-    * Post0. closes the userInformation window
+    * Post0. closes the MyProfile window
     '''
     def closeWindow(self):
-        self.master.destroy()
-        self.myProfileController.createDashboardController(self.userObject, self.exerciseObject)
+        self.myProfileController.createDashboardController(self.currentUserData, self.exerciseObject, self.master)

@@ -98,6 +98,7 @@ class LoginLogoutControllers():
         if self.databaseUserData == None:
             return self.currentUserData
 
+        # match usernames with data in database and parameter and create current currentUserData
         for data in self.databaseUserData:
             if data[1] == username:
                 self.currentUserData = data
@@ -124,6 +125,7 @@ class LoginLogoutControllers():
         userData = self.setCurrentUserData(username)
         userId = userData[0]
 
+        # search database for trainingDays pertaining to user with username parameter
         for data in self.databaseUserTrainingDays:
             if data[2] == userId:
                 self.currentUserTrainingDays.append(data)
@@ -158,25 +160,17 @@ class LoginLogoutControllers():
   
 
     '''
-    Inserts exercise data and junction data into the tables if user is new.
-    Will insert exercises based on how many days user is training.
-    For example, if user is training twice per week, it will enter userId, exerciseId, day, sets, and reps 5 times for 
-    one day and 5 times for the other.
-    
+    Intent: Will call appropraite function based on the length of list of days. 
     '''
     def insertExercisesIfNewUser(self, listOfDays, username ,userId):
         if len(listOfDays) == 2:
             self.insertExercisesFor2Days(listOfDays, username ,userId)
-
         if len(listOfDays) == 3:
             self.insertExercisesFor3Days(listOfDays, username ,userId)
-
         if len(listOfDays) == 4:
             self.insertExercisesFor4Days(listOfDays, username ,userId)
-
         if len(listOfDays) == 5:
             self.insertExercisesFor5Days(listOfDays, username ,userId)
-
         if len(listOfDays) == 6:
             self.insertExercisesFor6Days(listOfDays, username ,userId)
         if len(listOfDays) == 7:

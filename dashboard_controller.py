@@ -67,15 +67,18 @@ class DashboardController():
         author = response['a']
         return {"q":quote, "a": author} 
 
-    """This function calculates and returns amount of calories user should be intaking in a day to meet their goal."""
+    """This function calculates and returns amount of calories user should be intaking in a day to meet their goal
+    Based on user's age, height, weight, and gender.
+    """
     def calculateCalorieIntake(self):
+        # get data from user Object using GET methods
         age = self.userObject.getAge()
         weight = self.userObject.getWeight()
         height = self.userObject.getHeight()
         gender = self.userObject.getGender()
         goal = self.userObject.getCalorieGoal()
         
-
+        # calculate calories to intake
         if gender == "Man":
             caloriesResult = 66.47 + (6.24 * float(weight)) + (12.7 * float(height)) - (6.755 * float(age))
         else:
