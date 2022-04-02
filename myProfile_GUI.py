@@ -19,6 +19,7 @@ class MyProfileGUI():
         self.myProfileController = myProfile_controller.MyProfileController(userObject ,exerciseObject)
         self.userObject = userObject
         self.exerciseObject = exerciseObject
+        self.listOfDays = self.userObject.getTrainingDays()
         self.originalUserObject = {"age":self.userObject.getAge(), "Weight":self.userObject.getWeight(), "height": self.userObject.getHeight(),"gender": self.userObject.getGender(), "Calorie Goal": self.userObject.getCalorieGoal(), "Training days":self.userObject.getTrainingDays()}
 
         self.currentUserData = [self.userObject.getUserId(), self.userObject.getUsername(), self.userObject.getPassword(), "DummyData", self.userObject.getAge(), self.userObject.getWeight(),  self.userObject.getHeight(),self.userObject.getGender(), self.userObject.getCalorieGoal()]
@@ -62,6 +63,7 @@ class MyProfileGUI():
         self.chooseGoal.grid(row=6,column=1)
 
         self.createDaysFrame()
+        self.selectDays()
 
         self.saveButton = Button(self.master,text="Save", borderwidth=0, command=lambda:self.handleSaveInformationEvent(),  highlightthickness=0).grid(row = 14,column=1, pady=1, sticky="e")
         self.cancelButton = Button(self.master,text="Cancel", borderwidth=0,  highlightthickness=0, command=lambda:self.closeWindow()).grid(row = 14,column=2, pady=1, sticky="e")
@@ -75,7 +77,8 @@ class MyProfileGUI():
     '''
     def createDaysFrame(self):
         self.days = Label(self.master, text="How many days are you\n exercising?",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=7,column=0, sticky='w', ipadx=10)
-        
+    
+
         self.varMonday = StringVar()
         self.monday= Checkbutton(self.master, text = "Monday", background='#3E3C3C', foreground='white', variable=self.varMonday, onvalue="Monday", offvalue="0")
         self.monday.grid(row=7,column=1, sticky='w')
@@ -112,6 +115,27 @@ class MyProfileGUI():
         self.sunday.deselect()
 
     '''
+    Intent: selects theuser's training days for My profile GUI to let the user know which days they are already working out.
+    '''
+    def selectDays(self):
+        for day in self.listOfDays:
+            if day == "Monday":
+                self.monday.select()
+            if day == "Tuesday":
+                self.tuesday.select()
+            if day == "Wednesday":
+                self.wednesday.select()
+            if day == "Thursday":
+                self.thursday.select()
+            if day == "Friday":
+                self.friday.select()
+            if day == "Saturday":
+                self.saturday.select()
+            if day == "Sunday":
+                self.sunday.select()
+            
+
+    '''
     Intent: handles the save button. Saves information by calling function in My Profile controller.
     * Preconditions: loginlogout_ControllerObject is an instance of loginlogoutController class
     * Postconditions:
@@ -135,8 +159,7 @@ class MyProfileGUI():
             self.listOfDays.append('Saturday')
         if self.varSunday.get() != '0':
             self.listOfDays.append('Sunday')
-        if len(self.listOfDays) == 0:
-            self.listOfDays = self.userObject.getTrainingDays()
+        
 
         elif len(self.listOfDays) == 1:
             popupGUI = PopUpGUI("Please choose atleast two days to exercise.")
@@ -166,4 +189,4 @@ class MyProfileGUI():
     * Post0. closes the MyProfile window
     '''
     def closeWindow(self):
-        self.myProfileController.createDashboardController(self.currentUserData, self.exerciseObject, self.master)
+        self.myProfileController.createDashboardController(self.currentUserData, self.listOfDays, self.exerciseObject, self.master)
