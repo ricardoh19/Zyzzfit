@@ -1,5 +1,5 @@
 
-
+"""Exercise class holds exercise details of user """
 class ExerciseData():
     def __init__(self, current_user_exerciseData= None, current_user_junctionData=None, allExerciseData=None):
         self.current_user_exerciseData = current_user_exerciseData
@@ -7,7 +7,7 @@ class ExerciseData():
         self.exerciseData = allExerciseData
         self.currentExerciseData = {}
 
-        if current_user_exerciseData != None and current_user_exerciseData != [] : # don't try to add stock if there is not any associated with our user
+        if current_user_exerciseData != None and current_user_exerciseData != []: # does not add exercise data if there is not any associated with user
             self.user_exercise_data_to_dict(current_user_exerciseData, current_user_junctionData, allExerciseData)
         else:
             print("Info: No exercise data associated with user.")
@@ -24,10 +24,16 @@ class ExerciseData():
         return f"User Exercise Data: {self.current_user_exerciseData} \n {self.currentExerciseData}"
 
 
+    """
+    Intent: Takes in user exercise data: current_user_exerciseData, current_user_junctionData, and allExercises originating 
+    from text file. and converts into a dictionary.
+    Preconditions: 
+    1. current_user_ExerciseData != None
+    PostConditions:
+    1. currentExerciseData (dict) is created.
+    """
     def user_exercise_data_to_dict(self, current_user_exerciseData, current_user_junctionData, allExerciseData):
-        """Take in all users exercises and make them into the format of a dictionary"""
-        # make it into list of lists because user will have multiple exercises
-        
+        # grab information from current_user_exerciseData list
         for i in range(len(current_user_exerciseData)):
             userExerciseId = current_user_exerciseData[i][0]
             sets = current_user_exerciseData[i][2]
@@ -36,12 +42,12 @@ class ExerciseData():
             originalWeight = current_user_exerciseData[i][5]
             trainingDay = current_user_junctionData[i][2]
 
-            # iterate through allExerciseData and match the exerciseId with exerciseName and grab that
+            # iterate through allExerciseData and match the exerciseId with exerciseName
             for data in allExerciseData:
                 if data[0] == current_user_junctionData[i][1]:
                     exerciseName = data[2]
             
-
+            # create dictionary
             self.currentExerciseData[exerciseName] = \
                 {
                     "userexerciseId": userExerciseId, 
@@ -52,6 +58,8 @@ class ExerciseData():
                     "Original weight": originalWeight
                 }
 
+
+    # GET methods
     "returns userexerciseID based on exerciseName"
     def getUserExerciseId(self, exerciseName):
         return self.currentExerciseData[exerciseName]["userexerciseId"]
@@ -75,3 +83,26 @@ class ExerciseData():
     "returns training day based on exerciseName"
     def getTrainingDay(self, exerciseName):
         return self.currentExerciseData[exerciseName]["training Day"]
+
+
+    # SET methods
+
+    """Updates sets of exercise data"""
+    def updateSets(self, newSets):
+        self.currentExerciseData["sets"] = newSets
+
+    """Updates reps of exercise data"""
+    def updateReps(self, newReps):
+        self.currentExerciseData["reps"] = newReps
+    
+    """Updates original weight of exercise data"""
+    def updateOriginalWeight(self, newOriginalWeight):
+        self.currentExerciseData["Original weight"] = newOriginalWeight
+    
+    """Updates max weight of exercise data"""
+    def updateMaxWeight(self, newMaxWeight):
+        self.currentExerciseData["Max Weight"] = newMaxWeight
+
+
+    
+        

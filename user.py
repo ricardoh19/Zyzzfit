@@ -18,7 +18,14 @@ class User():
 
   
     
-    """Takes in user information such as userId, username, password, age, weight, height, gender, calorieGoal, and trainingDays. Turns it into the format of a dictionary"""
+    """
+    Intent: Takes in user information: userId, username, password, age, weight, 
+    height, gender, calorieGoal, and trainingDays and converts into a dictionary.
+    Preconditions: 
+    1. current_user_data != None
+    PostConditions:
+    1. userData (dict) is created.
+    """
     def user_data_to_dict(self, current_user_data, current_user_training_days):
         userId = current_user_data[0]
         username = current_user_data[1]
@@ -87,57 +94,34 @@ class User():
     
     """Updates age of user"""
     def updateAge(self, newAge):
-        try:
-            self.user_data["age"] = newAge
-        except KeyError:
-            print(f"Unable to change age")
-            return False
-        return True
+        self.user_data["age"] = newAge
+        
+       
 
     """Updates weight of user"""
     def updateWeight(self, newWeight):
-        try:
-            self.user_data["weight"] = newWeight
-        except KeyError:
-            print(f"Unable to change weight")
-            return False
-        return True
+        self.user_data["weight"] = newWeight
+       
 
     """Updates height of user"""
     def updateHeight(self, newHeight):
-        try:
-            self.user_data["height"] = newHeight
-        except KeyError:
-            print(f"Unable to change height")
-            return False
-        return True
+        self.user_data["height"] = newHeight
+        
 
     """Updates gender of user"""
     def updateGender(self, newGender):
-        try:
-            self.user_data["gender"] = newGender
-        except KeyError:
-            print(f"Unable to change gender")
-            return False
-        return True
+        self.user_data["gender"] = newGender
+       
 
     """Updates calorie goal of user"""
     def updateGoal(self, newGoal):
-        try:
-            self.user_data["Calorie Goal"] = newGoal
-        except KeyError:
-            print(f"Unable to change calorie goal")
-            return False
-        return True
+         self.user_data["Calorie Goal"] = newGoal
+       
 
     """Updates the days the user is exercising"""
     def updateDaysExercising(self, newDaysList):
-        try:
-            self.user_data["Training days"] = newDaysList
-        except KeyError:
-            print(f"Unable to change training days")
-            return False
-        return True
+        self.user_data["Training days"] = newDaysList
+        
 
     
 

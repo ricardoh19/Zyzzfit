@@ -178,7 +178,9 @@ class LoginLogoutControllers():
 
 
 
-
+    '''
+    Intent: Will insert exercises into the 2 days of user's training days into database.
+    '''
     def insertExercisesFor2Days(self,listOfDays, username ,userId):
         # have to insert exercise data and junction data
         for i in range(1,7):
@@ -199,6 +201,9 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[1])
             self.getSnapshotOfDatabase()
 
+    '''
+    Intent: Will insert exercises into the 3 days of user's training days into database.
+    '''
     def insertExercisesFor3Days(self, listOfDays, username ,userId):
         # have to insert exercise data and junction data
         for i in range(12,18):
@@ -228,6 +233,9 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[2])
             self.getSnapshotOfDatabase()
 
+    '''
+    Intent: Will insert exercises into the 4 days of user's training days into database.
+    '''
     def insertExercisesFor4Days(self,listOfDays, username ,userId):
         # have to insert exercise data and junction data
         for i in range(12,18):
@@ -267,7 +275,9 @@ class LoginLogoutControllers():
             self.getSnapshotOfDatabase()
     
 
-
+    '''
+    Intent: Will insert exercises into the 5 days of user's training days into database.
+    '''
     def insertExercisesFor5Days(self,listOfDays, username ,userId):
         # have to insert exercise data and junction data
         for i in range(12,16):
@@ -316,7 +326,9 @@ class LoginLogoutControllers():
             self.getSnapshotOfDatabase()
 
 
-
+    '''
+    Intent: Will insert exercises into the 6 days of user's training days into database.
+    '''
     def insertExercisesFor6Days(self, listOfDays, username ,userId):
         # have to insert exercise data and junction data
         for i in range(12,18):
@@ -373,6 +385,9 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[5])
             self.getSnapshotOfDatabase()
 
+    '''
+    Intent: Will insert exercises into the 7 days of user's training days into database.
+    '''
     def insertExercisesFor7Days(self, listOfDays, username ,userId):
         # have to insert exercise data and junction data
         for i in range(12,18):
@@ -430,7 +445,7 @@ class LoginLogoutControllers():
             self.getSnapshotOfDatabase()
 
         
-        
+        # will insert cardio data
         self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 0, 0, 0, 0)
         self.getSnapshotOfDatabase()
         self.setCurrentUserExerciseData(username)
@@ -603,9 +618,8 @@ class LoginLogoutControllers():
     def createUserObject(self, username):
         self.currentUserData = self.setCurrentUserData(username)
         self.currentUserTrainingDays = self.setCurrentTrainingDays(username)
-        print(self.currentUserData)
         self.currentUserTrainingDays = [i[1] for i in self.currentUserTrainingDays]
-        self.userObject =  User(self.currentUserData, self.currentUserTrainingDays)
+        self.userObject =  User(self.currentUserData, self.currentUserTrainingDays) # create user object
         print(self.userObject)
         return self.userObject
 
@@ -622,13 +636,9 @@ class LoginLogoutControllers():
         self.currentUserJunctionData = self.setCurrentUserJunctionData()
 
         allExercises = self.databaseManagerObject.getDatabaseExerciseData()
-        self.userExerciseObject =  ExerciseData(self.currentUserExerciseData, self.currentUserJunctionData, allExercises)
+        self.userExerciseObject =  ExerciseData(self.currentUserExerciseData, self.currentUserJunctionData, allExercises) # create exercise object
         print(self.userExerciseObject)
         return self.userExerciseObject
-
-
-
-
 
 
 

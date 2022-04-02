@@ -12,7 +12,7 @@ os.environ['SQLHost'] = "localhost"
 os.environ['DB_NAME'] ='ZyzzfitDB'
 
 
-# This class creates and maintains the Zyzzfit database with methods
+# This class creates and maintains the Zyzzfit database.
 class DB():
     def __init__(self):
         
@@ -424,16 +424,12 @@ class DB():
 
 
 
-
     # testing purposes
     def deleteDatabase(self):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
         query = (f"DROP DATABASE {self.DB_NAME}")
         cursor.execute(query)
         cnx.commit()
-
-
-
 
 
 
@@ -467,33 +463,43 @@ class DB():
         cnx.commit()
 
     '''
-    can update sets, reps, max weight, original weight
+    Intent: Update sets, reps, max weight, original weight
     '''
     def updateUserExerciseData(self):
         pass
 
     '''
-    Can update exerciseId if user changes the exercise
+    Intent: Update exerciseId 
     '''
     def updateUserJunctionData(self):
         pass
     
-   
+    '''
+    Intent: Update training days 
+    '''
     def updateUserTrainingDays(self):
         pass
 
-
+    '''
+    Intent: Update exerciseId
+    '''
     def updateUserExerciseSets(self):
         pass
 
-
+    '''
+    Intent: Update reps of specific exercise 
+    '''
     def updateUserExerciseReps(self):
         pass
 
-
+    '''
+    Intent: Update max weight of specific exercise 
+    '''
     def updateUserExerciseMaxWeight(self):
         pass
 
-
+    '''
+    Intent: Update original weight of specific exercise 
+    '''
     def updateUserExerciseOriginalWeight(self):
         pass
