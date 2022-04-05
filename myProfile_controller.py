@@ -60,13 +60,15 @@ class MyProfileController():
     '''
     def createDashboardController(self, currentUserData, trainingDaysList, exerciseObject, myProfileGUI):
         myProfileGUI.destroy() # close the MyProfile GUI
-
-        # create new user object
-        userObject =  User(currentUserData, trainingDaysList)
-        
-        # set new exercises in exercise object based on trainingDayList
-        self.currentUserExerciseData,self.currentUserJunctionData = self.insertExercises(trainingDaysList)
-        exerciseObject = self.createUserExerciseObject(self.currentUserExerciseData, self.currentUserJunctionData)
+       
+        if len(trainingDaysList) != 0:  # set new exercises in exercise object based on trainingDayList if new days added
+            userObject =  User(currentUserData, trainingDaysList)  # create new user object
+            self.currentUserExerciseData,self.currentUserJunctionData = self.insertExercises(trainingDaysList)
+            exerciseObject = self.createUserExerciseObject(self.currentUserExerciseData, self.currentUserJunctionData)
+        else: # keep old exercises if no new days added
+            trainingDays = self.userObject.getTrainingDays()
+            userObject = User(currentUserData, trainingDays)
+            exerciseObject = self.exerciseObject
 
          # create dashboard controller and dashboard GUI
         dashboardController = dashboard_controller.DashboardController(userObject, exerciseObject)

@@ -160,6 +160,9 @@ class MyProfileGUI():
         if self.varSunday.get() != '0':
             self.listOfDays.append('Sunday')
         
+        # If listOfDays equals the original list, the same exercise Object is kept.
+        if self.listOfDays == self.userObject.getTrainingDays():
+            self.listOfDays = []
 
         elif len(self.listOfDays) == 1:
             popupGUI = PopUpGUI("Please choose atleast two days to exercise.")
@@ -170,7 +173,7 @@ class MyProfileGUI():
             age = int(self.ageEntry.get())
             weight = int(self.weightEntry.get())
             height = int(self.heightEntry.get())
-            self.newCurrentUserData = [self.userObject.getUserId(), self.userObject.getUsername(), self.userObject.getPassword(), "DummyData", age, weight, height, self.clickedGender.get(), self.clickedGoal.get()]
+            self.newCurrentUserData = [self.userObject.getUserId(), self.userObject.getUsername(), self.userObject.getPassword(), "SecurityQuestionAnswer", age, weight, height, self.clickedGender.get(), self.clickedGoal.get()]
             #return userObject and pass it into dashboard controller
             self.myProfileController.createDashboardController(self.newCurrentUserData, self.listOfDays, self.exerciseObject, self.master)
         except ValueError:

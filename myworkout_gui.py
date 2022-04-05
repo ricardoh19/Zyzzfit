@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 import datetime
 import dashboard_controller 
+import editExercise_controller
 import myworkout_controller
 from PIL import ImageTk,Image 
 
@@ -22,8 +23,7 @@ class MyWorkoutGUI():
 
     '''
     Intent: creates the main frame for the My Workouts GUI
-    * Preconditions: master is connected to TKinter. 
-    * createWatchlistPortfolioFrame and createSearchbarFrame have the appropriate GUI code to be called in this method.
+    * Preconditions: master is connected to TKinter.
     * Postconditions:
     * Post0. main frame for dashboard is created
     '''
@@ -57,7 +57,10 @@ class MyWorkoutGUI():
         panel.grid(row=1,column=0, sticky='sw', padx=20)
 
     def createProfileButton(self):
-        self.profile = Button(self.master, text="My Profile",font='fixedsys 12',  height=3, width = 10, borderwidth=3, relief="solid", background='white').grid(row=0,column=4, sticky='e')
+        self.profile = Button(self.master, text="My Profile",font='fixedsys 12',  height=3, width = 10, borderwidth=3, relief="solid", background='white', command=lambda:self.createMyProfileController()).grid(row=0,column=4, sticky='e')
+
+    def createMyProfileController(self):
+        self.myWorkoutControllerObject.createMyProfileController(self.master)
 
 
     def createSuggestionFrame(self):
@@ -85,25 +88,27 @@ class MyWorkoutGUI():
 
         self.day = self.dashboardControllerObject.getDay()
 
-        DayCount = 0
-        if self.exerciseObject != None:
-            trainingDay = self.userObject.getTrainingDays()
-            for exerciseName in self.exerciseObject.keys():
-                if self.exerciseObject.getTrainingDay(exerciseName) == trainingDay[0]:
-                    try:
-                        self.sets = self.exerciseObject.getSets(exerciseName)
-                        self.reps = self.exerciseObject.getReps(exerciseName)
-                        self.originalWeight = self.exerciseObject.getOriginalWeight(exerciseName)
-                        self.maxWeight = self.exerciseObject.getMaxWeight(exerciseName)
-                        self.tree.insert('', 'end', text=exerciseName, values=(exerciseName, self.sets, self.reps, self.originalWeight, self.maxWeight))
-                    except KeyError:
-                        self.tree.insert('', 'end', text=exerciseName, values=(exerciseName, "N/A", "N/A","N/A","N/A" ))
+        self.changeWorkoutDisplayed(0)
                 
-        
-        self.editExerciseButton = Button(self.master, text="Edit Exercise",font='fixedsys 12',  height=1, width = 10, borderwidth=0, highlightthickness=0,background='white').grid(row=7,column=1, sticky='w', padx=5, pady=5)
         self.addExerciseButton = Button(self.master, text="Add Exercise",font='fixedsys 12',  height=1, width = 10, borderwidth=0, highlightthickness=0,background='white').grid(row=7,column=2,sticky='w', padx=5, pady=5)
-        self.removeExerciseButton = Button(self.master, text="Remove Exercise",font='fixedsys 12',  height=1, width = 10, borderwidth=0, highlightthickness=0,background='white').grid(row=7,column=3,sticky='w', padx=5, pady=5)
-        #self.editWorkoutButton = Button(self.master, text="Edit Workout",font='fixedsys 12',  height=1, width = 10, borderwidth=0, highlightthickness=0,background='white').grid(row=7,column=3,sticky='e', padx=5, pady=5)
+        self.tree.bind('<ButtonRelease-1>', self.selectItem)
+        
+        
+
+    def selectItem(self,a):
+        curItem = self.tree.focus()
+        exerciseText = self.tree.item(curItem)['text']
+
+        self.editExerciseButton = Button(self.master, text="Edit Exercise",font='fixedsys 12',  height=1, width = 10, borderwidth=0, highlightthickness=0,background='white', command=lambda:self.displayEditExerciseGUI(str(exerciseText))).grid(row=7,column=1, sticky='w', padx=5, pady=5)
+        self.removeExerciseButton = Button(self.master, text="Remove Exercise",font='fixedsys 12',  height=1, width = 10, borderwidth=0, highlightthickness=0,background='white', command=lambda:self.removeExercise(exerciseText)).grid(row=7,column=3,sticky='w', padx=5, pady=5)
+
+
+    def displayEditExerciseGUI(self, exerciseName):
+        self.myWorkoutControllerObject.createEditExerciseController(exerciseName ,self.master)
+
+    def removeExercise(self, exerciseName):
+        self.myWorkoutControllerObject.removeExercise(exerciseName)
+        self.changeWorkoutDisplayed(0)
 
 
     def displayDashboard(self):
@@ -197,15 +202,18 @@ class MyWorkoutGUI():
                     self.reps = self.exerciseObject.getReps(exerciseName)
                     self.originalWeight = self.exerciseObject.getOriginalWeight(exerciseName)
                     self.maxWeight = self.exerciseObject.getMaxWeight(exerciseName)
-                    self.tree.insert('', 'end', text=exerciseName, values=(exerciseName, self.sets, self.reps, self.originalWeight, self.maxWeight))
+                    self.tree.insert('', 'end', text=exerciseName, values=(exerciseName, self.sets, self.reps, self.maxWeight, self.originalWeight))
                 except KeyError:
                     self.tree.insert('', 'end', text=exerciseName, values=(exerciseName, "N/A", "N/A","N/A","N/A" ))
 
+        
+   
+   
     '''
     Intent: handles the logic for the user clicking logout button.
     * Preconditions: dashboard controller object exists
     * Postconditions: 
-    * Post0. changes are pushed to database, dashboard window is closed and login window is opened.
+    * Post0. changes are pushed to database, 
     * Post1. Changes are not pushed to database beacause connection to database could not be estbalished.
     '''
     def handleLogoutEvent(self):

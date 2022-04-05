@@ -34,13 +34,14 @@ class DashboardController():
     """This function creates the My Workouts Controller"""
     def createMyWorkoutsController(self, dashboardGUI):
         myWorkoutsControllerObject = myworkout_controller.MyWorkoutsController(self.userObject, self.exerciseObject)
-        dashboardGUI.destroy()
+        dashboardGUI.destroy() # close the dashboard GUI
         myWorkoutsControllerObject.createMyWorkoutsGUI()
     
     """This function creates the My Profile Controller"""
     def createMyProfileController(self, dashboardGUI):
         myProfileControllerObject = myProfile_controller.MyProfileController(self.userObject, self.exerciseObject)
-        dashboardGUI.destroy()
+
+        dashboardGUI.destroy() # close the dashboard GUI
         myProfileControllerObject.createMyProfileGUI()
 
 
@@ -83,7 +84,6 @@ class DashboardController():
             caloriesResult = 66.47 + (6.24 * float(weight)) + (12.7 * float(height)) - (6.755 * float(age))
         else:
             caloriesResult = 655.1 + (4.35 * float(weight)) + (4.7 * float(height)) - (4.7 * float(age))
-            
         if goal =="Maintain":
                 caloriesResult *= 1.5
         if goal == "Lose":

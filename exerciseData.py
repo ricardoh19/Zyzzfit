@@ -60,6 +60,11 @@ class ExerciseData():
 
 
     # GET methods
+
+    "returns all exercise information"
+    def getExerciseInfo(self, exerciseName):
+        return self.currentExerciseData[exerciseName]
+
     "returns userexerciseID based on exerciseName"
     def getUserExerciseId(self, exerciseName):
         return self.currentExerciseData[exerciseName]["userexerciseId"]
@@ -88,21 +93,25 @@ class ExerciseData():
     # SET methods
 
     """Updates sets of exercise data"""
-    def updateSets(self, newSets):
-        self.currentExerciseData["sets"] = newSets
+    def updateSets(self, exerciseName, newSets):
+        self.currentExerciseData[exerciseName]["sets"] = newSets
+
 
     """Updates reps of exercise data"""
-    def updateReps(self, newReps):
-        self.currentExerciseData["reps"] = newReps
+    def updateReps(self, exerciseName,newReps):
+        self.currentExerciseData[exerciseName]["reps"] = newReps
     
     """Updates original weight of exercise data"""
-    def updateOriginalWeight(self, newOriginalWeight):
-        self.currentExerciseData["Original weight"] = newOriginalWeight
+    def updateOriginalWeight(self, exerciseName,newOriginalWeight):
+        self.currentExerciseData[exerciseName]["Original weight"] = newOriginalWeight
     
     """Updates max weight of exercise data"""
-    def updateMaxWeight(self, newMaxWeight):
-        self.currentExerciseData["Max Weight"] = newMaxWeight
+    def updateMaxWeight(self, exerciseName,newMaxWeight):
+        self.currentExerciseData[exerciseName]["Max Weight"] = newMaxWeight
 
 
-    
+
+    """Removes specific exercise from exercise data"""
+    def removeExercise(self, exerciseName):
+        del self.currentExerciseData[exerciseName]
         
