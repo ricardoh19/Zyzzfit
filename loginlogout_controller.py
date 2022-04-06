@@ -40,7 +40,9 @@ class LoginLogoutControllers():
         self.getSnapshotOfDatabase()
         
         # insert all exercises into system
-        self.databaseManagerObject.insertAllExercisesIntoDatabase()
+        exercisesInDatabase = self.databaseManagerObject.getDatabaseExerciseData()
+        if exercisesInDatabase == []:
+            self.databaseManagerObject.insertAllExercisesIntoDatabase()
 
 
         

@@ -46,8 +46,8 @@ class MyWorkoutsController():
         myWorkoutGUI.destroy() # close myWorkouts GUI window
 
         # create edit exercise controller and display edit Exercise GUI
-        self.editExercise_controllerObject = editExercise_controller.EditExerciseController(self.userObject, self.exerciseObject)
-        self.editExercise_controllerObject.createEditExerciseGUI(exerciseName)
+        editExercise_controllerObject = editExercise_controller.EditExerciseController(self.userObject, self.exerciseObject)
+        editExercise_controllerObject.createEditExerciseGUI(exerciseName)
 
     '''
     Intent: Creates add exercise Controller and calls functions to create user and exercise objects and add exercise GUI.

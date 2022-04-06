@@ -29,16 +29,16 @@ class DashboardGUI():
     '''
     def createMainFrame(self):
         self.createMenuFrame()
-        self.title = Label(self.master, text="Dashboard",font='fixedsys 20 bold', height=5, width = 20, borderwidth=0, background='#3E3C3C', foreground="white").grid(row=0,column=1, pady=5, padx=5, columnspan=2, sticky='w')
+        title = Label(self.master, text="Dashboard",font='fixedsys 20 bold', height=5, width = 20, borderwidth=0, background='#3E3C3C', foreground="white").grid(row=0,column=1, pady=5, padx=5, columnspan=2, sticky='w')
 
-        self.profile = Button(self.master, text="My Profile",font='Fixedsys 12', command=lambda:self.openMyProfileGUI(), height=3, width = 10, borderwidth=3, relief="solid", background='white').grid(row=0,column=4, pady=4, sticky='e')
+        profile = Button(self.master, text="My Profile",font='Fixedsys 12', command=lambda:self.openMyProfileGUI(), height=3, width = 10, borderwidth=3, relief="solid", background='white').grid(row=0,column=4, pady=4, sticky='e')
         self.createQuoteFrame()
         self.createDateFrame()
         self.createWorkoutFrame()
         self.createDaysFrame()
         self.createCaloriesFrame()
 
-        self.exitButton = Button(self.master,text="Log Out", command=lambda:self.handleLogoutEvent(), borderwidth=0).grid(row = 3,column=0, sticky='s')
+        exitButton = Button(self.master,text="Log Out", command=lambda:self.handleLogoutEvent(), borderwidth=0).grid(row = 3,column=0, sticky='s')
 
     '''
     Intent: creates the menu frame for GUI
@@ -47,10 +47,10 @@ class DashboardGUI():
     * Post0. frame with dashboard, My Workouts buttons, and logout buttons are created for dashboard GUI
     '''
     def createMenuFrame(self):
-        self.menuFrame = Frame(self.master, height=555, width = 150, relief="solid", background='white').grid(row=0,column=0, pady=5, padx=15, rowspan=4)
-        self.menu = Label(self.menuFrame, text="Zyzzfit",font='fixedsys 25 bold', background='white').grid(row=0,column=0)
-        self.dashboardButton = Button(self.menuFrame, text="Dashboard",font='fixedsys 10 bold', borderwidth=0).grid(row=1,column=0, sticky='ne', padx=20) 
-        self.myWorkoutsButton = Button(self.menuFrame, text="My Workouts",font='fixedsys 10 bold', borderwidth=0, command=lambda:self.openMyWorkoutsGUI()).grid(row=1,column=0, sticky='se', padx=20) 
+        menuFrame = Frame(self.master, height=555, width = 150, relief="solid", background='white').grid(row=0,column=0, pady=5, padx=15, rowspan=4)
+        menu = Label(menuFrame, text="Zyzzfit",font='fixedsys 25 bold', background='white').grid(row=0,column=0)
+        self.dashboardButton = Button(menuFrame, text="Dashboard",font='fixedsys 10 bold', borderwidth=0).grid(row=1,column=0, sticky='ne', padx=20) 
+        self.myWorkoutsButton = Button(menuFrame, text="My Workouts",font='fixedsys 10 bold', borderwidth=0, command=lambda:self.openMyWorkoutsGUI()).grid(row=1,column=0, sticky='se', padx=20) 
         image = Image.open("assets/dashboard.png")
         resize_image = image.resize((15,15))
         img = ImageTk.PhotoImage(resize_image)
@@ -73,8 +73,8 @@ class DashboardGUI():
     * Post0. date frame for dashboard GUI is created
     '''
     def createDateFrame(self):
-        self.date = self.dashboardControllerObject.getFullDate()
-        self.date = Label(self.master, text=self.date,font='fixedsys 17 bold', height=2, width = 29, background='lightGray', foreground="black").grid(row=1,column=3, columnspan=2)
+        date = self.dashboardControllerObject.getFullDate()
+        date = Label(self.master, text=date,font='fixedsys 17 bold', height=2, width = 29, background='lightGray', foreground="black").grid(row=1,column=3, columnspan=2)
 
     '''
     Intent: creates the workout frame for GUI
@@ -83,7 +83,7 @@ class DashboardGUI():
     * Post0. workout frame for dashboard is created
     '''
     def createWorkoutFrame(self):
-        self.title = Label(self.master, text="Today's Workout",font='fixedsys 10 bold', height=1, width = 20, borderwidth=0, background='#3E3C3C', foreground="white").grid(row=2,column=1, sticky='w')
+        title = Label(self.master, text="Today's Workout",font='fixedsys 10 bold', height=1, width = 20, borderwidth=0, background='#3E3C3C', foreground="white").grid(row=2,column=1, sticky='w')
 
         self.tree = ttk.Treeview(self.master, column=("Exercise", "Sets","Reps"), show='headings', height=12)
         self.tree.grid(row=2,column=1, pady=5, padx=3, rowspan=2, columnspan=2, sticky='s')
@@ -161,7 +161,7 @@ class DashboardGUI():
         if self.userObject != None:
             trainingDays = self.userObject.getTrainingDays()
             daySplit = len(trainingDays)
-            self.dayNumber = Label(self.master, text="{} Day Split".format(daySplit),font='fixedsys 21 bold', height=7, width = 24, borderwidth=0, background='white').grid(row=2,column=3,columnspan=2)
+            dayNumber = Label(self.master, text="{} Day Split".format(daySplit),font='fixedsys 21 bold', height=7, width = 24, borderwidth=0, background='white').grid(row=2,column=3,columnspan=2)
 
     '''
     Intent: creates the calories frame
@@ -173,7 +173,7 @@ class DashboardGUI():
     '''
     def createCaloriesFrame(self):
         caloriesResult = self.dashboardControllerObject.calculateCalorieIntake()
-        self.calories = Label(self.master, text="Eat {} Calories \n a day to \n{} weight".format(caloriesResult, self.userObject.getCalorieGoal()), font="fixedsys 21 bold", height=7, width = 24,borderwidth=0, background='red').grid(row=3,column=3, columnspan=2)
+        calories = Label(self.master, text="Eat {} Calories \n a day to \n{} weight".format(caloriesResult, self.userObject.getCalorieGoal()), font="fixedsys 21 bold", height=7, width = 24,borderwidth=0, background='red').grid(row=3,column=3, columnspan=2)
 
 
 

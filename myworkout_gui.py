@@ -17,6 +17,7 @@ class MyWorkoutGUI():
         self.exerciseObject = exerciseObject
         self.dashboardControllerObject = dashboard_controller.DashboardController(userObject, exerciseObject)
         self.myWorkoutControllerObject = myworkout_controller.MyWorkoutsController(userObject, exerciseObject)
+        self.tree = None
         userObject = None
         exerciseObject = None
         self.createMainFrame()
@@ -25,23 +26,28 @@ class MyWorkoutGUI():
     Intent: creates the main frame for the My Workouts GUI
     * Preconditions: master is connected to TKinter.
     * Postconditions:
-    * Post0. main frame for dashboard is created
+    * Post0. main frame for my workouts is created
     '''
     def createMainFrame(self):
         self.createMenuFrame()
-        self.title = Label(self.master, text="My Workouts",font='Ubuntu 20 bold', height=5, width = 20, borderwidth=0, background='#3E3C3C', foreground="white").grid(row=0,column=1, pady=5, padx=5, columnspan=2, sticky='w')
+        title = Label(self.master, text="My Workouts",font='Ubuntu 20 bold', height=5, width = 20, borderwidth=0, background='#3E3C3C', foreground="white").grid(row=0,column=1, pady=5, padx=5, columnspan=2, sticky='w')
         self.createProfileButton()
         self.createSuggestionFrame()
         self.createWorkoutFrame()
         self.createDaysFrame()
-        self.exitButton = Button(self.master,text="Log Out", command=lambda:self.handleLogoutEvent(), highlightthickness=0, borderwidth=0).grid(row = 6,column=0, sticky='s')
+        exitButton = Button(self.master,text="Log Out", command=lambda:self.handleLogoutEvent(), highlightthickness=0, borderwidth=0).grid(row = 6,column=0, sticky='s')
 
-
+    '''
+    Intent: creates the menu frame for the My Workouts GUI
+    * Preconditions: master is connected to TKinter.
+    * Postconditions:
+    * Post0. menu frame for my workouts is created
+    '''
     def createMenuFrame(self):
-        self.menuFrame = Frame(self.master, height=555, width = 150, relief="solid", background='white').grid(row=0,column=0, pady=5, padx=15, rowspan=7)
-        self.menu = Label(self.menuFrame, text="Zyzzfit",font='Ubuntu 25 bold', background='white').grid(row=0,column=0)
-        self.dashboardButton = Button(self.menuFrame, text="Dashboard",font='Ubuntu 10 bold', highlightthickness=0,borderwidth=0, command=lambda:self.displayDashboard()).grid(row=1,column=0, sticky='ne', padx=20) 
-        self.myWorkoutsButton = Button(self.menuFrame, text="My Workouts",font='Ubuntu 10 bold', highlightthickness=0,borderwidth=0).grid(row=1,column=0, sticky='se', padx=20)
+        menuFrame = Frame(self.master, height=555, width = 150, relief="solid", background='white').grid(row=0,column=0, pady=5, padx=15, rowspan=7)
+        menu = Label(menuFrame, text="Zyzzfit",font='Ubuntu 25 bold', background='white').grid(row=0,column=0)
+        self.dashboardButton = Button(menuFrame, text="Dashboard",font='Ubuntu 10 bold', highlightthickness=0,borderwidth=0, command=lambda:self.displayDashboard()).grid(row=1,column=0, sticky='ne', padx=20) 
+        self.myWorkoutsButton = Button(menuFrame, text="My Workouts",font='Ubuntu 10 bold', highlightthickness=0,borderwidth=0).grid(row=1,column=0, sticky='se', padx=20)
         image = Image.open("assets/dashboard.png")
         resize_image = image.resize((15,15))
         img = ImageTk.PhotoImage(resize_image)
@@ -56,17 +62,30 @@ class MyWorkoutGUI():
         panel.image = img
         panel.grid(row=1,column=0, sticky='sw', padx=20)
 
+    '''
+    Intent: creates the my profile button for this GUI.
+    '''
     def createProfileButton(self):
-        self.profile = Button(self.master, text="My Profile",font='fixedsys 12',  height=3, width = 10, borderwidth=3, relief="solid", background='white', command=lambda:self.createMyProfileController()).grid(row=0,column=4, sticky='e')
+        profile = Button(self.master, text="My Profile",font='fixedsys 12',  height=3, width = 10, borderwidth=3, relief="solid", background='white', command=lambda:self.createMyProfileController()).grid(row=0,column=4, sticky='e')
 
+    '''
+    Intent: Calls function in myWorkouts controller to create the myProfile controller.
+    '''
     def createMyProfileController(self):
         self.myWorkoutControllerObject.createMyProfileController(self.master)
 
-
+    '''
+    Intent: creates the suggestion frame for My workouts GUI. Calls function in myWorkouts controller to get suggestion.
+    '''
     def createSuggestionFrame(self):
-        self.quote = Label(self.master, text="Suggestion", height=4, width = 87, borderwidth=0, background='white').grid(row=1,column=1, columnspan=3)
+        quote = Label(self.master, text="Suggestion", height=4, width = 87, borderwidth=0, background='white').grid(row=1,column=1, columnspan=3)
 
-
+    '''
+    Intent: creates the workout frame for the My Workouts GUI
+    * Preconditions: master is connected to TKinter.
+    * Postconditions:
+    * Post0. workout frame for my workouts is created
+    '''
     def createWorkoutFrame(self):
         self.tree = ttk.Treeview(self.master, column=("Exercise", "Sets","Reps", "Max_Weight", "Original_Weight"), show='headings', height=17)
         self.tree.grid(row=2,column=1, columnspan=3, rowspan=5, padx=5)
@@ -94,27 +113,41 @@ class MyWorkoutGUI():
         self.tree.bind('<ButtonRelease-1>', self.selectItem)
         
         
-
+    '''
+    Intent: creates exercise and remove button. Focus on one exercise to edit or remove it. 
+    '''
     def selectItem(self,a):
         curItem = self.tree.focus()
         exerciseText = self.tree.item(curItem)['text']
 
-        self.editExerciseButton = Button(self.master, text="Edit Exercise",font='fixedsys 12',  height=1, width = 10, borderwidth=0, highlightthickness=0,background='white', command=lambda:self.displayEditExerciseGUI(str(exerciseText))).grid(row=7,column=1, sticky='w', padx=5, pady=5)
-        self.removeExerciseButton = Button(self.master, text="Remove Exercise",font='fixedsys 12',  height=1, width = 10, borderwidth=0, highlightthickness=0,background='white', command=lambda:self.removeExercise(exerciseText)).grid(row=7,column=3,sticky='w', padx=5, pady=5)
+        editExerciseButton = Button(self.master, text="Edit Exercise",font='fixedsys 12',  height=1, width = 10, borderwidth=0, highlightthickness=0,background='white', command=lambda:self.displayEditExerciseGUI(str(exerciseText))).grid(row=7,column=1, sticky='w', padx=5, pady=5)
+        removeExerciseButton = Button(self.master, text="Remove Exercise",font='fixedsys 12',  height=1, width = 10, borderwidth=0, highlightthickness=0,background='white', command=lambda:self.removeExercise(exerciseText)).grid(row=7,column=3,sticky='w', padx=5, pady=5)
 
-
+    '''
+    Intent: calls my workout controller to create edit exercise controller
+    '''
     def displayEditExerciseGUI(self, exerciseName):
         self.myWorkoutControllerObject.createEditExerciseController(exerciseName ,self.master)
 
+    '''
+    Intent: calls my workout controller to remove exercise. Also upates the workout displayed.
+    '''
     def removeExercise(self, exerciseName):
         self.myWorkoutControllerObject.removeExercise(exerciseName)
         self.changeWorkoutDisplayed(0)
 
-
+    '''
+    Intent: calls my workout controller to create dashboard controller
+    '''
     def displayDashboard(self):
         self.myWorkoutControllerObject.createDashboardController(self.master)
 
-
+    '''
+    Intent: creates the day frame for the My Workouts GUI
+    * Preconditions: master is connected to TKinter.
+    * Postconditions:
+    * Post0. day frame for my workouts is created
+    '''
     def createDaysFrame(self):
         length = len(self.userObject.getTrainingDays())
         if length == 2:
@@ -185,12 +218,17 @@ class MyWorkoutGUI():
             self.button7 = Button(self.master, text="Workout 7" ,font='fixedsys 12', command=lambda:self.changeWorkoutDisplayed(6), height=1, width =13, highlightthickness=0, borderwidth=0, background='white')
             self.button7.grid(row=7,column=4)
 
+    '''
+    Intent: self.tree is cleared. self. tree displays all workout information for a specific day.
+    '''
     def clear_tree(self):
         for item in self.tree.get_children():
             self.tree.delete(item)
        
     
-
+    '''
+    Intent: Calls function clear tree and changes the workout displayed through the tree.
+    '''
     def changeWorkoutDisplayed(self, day):
         self.clear_tree()
         
@@ -214,7 +252,7 @@ class MyWorkoutGUI():
     * Preconditions: dashboard controller object exists
     * Postconditions: 
     * Post0. changes are pushed to database, 
-    * Post1. Changes are not pushed to database beacause connection to database could not be estbalished.
+    * Post1. Changes are not pushed to database beacause connection to database could not be established.
     '''
     def handleLogoutEvent(self):
         #username = self.userObject.current_user_data[1]

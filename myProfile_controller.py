@@ -35,18 +35,18 @@ class MyProfileController():
     '''
     def insertExercises(self, listOfDays):
         if len(listOfDays) == 2:
-            self.currentUserExerciseData,self.currentUserJunctionData = self.insertNewExercisesFor2Days(listOfDays)
+            currentUserExerciseData, currentUserJunctionData = self.insertNewExercisesFor2Days(listOfDays)
         elif len(listOfDays) == 3:
-            self.currentUserExerciseData,self.currentUserJunctionData = self.insertNewExercisesFor3Days(listOfDays)
+            currentUserExerciseData, currentUserJunctionData = self.insertNewExercisesFor3Days(listOfDays)
         elif len(listOfDays) == 4:
-            self.currentUserExerciseData,self.currentUserJunctionData = self.insertNewExercisesFor4Days(listOfDays)
+            currentUserExerciseData,currentUserJunctionData = self.insertNewExercisesFor4Days(listOfDays)
         elif len(listOfDays) == 5:
-            self.currentUserExerciseData,self.currentUserJunctionData = self.insertNewExercisesFor5Days(listOfDays)
+            currentUserExerciseData,currentUserJunctionData = self.insertNewExercisesFor5Days(listOfDays)
         elif len(listOfDays) == 6:
-            self.currentUserExerciseData,self.currentUserJunctionData = self.insertNewExercisesFor6Days(listOfDays)
+            currentUserExerciseData,currentUserJunctionData = self.insertNewExercisesFor6Days(listOfDays)
         elif len(listOfDays) == 7:
-            self.currentUserExerciseData,self.currentUserJunctionData = self.insertNewExercisesFor7Days(listOfDays)
-        return self.currentUserExerciseData,self.currentUserJunctionData
+            currentUserExerciseData,currentUserJunctionData = self.insertNewExercisesFor7Days(listOfDays)
+        return currentUserExerciseData,currentUserJunctionData
 
 
         
@@ -63,8 +63,8 @@ class MyProfileController():
        
         if len(trainingDaysList) != 0:  # set new exercises in exercise object based on trainingDayList if new days added
             userObject =  User(currentUserData, trainingDaysList)  # create new user object
-            self.currentUserExerciseData,self.currentUserJunctionData = self.insertExercises(trainingDaysList)
-            exerciseObject = self.createUserExerciseObject(self.currentUserExerciseData, self.currentUserJunctionData)
+            currentUserExerciseData,currentUserJunctionData = self.insertExercises(trainingDaysList)
+            exerciseObject = self.createUserExerciseObject(currentUserExerciseData, currentUserJunctionData)
         else: # keep old exercises if no new days added
             trainingDays = self.userObject.getTrainingDays()
             userObject = User(currentUserData, trainingDays)
