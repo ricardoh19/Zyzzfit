@@ -78,7 +78,8 @@ class MyWorkoutGUI():
     Intent: creates the suggestion frame for My workouts GUI. Calls function in myWorkouts controller to get suggestion.
     '''
     def createSuggestionFrame(self):
-        quote = Label(self.master, text="Suggestion", height=4, width = 87, borderwidth=0, background='white').grid(row=1,column=1, columnspan=3)
+        suggestion = self.myWorkoutControllerObject.createSuggestion()
+        quote = Label(self.master, text=suggestion, height=4, width = 87, borderwidth=0, background='white').grid(row=1,column=1, columnspan=3)
 
     '''
     Intent: creates the workout frame for the My Workouts GUI
@@ -109,7 +110,7 @@ class MyWorkoutGUI():
 
         self.changeWorkoutDisplayed(0)
                 
-        self.addExerciseButton = Button(self.master, text="Add Exercise",font='fixedsys 12',  height=1, width = 10, borderwidth=0, highlightthickness=0,background='white').grid(row=7,column=2,sticky='w', padx=5, pady=5)
+        self.addExerciseButton = Button(self.master, text="Add Exercise",font='fixedsys 12',  height=1, width = 10, borderwidth=0, highlightthickness=0,background='white', command=lambda:self.displayAddExerciseGUI()).grid(row=7,column=2,sticky='w', padx=5, pady=5)
         self.tree.bind('<ButtonRelease-1>', self.selectItem)
         
         
@@ -128,6 +129,12 @@ class MyWorkoutGUI():
     '''
     def displayEditExerciseGUI(self, exerciseName):
         self.myWorkoutControllerObject.createEditExerciseController(exerciseName ,self.master)
+
+    '''
+    Intent: calls my workout controller to create add exercise controller
+    '''
+    def displayAddExerciseGUI(self):
+        self.myWorkoutControllerObject.createAddExerciseController(self.master)
 
     '''
     Intent: calls my workout controller to remove exercise. Also upates the workout displayed.

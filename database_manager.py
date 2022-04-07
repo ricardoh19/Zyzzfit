@@ -222,21 +222,7 @@ class DB():
         result = [list(i) for i in cursor]
         return result
 
-    '''
-    Intent: Query exercise data based on body part passed as a parameter. Returns exercises based on that body part.
-    * Preconditions: 
-    * cursor is connected to correct database (ZyzzfitDB)
-    * Exercises table already exists.
-    * Postconditions:
-    * Post0. Selects exercise data based on body part from the Exercises table if connection to database if successful.
-    * Post1. Displays None if connection to database is not successful.
-    '''
-    def getExerciseBasedOnBodyPart(self, bodyPart):
-        cursor, cnx = self.connect_to_db(db=self.DB_NAME)
-        query = ("SELECT * FROM Exercises")
-        cursor.execute(query)
-        result = [list(i) for i in cursor]
-        return result
+    
 
     '''
     Intent: Query all user exercise data from database,return a list of all exercise data from database. 

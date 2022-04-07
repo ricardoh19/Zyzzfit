@@ -33,15 +33,19 @@ class DashboardController():
 
     """This function creates the My Workouts Controller"""
     def createMyWorkoutsController(self, dashboardGUI):
-        myWorkoutsControllerObject = myworkout_controller.MyWorkoutsController(self.userObject, self.exerciseObject)
         dashboardGUI.destroy() # close the dashboard GUI
+
+        # create my profile controller and GUI
+        myWorkoutsControllerObject = myworkout_controller.MyWorkoutsController(self.userObject, self.exerciseObject)
         myWorkoutsControllerObject.createMyWorkoutsGUI()
     
     """This function creates the My Profile Controller"""
     def createMyProfileController(self, dashboardGUI):
-        myProfileControllerObject = myProfile_controller.MyProfileController(self.userObject, self.exerciseObject)
-
         dashboardGUI.destroy() # close the dashboard GUI
+
+        # create my profile controller and GUI
+        windowOpenedFrom = "dashboard"
+        myProfileControllerObject = myProfile_controller.MyProfileController(self.userObject, self.exerciseObject, windowOpenedFrom)
         myProfileControllerObject.createMyProfileGUI()
 
 

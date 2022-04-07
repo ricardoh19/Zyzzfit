@@ -114,4 +114,30 @@ class ExerciseData():
     """Removes specific exercise from exercise data"""
     def removeExercise(self, exerciseName):
         del self.currentExerciseData[exerciseName]
+
+
+
+    def insertExercise(self, exerciseName, largestExerciseId, day):
+        count = 0
+        for data in self.currentExerciseData:
+            if exerciseName == data:
+                count+=1
+        if exerciseName in self.currentExerciseData:
+            exerciseName = f"{exerciseName} {count}"
+       
+
+        self.currentExerciseData[exerciseName] = {
+                    "userexerciseId": largestExerciseId+1, 
+                    "training Day": day,
+                    "sets":3,
+                    "reps":10,
+                    "Max Weight": 0,
+                    "Original weight": 0
+                }
+
+
+        
+        
+
+
         

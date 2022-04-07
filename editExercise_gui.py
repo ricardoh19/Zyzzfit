@@ -2,21 +2,21 @@ from hashlib import new
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
-import loginlogout_controller 
 import editExercise_controller
+import myworkout_controller
 
 
 
 # this class controls the graphical user interface of the edit exercise window.
 class EditExerciseGUI():
     def __init__(self, master, userObject, exerciseObject, exerciseName):
-        self.loginlogout_ControllerObject = loginlogout_controller.LoginLogoutControllers()
         self.master = master
         self.master.configure(background= "#3E3C3C")
         self.master.title("Edit Exercise")
         self.exerciseObject = exerciseObject
+        self.userObject = userObject
         self.exerciseNameString = exerciseName
-        self.editExercise_controllerObject = editExercise_controller.EditExerciseController(userObject, self.exerciseObject)
+        self.editExercise_controllerObject = editExercise_controller.EditExerciseController(self.userObject, self.exerciseObject)
         self.createMainFrame()
 
     '''
@@ -50,8 +50,8 @@ class EditExerciseGUI():
         self.originalWeightEntry.insert(0, self.exerciseObject.getOriginalWeight(self.exerciseNameString))
 
 
-        self.saveButton = Button(self.master,text="Save", borderwidth=0, command=lambda:self.handleSaveInformationEvent(),  highlightthickness=0).grid(row = 7,column=1, pady=5,padx=5,)
-        self.cancelButton = Button(self.master,text="Cancel", borderwidth=0,  highlightthickness=0, command=lambda:self.closeWindow()).grid(row = 7,column=1, pady=5, padx=5,sticky="e")
+        self.saveButton = Button(self.master,text="Save", borderwidth=0, command=lambda: self.handleSaveInformationEvent(),  highlightthickness=0).grid(row = 7,column=1, pady=5,padx=5,)
+        self.cancelButton = Button(self.master,text="Cancel", borderwidth=0,  highlightthickness=0, command=lambda: self.closeWindow()).grid(row = 7,column=1, pady=5, padx=5,sticky="e")
 
     
     
@@ -81,5 +81,7 @@ class EditExerciseGUI():
     '''
     def closeWindow(self):
         self.master.destroy()
+        myWorkoutController = myworkout_controller.MyWorkoutsController(self.userObject, self.exerciseObject)
+        myWorkoutController.createMyWorkoutsGUI()
 
 

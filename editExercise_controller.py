@@ -23,7 +23,7 @@ class EditExerciseController():
     def createEditExerciseGUI(self, exerciseName):
         root = Tk()
         root.geometry("600x450")
-        userInformationGUIObject = editExercise_gui.EditExerciseGUI(root, self.userObject, self.exerciseObject, exerciseName)
+        editExerciseGUIObject = editExercise_gui.EditExerciseGUI(root, self.userObject, self.exerciseObject, exerciseName)
         root.mainloop()
 
 
@@ -41,9 +41,9 @@ class EditExerciseController():
         if self.exerciseObject.getOriginalWeight(exerciseName) != newExerciseObject["Original weight"]:
             self.exerciseObject.updateOriginalWeight(exerciseName, newExerciseObject["Original weight"])
 
-        editExerciseGUI.destroy()
+        editExerciseGUI.destroy() # close dit exercise GUI
 
-        print(self.exerciseObject)
+        # create MYWorkout controller and display GUI
         myWorkoutController = myworkout_controller.MyWorkoutsController(self.userObject, self.exerciseObject)
         myWorkoutController.createMyWorkoutsGUI()
 

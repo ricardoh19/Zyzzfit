@@ -4,6 +4,7 @@ import myworkout_gui
 import dashboard_controller
 import editExercise_controller
 import myProfile_controller
+import addExerciseController
 
 class MyWorkoutsController():
     def __init__(self, userObject, exerciseObject):
@@ -22,8 +23,10 @@ class MyWorkoutsController():
         myWorkoutsGUI.destroy() # close the My workouts GUI
 
         # create my profile controller and my profile GUI
-        myProfileControllerObject = myProfile_controller.MyProfileController(self.userObject, self.exerciseObject)
+        windowOpenedFrom = "myWorkouts"
+        myProfileControllerObject = myProfile_controller.MyProfileController(self.userObject, self.exerciseObject, windowOpenedFrom)
         myProfileControllerObject.createMyProfileGUI()
+
 
     '''
     Intent: Creates Dashboard Controller and calls functions to create user and exercise objects and dashboard GUI.
@@ -37,7 +40,8 @@ class MyWorkoutsController():
 
 
     def createSuggestion(self):
-        pass
+        return "Try to keep compound movements in the beginning of a workout.\nSome examples of compound Movements are Bench Press, Deadlift, Squat, and PullUps."
+        
 
     '''
     Intent: Creates edit exercise Controller and calls functions to create user and exercise objects and edit exercise GUI.
@@ -52,9 +56,10 @@ class MyWorkoutsController():
     '''
     Intent: Creates add exercise Controller and calls functions to create user and exercise objects and add exercise GUI.
     '''
-    def createAddExerciseController(self):
-        pass
-
+    def createAddExerciseController(self, myWorkoutGUI):
+        myWorkoutGUI.destroy() # close myWorkouts GUI window
+        addExerciseControllerObject = addExerciseController.AddExerciseController(self.userObject, self.exerciseObject)
+        addExerciseControllerObject.createAddExerciseGUI()
    
     '''
     Intent: Removes exercise from exerciseObject. 

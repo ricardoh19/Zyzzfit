@@ -10,9 +10,10 @@ from database_manager import DB
 
 """This class controls the logic for user changing their personal information or training days."""
 class MyProfileController():
-    def __init__(self, userObject, exerciseObject):
+    def __init__(self, userObject, exerciseObject, windowOpenedFrom):
         self.userObject = userObject
         self.exerciseObject = exerciseObject
+        self.windowOpenedFrom = windowOpenedFrom
         self.databaseManagerObject = DB()
 
     '''
@@ -26,7 +27,7 @@ class MyProfileController():
     def createMyProfileGUI(self):
         root = Tk()
         root.geometry("710x550")
-        userInformationGUIObject = myProfile_GUI.MyProfileGUI(root, self.userObject, self.exerciseObject)
+        userInformationGUIObject = myProfile_GUI.MyProfileGUI(root, self.userObject, self.exerciseObject, self.windowOpenedFrom)
         root.mainloop()
 
 
@@ -73,6 +74,9 @@ class MyProfileController():
          # create dashboard controller and dashboard GUI
         dashboardController = dashboard_controller.DashboardController(userObject, exerciseObject)
         dashboardController.createDashboardGUI()
+
+
+    
 
     '''
     Intent: Creates exercise object by passing username parameter. Returns exercise object

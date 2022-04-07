@@ -5,20 +5,23 @@ from tkinter import ttk
 from popup_gui import PopUpGUI
 import loginlogout_controller 
 import myProfile_controller
+import dashboard_controller
+import myworkout_controller
 
 
 
 # this class controls the graphical user interface of the My Profile window. Its methods include createMainFrame, createDaysFrame,
 # handleSaveInformationEvent, and closeWindow
 class MyProfileGUI():
-    def __init__(self, master, userObject, exerciseObject):
+    def __init__(self, master, userObject, exerciseObject, windowOpenedFrom):
         self.loginlogout_ControllerObject = loginlogout_controller.LoginLogoutControllers()
         self.master = master
         self.master.configure(background= "#3E3C3C")
         self.master.title("My Profile Information")
-        self.myProfileController = myProfile_controller.MyProfileController(userObject ,exerciseObject)
+        self.myProfileController = myProfile_controller.MyProfileController(userObject ,exerciseObject, windowOpenedFrom)
         self.userObject = userObject
         self.exerciseObject = exerciseObject
+        self.windowOpenedFrom = windowOpenedFrom
         self.listOfDays = self.userObject.getTrainingDays()
         self.originalUserObject = {"age":self.userObject.getAge(), "Weight":self.userObject.getWeight(), "height": self.userObject.getHeight(),"gender": self.userObject.getGender(), "Calorie Goal": self.userObject.getCalorieGoal(), "Training days":self.userObject.getTrainingDays()}
 
@@ -65,8 +68,8 @@ class MyProfileGUI():
         self.createDaysFrame()
         self.selectDays()
 
-        self.saveButton = Button(self.master,text="Save", borderwidth=0, command=lambda:self.handleSaveInformationEvent(),  highlightthickness=0).grid(row = 14,column=1, pady=1, sticky="e")
-        self.cancelButton = Button(self.master,text="Cancel", borderwidth=0,  highlightthickness=0, command=lambda:self.closeWindow()).grid(row = 14,column=2, pady=1, sticky="e")
+        self.saveButton = Button(self.master,text="Save", borderwidth=0, command=lambda:self.handleSaveInformationEvent(),  highlightthickness=0).grid(row = 14,column=1, pady=50,padx=5,sticky="w")
+        self.cancelButton = Button(self.master,text="Cancel", borderwidth=0,  highlightthickness=0, command=lambda:self.closeWindow()).grid(row = 14, column=1, pady=50, padx=5)
 
     
     '''
@@ -192,4 +195,12 @@ class MyProfileGUI():
     * Post0. closes the MyProfile window
     '''
     def closeWindow(self):
-        self.myProfileController.createDashboardController(self.currentUserData, self.listOfDays, self.exerciseObject, self.master)
+        #self.myProfileController.createDashboardController(self.currentUserData, self.listOfDays, self.exerciseObject, self.master)
+        self.master.destroy()
+
+        if self.windowOpenedFrom == "dashboard":
+            dashboardController = dashboard_controller.DashboardController(self.userObject, self.exerciseObject)
+            dashboardController.createDashboardGUI()
+        else:
+            myWorkoutsController = myworkout_controller.MyWorkoutsController(self.userObject, self.exerciseObject)
+            myWorkoutsController.createMyWorkoutsGUI()
