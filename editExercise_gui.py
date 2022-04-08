@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import ttk
 import editExercise_controller
 import myworkout_controller
+from popup_gui import PopUpGUI
 
 
 
@@ -57,7 +58,7 @@ class EditExerciseGUI():
     
 
     '''
-    Intent: sets, reps, max and orginal weight is gotten and and exercise object is created. THis exercise object will be used to 
+    Intent: sets, reps, max and orginal weight is gotten and and exercise object is created. This exercise object will be used to 
     compare with the original exercise object. 
     '''
     def handleSaveInformationEvent(self):
@@ -65,6 +66,16 @@ class EditExerciseGUI():
         reps = self.repsEntry.get()
         maxWeight = self.maxWeightEntry.get()
         originalWeight = self.originalWeightEntry.get()
+        
+        try: 
+            sets = int(sets)
+            reps = int(reps)
+            maxWeight = int(maxWeight)
+            originalWeight = int(originalWeight)
+        except ValueError:
+            popupGUI = PopUpGUI("Field left blank.")
+            popupGUI.createPopUp()
+            return False
 
         newExerciseObject = {'sets': sets, 'reps': reps, 'Max Weight': maxWeight, 'Original weight': originalWeight}
         

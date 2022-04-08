@@ -12,12 +12,11 @@ class AddExerciseController():
         self.databaseManagerObject = DB()
 
     '''
-    Intent: creates edit exercise GUI
+    Intent: creates add exercise GUI
     * Preconditions: 
     * Tkinter is imported
-    * editExercise_gui exists
     * Postconditions:
-    * Post0. edit exercise GUIis created
+    * Post0. add exercise GUI is created
     '''
     def createAddExerciseGUI(self):
         root = Tk()
@@ -44,7 +43,6 @@ class AddExerciseController():
 
         # add whole exercise to exerciseObject
         self.exerciseObject.insertExercise(exerciseName, largestExerciseId, day)
-        print(self.exerciseObject)
 
         addExerciseGUI.destroy() # close add exercise GUI
 

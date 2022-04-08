@@ -57,7 +57,10 @@ class AddExerciseGUI():
         self.cancelButton = Button(self.master,text="Cancel", borderwidth=0,  highlightthickness=0, command=lambda:self.closeWindow()).grid(row = 5,column=1, pady=50, padx=5)
 
     
-
+    '''
+    Intent: searches through  all aexercises to match body part parameter. Calls function in addExerciseController.
+    Inputs list of returned exercises into exercise optionMenu.
+    '''
     def getExercisesBasedOnBodyPart(self, bodyPart):
         listOfExercises = self.addExerciseControllerObject.searchBodyPart(bodyPart.lower())
         
