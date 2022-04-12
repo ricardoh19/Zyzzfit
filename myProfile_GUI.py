@@ -177,8 +177,8 @@ class MyProfileGUI():
             weight = int(self.weightEntry.get())
             height = int(self.heightEntry.get())
             self.newCurrentUserData = [self.userObject.getUserId(), self.userObject.getUsername(), self.userObject.getPassword(), "SecurityQuestionAnswer", age, weight, height, self.clickedGender.get(), self.clickedGoal.get()]
-            #return userObject and pass it into dashboard controller
-            self.myProfileController.createDashboardController(self.newCurrentUserData, self.listOfDays, self.exerciseObject, self.master)
+            #return userObject and pass it into craeteController function
+            self.myProfileController.createController(self.newCurrentUserData, self.listOfDays, self.exerciseObject, self.windowOpenedFrom, self.master)
         except ValueError:
             popupGUI = PopUpGUI("Please provide an appropriate age, weight, or height.")
             popupGUI.createPopUp()
@@ -195,8 +195,7 @@ class MyProfileGUI():
     * Post0. closes the MyProfile window
     '''
     def closeWindow(self):
-        #self.myProfileController.createDashboardController(self.currentUserData, self.listOfDays, self.exerciseObject, self.master)
-        self.master.destroy()
+        self.master.destroy() # close the myProfile GUI
 
         if self.windowOpenedFrom == "dashboard":
             dashboardController = dashboard_controller.DashboardController(self.userObject, self.exerciseObject)

@@ -24,6 +24,10 @@ class AddExerciseController():
         userInformationGUIObject = addExercise_gui.AddExerciseGUI(root, self.userObject, self.exerciseObject)
         root.mainloop()
 
+    '''
+    Intent: All exercises obtained frmo database will be gotten and search for bodyPart parameter. 
+    Exercise pertianing to that body part will be returned in a list.
+    '''
     def searchBodyPart(self, bodyPart):
         allExercises = self.databaseManagerObject.getDatabaseExerciseData()
         allExercisesList = []
@@ -32,10 +36,13 @@ class AddExerciseController():
                 allExercisesList.append(exercise[2])
         return allExercisesList
 
-    
+    '''
+    Intent: Exercise will be added to exercise object with the last userExerciseId obtained. AddWorkoutsGUI will be closed and 
+    MyWorkouts GUI will be displayed.
+    '''
     def addExercise(self, exerciseName, day, addExerciseGUI):
         # get last userExerciseId
-        largestExerciseId = self.exerciseObject.getUserExerciseId("Bench Press")
+        largestExerciseId = self.exerciseObject.getUserExerciseId(list(self.exerciseObject.keys())[0])
         for data in self.exerciseObject.keys():
             if self.exerciseObject.getUserExerciseId(data) > largestExerciseId:
                 largestExerciseId = self.exerciseObject.getUserExerciseId(data)
@@ -46,5 +53,6 @@ class AddExerciseController():
 
         addExerciseGUI.destroy() # close add exercise GUI
 
+        # create my workout controller and displays my workouts GUI
         myWorkoutController = myworkout_controller.MyWorkoutsController(self.userObject, self.exerciseObject)
         myWorkoutController.createMyWorkoutsGUI()

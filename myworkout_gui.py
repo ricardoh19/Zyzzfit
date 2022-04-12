@@ -1,9 +1,7 @@
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
-import datetime
 import dashboard_controller 
-import editExercise_controller
 import myworkout_controller
 from PIL import ImageTk,Image 
 
@@ -262,8 +260,9 @@ class MyWorkoutGUI():
     * Post1. Changes are not pushed to database beacause connection to database could not be established.
     '''
     def handleLogoutEvent(self):
-        #username = self.userObject.current_user_data[1]
-        #self.dashboardControllerObject.logOutPushChanges(username, self.userObject)
+        username = self.userObject.getUsername()
+        self.dashboardControllerObject.logOutPushChanges(username, self.userObject, self.exerciseObject)
+
         self.closeWindow()
         self.dashboardControllerObject.openLoginGUI()
         

@@ -18,6 +18,9 @@ class ExerciseData():
     def keys(self):
         return self.currentExerciseData.keys()
 
+    def items(self):
+        return self.currentExerciseData.items()
+
    
         
     def __str__(self):

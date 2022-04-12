@@ -1,7 +1,7 @@
 from tkinter import *
 from popup_gui import PopUpGUI
 import dashboard_controller
-import loginlogout_controller
+import myworkout_controller
 import myProfile_GUI
 from user import User
 from exerciseData import ExerciseData
@@ -59,7 +59,7 @@ class MyProfileController():
     * Postconditions:
     * Post0. dashboard controller class is created.
     '''
-    def createDashboardController(self, currentUserData, trainingDaysList, exerciseObject, myProfileGUI):
+    def createController(self, currentUserData, trainingDaysList, exerciseObject, windowOpenedFrom, myProfileGUI):
         myProfileGUI.destroy() # close the MyProfile GUI
        
         if len(trainingDaysList) != 0:  # set new exercises in exercise object based on trainingDayList if new days added
@@ -71,9 +71,13 @@ class MyProfileController():
             userObject = User(currentUserData, trainingDays)
             exerciseObject = self.exerciseObject
 
-         # create dashboard controller and dashboard GUI
-        dashboardController = dashboard_controller.DashboardController(userObject, exerciseObject)
-        dashboardController.createDashboardGUI()
+        # create dashboard controller or myWorkouts controller
+        if windowOpenedFrom == "dashboard":
+            dashboardController = dashboard_controller.DashboardController(userObject, exerciseObject)
+            dashboardController.createDashboardGUI()
+        else:
+            myWorkoutsController = myworkout_controller.MyWorkoutsController(userObject, exerciseObject)
+            myWorkoutsController.createMyWorkoutsGUI()
 
 
     

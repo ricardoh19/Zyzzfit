@@ -1,8 +1,6 @@
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
-import tkinter.messagebox
-import login_gui
 import loginlogout_controller 
 
 

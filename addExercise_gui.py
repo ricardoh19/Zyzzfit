@@ -35,7 +35,7 @@ class AddExerciseGUI():
         
         self.varBodyPart = StringVar()
         self.varBodyPart.set("None")
-        self.bodyPartEntry = OptionMenu(self.master, self.varBodyPart, "Chest", "Back", "Shoudlers", "Biceps", "Triceps", "Legs", "Cardio")
+        self.bodyPartEntry = OptionMenu(self.master, self.varBodyPart, "Chest", "Back", "Shoulders", "Biceps", "Triceps", "Legs", "Cardio")
         self.bodyPartEntry.grid(row = 1,column=1,pady=5, sticky="w")       
         
 

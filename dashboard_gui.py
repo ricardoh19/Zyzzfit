@@ -1,8 +1,6 @@
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
-import datetime
-
 import dashboard_controller
 from PIL import ImageTk,Image 
 
@@ -185,9 +183,9 @@ class DashboardGUI():
     * Post1. Changes are not pushed to database beacause connection to database could not be estbalished.
     '''
     def handleLogoutEvent(self):
-        #username = self.userObject.current_user_data[1]
-        #self.dashboardControllerObject.logOutPushChanges(username, self.userObject)
-        # supposed to be 
+        username = self.userObject.getUsername()
+        self.dashboardControllerObject.logOutPushChanges(username, self.userObject, self.exerciseObject)
+       
 
         self.closeWindow()
         self.dashboardControllerObject.openLoginGUI()

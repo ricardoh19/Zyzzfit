@@ -100,5 +100,5 @@ class DashboardController():
     """In Dashboard GUI logout button is pressed.
     The controller passes the control back to login/logout controller.
     Login logout controller function is called which pushes the changes to the database"""
-    def logOutPushChanges(self, username, finalUserObject):
-        self.loginlogout_controller.logout_push_changes_to_database(username,finalUserObject)
+    def logOutPushChanges(self, username, finalUserObject, finalExerciseObject):
+        self.loginlogout_controller.logout_push_changes_to_database(username, finalUserObject, finalExerciseObject)
