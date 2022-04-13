@@ -1,3 +1,4 @@
+
 from popup_gui import PopUpGUI
 from tkinter import *
 import tkinter as tk
@@ -194,7 +195,7 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[0])
             self.getSnapshotOfDatabase()
 
-        for i in range(7,11):
+        for i in range(7,12):
             self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
             self.getSnapshotOfDatabase()
             self.setCurrentUserExerciseData(username)
@@ -226,7 +227,7 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[1])
             self.getSnapshotOfDatabase()
 
-        for i in range(23,28):
+        for i in range(23,27):
             self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
             self.getSnapshotOfDatabase()
             self.setCurrentUserExerciseData(username)
@@ -258,7 +259,7 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[1])
             self.getSnapshotOfDatabase()
 
-        for i in range(23,28):
+        for i in range(23,27):
             self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
             self.getSnapshotOfDatabase()
             self.setCurrentUserExerciseData(username)
@@ -267,7 +268,7 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[2])
             self.getSnapshotOfDatabase()
         
-        for i in range(28,34):
+        for i in range(31,37):
             self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
             self.getSnapshotOfDatabase()
             self.setCurrentUserExerciseData(username)
@@ -291,7 +292,7 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[0])
             self.getSnapshotOfDatabase()
 
-        for i in range(34,37):
+        for i in range(37,40):
             self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
             self.getSnapshotOfDatabase()
             self.setCurrentUserExerciseData(username)
@@ -300,7 +301,7 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[1])
             self.getSnapshotOfDatabase()
 
-        for i in range(37,41):
+        for i in range(40,44):
             self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
             self.getSnapshotOfDatabase()
             self.setCurrentUserExerciseData(username)
@@ -309,7 +310,7 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[2])
             self.getSnapshotOfDatabase()
 
-        for i in range(23,28):
+        for i in range(23,27):
             self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
             self.getSnapshotOfDatabase()
             self.setCurrentUserExerciseData(username)
@@ -318,7 +319,7 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[3])
             self.getSnapshotOfDatabase()
 
-        for i in range(41,44):
+        for i in range(44,47):
             self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
             self.getSnapshotOfDatabase()
             self.setCurrentUserExerciseData(username)
@@ -351,7 +352,7 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[1])
             self.getSnapshotOfDatabase()
 
-        for i in range(23,28):
+        for i in range(23,27):
             self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
             self.getSnapshotOfDatabase()
             self.setCurrentUserExerciseData(username)
@@ -360,7 +361,7 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[2])
             self.getSnapshotOfDatabase()
 
-        for i in range(12,18):
+        for i in range(48,53):
             self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
             self.getSnapshotOfDatabase()
             self.setCurrentUserExerciseData(username)
@@ -369,7 +370,7 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[3])
             self.getSnapshotOfDatabase()
 
-        for i in range(18,23):
+        for i in range(53,58):
             self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
             self.getSnapshotOfDatabase()
             self.setCurrentUserExerciseData(username)
@@ -378,7 +379,7 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[4])
             self.getSnapshotOfDatabase()
 
-        for i in range(23,28):
+        for i in range(58,63):
             self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
             self.getSnapshotOfDatabase()
             self.setCurrentUserExerciseData(username)
@@ -410,7 +411,7 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[1])
             self.getSnapshotOfDatabase()
 
-        for i in range(23,28):
+        for i in range(23,27):
             self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
             self.getSnapshotOfDatabase()
             self.setCurrentUserExerciseData(username)
@@ -419,7 +420,7 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[2])
             self.getSnapshotOfDatabase()
 
-        for i in range(12,18):
+        for i in range(48,53):
             self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
             self.getSnapshotOfDatabase()
             self.setCurrentUserExerciseData(username)
@@ -428,7 +429,7 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[3])
             self.getSnapshotOfDatabase()
 
-        for i in range(18,23):
+        for i in range(53,58):
             self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
             self.getSnapshotOfDatabase()
             self.setCurrentUserExerciseData(username)
@@ -437,7 +438,7 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, i, listOfDays[4])
             self.getSnapshotOfDatabase()
 
-        for i in range(23,28):
+        for i in range(58,63):
             self.databaseManagerObject.insertDatabaseUserExerciseData(userId, 3, 10, 0, 0)
             self.getSnapshotOfDatabase()
             self.setCurrentUserExerciseData(username)
@@ -453,7 +454,7 @@ class LoginLogoutControllers():
         self.setCurrentUserExerciseData(username)
 
         userExerciseId = self.currentUserExerciseData[-1][0]
-        self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, 44, listOfDays[6])
+        self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, 47, listOfDays[6])
         self.getSnapshotOfDatabase()
         
 
@@ -622,7 +623,6 @@ class LoginLogoutControllers():
         self.currentUserTrainingDays = self.setCurrentTrainingDays(username)
         self.currentUserTrainingDays = [i[1] for i in self.currentUserTrainingDays]
         self.userObject =  User(self.currentUserData, self.currentUserTrainingDays) # create user object
-        print(self.userObject)
         return self.userObject
 
 
@@ -636,10 +636,8 @@ class LoginLogoutControllers():
     def createUserExerciseObject(self, username):
         self.currentUserExerciseData = self.setCurrentUserExerciseData(username)
         self.currentUserJunctionData = self.setCurrentUserJunctionData()
-
         allExercises = self.databaseManagerObject.getDatabaseExerciseData()
         self.userExerciseObject =  ExerciseData(self.currentUserExerciseData, self.currentUserJunctionData, allExercises) # create exercise object
-        print(self.userExerciseObject)
         return self.userExerciseObject
 
 
@@ -814,15 +812,121 @@ class LoginLogoutControllers():
 
 
 
-
-
     '''
-    Intent: Check what has to be changed in objects.
-    * Preconditions: 
-    * username and finalUserObject exists
-    * self.createUserObejct creates the initial user object
+    Intent: calls the two functions to comapre user and exercise object. 
+    * Preconditions: Function compareUserObjects and compareExerciseObjects exists
     * Postconditions:
-    * Post0. 
+    * Post0. Functions compareUserObjects and compareExerciseObjects are called.
     '''
-    def logout_push_changes_to_database(self,username, finalUserObject):
-        pass
+    def logout_push_changes_to_database(self, username, finalUserObject, finalExerciseObject):
+        self.compareUserObjects(username, finalUserObject)
+        self.compareExerciseObjects(username, finalExerciseObject)
+
+    '''
+    Intent: creates forgot password GUI
+    * Preconditions: 
+    * Tkinter is imported and working
+    * signUpGUI exists
+    * Postconditions:
+    * Post0. forgot password GUI is created
+    '''
+    def compareUserObjects(self, username, finalUserObject):
+        userObject = self.createUserObject(username)
+
+        if userObject.getAge() != finalUserObject.getAge():
+            self.databaseManagerObject.updateUserAge(username, finalUserObject.getAge())
+        if userObject.getWeight() != finalUserObject.getWeight():
+            self.databaseManagerObject.updateUserWeight(username, finalUserObject.getWeight())
+        if userObject.getHeight() != finalUserObject.getHeight():
+            self.databaseManagerObject.updateUserHeight(username, finalUserObject.getHeight())
+        if userObject.getGender() != finalUserObject.getGender():
+            self.databaseManagerObject.updateUserGender(username, finalUserObject.getGender())
+        if userObject.getCalorieGoal() != finalUserObject.getCalorieGoal():
+            self.databaseManagerObject.updateUserCalorieGoal(username, finalUserObject.getCalorieGoal())
+        if userObject.getTrainingDays() != finalUserObject.getTrainingDays():
+            self.databaseManagerObject.deleteUserTrainingDays(self.userObject.getUserId()) # delete training days
+            for day in finalUserObject.getTrainingDays(): # add the new training days
+                self.databaseManagerObject.insertTrainingDays(day,self.userObject.getUserId()) 
+
+
+    '''
+    Intent: compares exercise objects. The original and the most recent exercise Object when logout button is clicked. 
+    * Preconditions:
+    * deleteExercises function exists.
+    * database functions exists to updated exercise object
+    * Postconditions:
+    * Post0. Any changes that are made are pushed or updated in the database for specific user that is logged in.
+    '''
+    def compareExerciseObjects(self, username, finalExerciseObject):
+        exerciseObject = self.createUserExerciseObject(username)
+
+        self.deleteExercises(exerciseObject, finalExerciseObject)
+
+        # traverse thorugh the object and compare values
+        for exercise in finalExerciseObject.keys():
+            if exercise in exerciseObject.keys():
+                if exerciseObject.getSets(exercise) != finalExerciseObject.getSets(exercise):
+                    userExerciseId = exerciseObject.getUserExerciseId(exercise)
+                    self.databaseManagerObject.updateUserExerciseSets(finalExerciseObject.getSets(exercise), userExerciseId)
+                if exerciseObject.getReps(exercise) != finalExerciseObject.getReps(exercise):
+                    userExerciseId = exerciseObject.getUserExerciseId(exercise)
+                    self.databaseManagerObject.updateUserExerciseReps(finalExerciseObject.getReps(exercise), userExerciseId)
+                if exerciseObject.getMaxWeight(exercise) != finalExerciseObject.getMaxWeight(exercise):
+                    userExerciseId = exerciseObject.getUserExerciseId(exercise)
+                    self.databaseManagerObject.updateUserExerciseMaxWeight(finalExerciseObject.getMaxWeight(exercise), userExerciseId)
+                if exerciseObject.getOriginalWeight(exercise) != finalExerciseObject.getOriginalWeight(exercise):
+                    userExerciseId = exerciseObject.getUserExerciseId(exercise)
+                    self.databaseManagerObject.updateUserExerciseOriginalWeight(finalExerciseObject.getOriginalWeight(exercise), userExerciseId)
+            
+
+        # create a list with new exercise objects
+        newList = [i for i in finalExerciseObject if i not in exerciseObject]
+        userId = self.userObject.getUserId()
+        allExercises = self.databaseManagerObject.getDatabaseExerciseData()
+
+        # traverse and compare if exerciseObject contains new Object
+        for exercise in newList:
+            exerciseId = self.searchForExerciseId(allExercises, exercise, "newExercise")
+            sets = finalExerciseObject.getSets(exercise)
+            reps = finalExerciseObject.getReps(exercise)
+            originalWeight = finalExerciseObject.getOriginalWeight(exercise)
+            maxWeight = finalExerciseObject.getMaxWeight(exercise)
+            day = finalExerciseObject.getTrainingDay(exercise)
+            
+            # push changes to database
+            self.databaseManagerObject.insertDatabaseUserExerciseData(userId, sets, reps, maxWeight, originalWeight)
+            self.getSnapshotOfDatabase()
+            self.setCurrentUserExerciseData(username)
+            userExerciseId = self.currentUserExerciseData[-1][0]
+            self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, exerciseId, day)
+        
+            
+        
+    '''
+    Intent: searches for specific exercies's exerciseId. 
+    * Preconditions:
+    * database function insertDatabaseExerciseData exists
+    * Postconditions:
+    * Post0. exerciseId is returned peratining to specific exercise. 
+    '''
+    def searchForExerciseId(self, allExercises, exerciseName, bodyPart):
+        for data in allExercises:
+            if data[2] == exerciseName:
+                exerciseId = data[0]
+                return exerciseId
+        exerciseId = allExercises[-1][0] + 1
+        self.databaseManagerObject.insertDatabaseExerciseData(exerciseName, bodyPart)
+        return exerciseId
+
+
+    '''
+    Intent: removes an exercise object from exerciseData dictionary if it is not in finalExerciseObject
+    * Preconditions:
+    * database function deleteDatabaseExerciseData exists
+    * Postconditions:
+    * Post0. exercise data is removed from database pertaining to specific user.
+    '''
+    def deleteExercises(self, exerciseObject, finalExerciseObject):
+        for i in exerciseObject.keys():
+            if i not in finalExerciseObject.keys():
+                self.databaseManagerObject.deleteDatabaseExerciseData(exerciseObject.getUserExerciseId(i))

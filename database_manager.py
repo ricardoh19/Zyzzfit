@@ -448,44 +448,103 @@ class DB():
         cursor.execute(query)
         cnx.commit()
 
-    '''
-    Intent: Update sets, reps, max weight, original weight
-    '''
-    def updateUserExerciseData(self):
-        pass
+
+    def updateUserAge(self, username, newAge):
+        cursor, cnx = self.connect_to_db(db=self.DB_NAME)
+        query = (f"UPDATE User SET age = '{newAge}' WHERE username = '{username}'")
+        cursor.execute(query)
+        cnx.commit()
+
+    def updateUserWeight(self, username, newWeight):
+        cursor, cnx = self.connect_to_db(db=self.DB_NAME)
+        query = (f"UPDATE User SET weight = '{newWeight}' WHERE username = '{username}'")
+        cursor.execute(query)
+        cnx.commit()
+
+    def updateUserHeight(self, username, newHeight):
+        cursor, cnx = self.connect_to_db(db=self.DB_NAME)
+        query = (f"UPDATE User SET height = '{newHeight}' WHERE username = '{username}'")
+        cursor.execute(query)
+        cnx.commit()
+
+    def updateUserGender(self, username, newGender):
+        cursor, cnx = self.connect_to_db(db=self.DB_NAME)
+        query = (f"UPDATE User SET gender = '{newGender}' WHERE username = '{username}'")
+        cursor.execute(query)
+        cnx.commit()
+
+    def updateUserCalorieGoal(self, username, newCalorieGoal):
+        cursor, cnx = self.connect_to_db(db=self.DB_NAME)
+        query = (f"UPDATE User SET calorieGoal = '{newCalorieGoal}' WHERE username = '{username}'")
+        cursor.execute(query)
+        cnx.commit()
+
+    
+        
+
 
     '''
-    Intent: Update exerciseId 
+    Intent: Update junction data of specific user 
     '''
     def updateUserJunctionData(self):
         pass
     
-    '''
-    Intent: Update training days 
-    '''
-    def updateUserTrainingDays(self):
-        pass
 
     '''
-    Intent: Update exerciseId
+    Intent: Update sets of specific exercise
     '''
-    def updateUserExerciseSets(self):
-        pass
+    def updateUserExerciseSets(self, newSets, userExerciseId):
+        cursor, cnx = self.connect_to_db(db=self.DB_NAME)
+        query = (f"UPDATE UserExerciseInfo SET sets = '{newSets}' WHERE userexerciseId = '{userExerciseId}'")
+        cursor.execute(query)
+        cnx.commit()
 
     '''
     Intent: Update reps of specific exercise 
     '''
-    def updateUserExerciseReps(self):
-        pass
+    def updateUserExerciseReps(self, newReps, userExerciseId):
+        cursor, cnx = self.connect_to_db(db=self.DB_NAME)
+        query = (f"UPDATE UserExerciseInfo SET repetitions = '{newReps}' WHERE userexerciseId = '{userExerciseId}'")
+        cursor.execute(query)
+        cnx.commit()
 
     '''
     Intent: Update max weight of specific exercise 
     '''
-    def updateUserExerciseMaxWeight(self):
-        pass
+    def updateUserExerciseMaxWeight(self, newMaxWeight, userExerciseId):
+        cursor, cnx = self.connect_to_db(db=self.DB_NAME)
+        query = (f"UPDATE UserExerciseInfo SET maxweight = '{newMaxWeight}' WHERE userexerciseId = '{userExerciseId}'")
+        cursor.execute(query)
+        cnx.commit()
 
     '''
     Intent: Update original weight of specific exercise 
     '''
-    def updateUserExerciseOriginalWeight(self):
-        pass
+    def updateUserExerciseOriginalWeight(self, newOriginalWeight, userExerciseId):
+        cursor, cnx = self.connect_to_db(db=self.DB_NAME)
+        query = (f"UPDATE UserExerciseInfo SET originalweight = '{newOriginalWeight}' WHERE userexerciseId = '{userExerciseId}'")
+        cursor.execute(query)
+        cnx.commit()
+
+
+    # delete methods
+
+    def deleteDatabaseExerciseData(self, userExerciseId):
+        cursor, cnx = self.connect_to_db(db=self.DB_NAME)
+        query = (f"SET FOREIGN_KEY_CHECKS={0};")
+        cursor.execute(query)
+        query = (f"DELETE FROM UserExerciseInfo WHERE userexerciseId = '{userExerciseId}'")
+        cursor.execute(query)
+        cnx.commit()
+
+
+    '''
+    Intent: deletes user training days if they are changed
+    '''
+    def deleteUserTrainingDays(self, userId):
+        cursor, cnx = self.connect_to_db(db=self.DB_NAME)
+        query = (f"SET FOREIGN_KEY_CHECKS={0};")
+        cursor.execute(query)
+        query = (f"DELETE FROM TrainingDay WHERE userId = '{userId}'")
+        cursor.execute(query)
+        cnx.commit()

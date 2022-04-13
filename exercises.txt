@@ -20,11 +20,14 @@ biceps,Hammer Curls
 biceps,Cable Curls
 back,Cable Rows
 biceps,Dumbbell Curls
-legs,Deadlift
+legs,Squat
+legs,RDL
 legs,Leg Press
-legs,RDLs
 legs,Leg Extension
-legs,Hamstring Curls
+chest,Military Press
+chest,Close Grip Bench Press
+chest,Cable Flies
+chest,Overhead Tricep Extension
 triceps,Tricep Extension
 shoulders,Dumbbell Shoulder Press
 biceps,Preacher Curl Machine
@@ -42,3 +45,18 @@ shoulders,Shoulder Press Machine
 shoulders,Lateral Raises
 shoulders,Rear Delt Flies
 cardio,Light or Heavy Cardio
+chest,Military Press
+chest,Close Grip Bench Press
+chest,Cable Flies
+triceps,Overhead Tricep Extension
+shoulders,Lateral Raises
+back,Pull Downs
+biceps,Seated Cable Row
+biceps,Cable Pullover Curls
+back,Hammer Curls 
+biceps,Dumbbell Curls
+legs,Deadlift
+legs,Goblet Squat
+legs,Hamstring Curls
+legs,Prisoner Back Extension
+legs,Calf Raises

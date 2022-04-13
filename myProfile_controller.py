@@ -61,11 +61,13 @@ class MyProfileController():
     '''
     def createController(self, currentUserData, trainingDaysList, exerciseObject, windowOpenedFrom, myProfileGUI):
         myProfileGUI.destroy() # close the MyProfile GUI
-       
+
         if len(trainingDaysList) != 0:  # set new exercises in exercise object based on trainingDayList if new days added
             userObject =  User(currentUserData, trainingDaysList)  # create new user object
             currentUserExerciseData,currentUserJunctionData = self.insertExercises(trainingDaysList)
             exerciseObject = self.createUserExerciseObject(currentUserExerciseData, currentUserJunctionData)
+
+
         else: # keep old exercises if no new days added
             trainingDays = self.userObject.getTrainingDays()
             userObject = User(currentUserData, trainingDays)
@@ -108,7 +110,7 @@ class MyProfileController():
             userExerciseJunction.append([userExerciseId, i, listOfDays[0]])
             userExerciseId +=1 
 
-        for i in range(7,11): # will insert full body exercises for second day 
+        for i in range(7,12): # will insert full body exercises for second day 
             userExerciseData.append([userExerciseId, self.userObject.getUserId(), 3, 10, 0, 0])
             userExerciseId = userExerciseData[-1][0]
             userExerciseJunction.append([userExerciseId, i, listOfDays[1]])
@@ -135,7 +137,7 @@ class MyProfileController():
             userExerciseJunction.append([userExerciseId, i, listOfDays[1]])
             userExerciseId +=1 
 
-        for i in range(23, 28): # will insert legs exercises for third day 
+        for i in range(23, 27): # will insert legs exercises for third day 
             userExerciseData.append([userExerciseId, self.userObject.getUserId(), 3, 10, 0, 0])
             userExerciseId = userExerciseData[-1][0]
             userExerciseJunction.append([userExerciseId, i, listOfDays[2]])
@@ -150,7 +152,7 @@ class MyProfileController():
         userExerciseData = []
         userExerciseJunction = []
         userExerciseId = 0
-        for i in range(12,18): # will insert chest and triceps exercises for first day 
+        for i in range(27,31): # will insert chest and triceps exercises for first day 
             userExerciseData.append([userExerciseId, self.userObject.getUserId(), 3, 10, 0, 0])
             userExerciseId = userExerciseData[-1][0]
             userExerciseJunction.append([userExerciseId, i, listOfDays[0]])
@@ -162,13 +164,13 @@ class MyProfileController():
             userExerciseJunction.append([userExerciseId, i, listOfDays[1]])
             userExerciseId +=1 
 
-        for i in range(23, 28): # will insert legs exercises for third day 
+        for i in range(23, 27): # will insert legs exercises for third day 
             userExerciseData.append([userExerciseId, self.userObject.getUserId(), 3, 10, 0, 0])
             userExerciseId = userExerciseData[-1][0]
             userExerciseJunction.append([userExerciseId, i, listOfDays[2]])
             userExerciseId +=1 
 
-        for i in range(28, 34): # will insert shoulders exercises for fourth day 
+        for i in range(31, 37): # will insert shoulders/Arms exercises for fourth day 
             userExerciseData.append([userExerciseId, self.userObject.getUserId(), 3, 10, 0, 0])
             userExerciseId = userExerciseData[-1][0]
             userExerciseJunction.append([userExerciseId, i, listOfDays[3]])
@@ -189,25 +191,25 @@ class MyProfileController():
             userExerciseJunction.append([userExerciseId, i, listOfDays[0]])
             userExerciseId +=1 
 
-        for i in range(34,37): # will insert back exercises for second day 
+        for i in range(37,40): # will insert back exercises for second day 
             userExerciseData.append([userExerciseId, self.userObject.getUserId(), 3, 10, 0, 0])
             userExerciseId = userExerciseData[-1][0]
             userExerciseJunction.append([userExerciseId, i, listOfDays[1]])
             userExerciseId +=1 
 
-        for i in range(37,41): # will insert biceps and triceps exercises for third day 
+        for i in range(40,44): # will insert biceps and triceps exercises for third day 
             userExerciseData.append([userExerciseId, self.userObject.getUserId(), 3, 10, 0, 0])
             userExerciseId = userExerciseData[-1][0]
             userExerciseJunction.append([userExerciseId, i, listOfDays[2]])
             userExerciseId +=1 
 
-        for i in range(23,28): # will insert legs exercises for fourth day 
+        for i in range(23,27): # will insert legs exercises for fourth day 
             userExerciseData.append([userExerciseId, self.userObject.getUserId(), 3, 10, 0, 0])
             userExerciseId = userExerciseData[-1][0]
             userExerciseJunction.append([userExerciseId, i, listOfDays[3]])
             userExerciseId +=1 
 
-        for i in range(41,44): # will insert shoulders exercises for fifth day 
+        for i in range(44,47): # will insert shoulders exercises for fifth day 
             userExerciseData.append([userExerciseId, self.userObject.getUserId(), 3, 10, 0, 0])
             userExerciseId = userExerciseData[-1][0]
             userExerciseJunction.append([userExerciseId, i, listOfDays[4]])
@@ -233,29 +235,30 @@ class MyProfileController():
             userExerciseJunction.append([userExerciseId, i, listOfDays[1]])
             userExerciseId +=1 
 
-        for i in range(23,28): # will insert legs exercises for third day 
+        for i in range(23,27): # will insert legs exercises for third day 
             userExerciseData.append([userExerciseId, self.userObject.getUserId(), 3, 10, 0, 0])
             userExerciseId = userExerciseData[-1][0]
             userExerciseJunction.append([userExerciseId, i, listOfDays[2]])
             userExerciseId +=1 
 
-        for i in range(12,18): # will insert Chest, Shoulders, Triceps exercises for fourth day 
+        for i in range(48,53): # will insert Chest, Shoulders, Triceps exercises for fourth day 
             userExerciseData.append([userExerciseId, self.userObject.getUserId(), 3, 10, 0, 0])
             userExerciseId = userExerciseData[-1][0]
             userExerciseJunction.append([userExerciseId, i, listOfDays[3]])
             userExerciseId +=1 
 
-        for i in range(18,23): # will insert back and biceps exercises for fifth day 
+        for i in range(53,58): # will insert back and biceps exercises for fifth day 
             userExerciseData.append([userExerciseId, self.userObject.getUserId(), 3, 10, 0, 0])
             userExerciseId = userExerciseData[-1][0]
             userExerciseJunction.append([userExerciseId, i, listOfDays[4]])
             userExerciseId +=1 
 
-        for i in range(23,28): # will insert legs exercises for fifth day 
+        for i in range(58,63): # will insert legs exercises for sixth day 
             userExerciseData.append([userExerciseId, self.userObject.getUserId(), 3, 10, 0, 0])
             userExerciseId = userExerciseData[-1][0]
             userExerciseJunction.append([userExerciseId, i, listOfDays[5]])
             userExerciseId +=1 
+
         return userExerciseData, userExerciseJunction
 
     '''
@@ -277,25 +280,25 @@ class MyProfileController():
             userExerciseJunction.append([userExerciseId, i, listOfDays[1]])
             userExerciseId +=1 
 
-        for i in range(23,28): # will insert legs exercises for third day 
+        for i in range(23,27): # will insert legs exercises for third day 
             userExerciseData.append([userExerciseId, self.userObject.getUserId(), 3, 10, 0, 0])
             userExerciseId = userExerciseData[-1][0]
             userExerciseJunction.append([userExerciseId, i, listOfDays[2]])
             userExerciseId +=1 
 
-        for i in range(12,18): # will insert Chest, Shoulders, Triceps exercises for fourth day 
+        for i in range(48,53): # will insert Chest, Shoulders, Triceps exercises for fourth day 
             userExerciseData.append([userExerciseId, self.userObject.getUserId(), 3, 10, 0, 0])
             userExerciseId = userExerciseData[-1][0]
             userExerciseJunction.append([userExerciseId, i, listOfDays[3]])
             userExerciseId +=1 
 
-        for i in range(18,23): # will insert back and biceps exercises for fifth day 
+        for i in range(53,58): # will insert back and biceps exercises for fifth day 
             userExerciseData.append([userExerciseId, self.userObject.getUserId(), 3, 10, 0, 0])
             userExerciseId = userExerciseData[-1][0]
             userExerciseJunction.append([userExerciseId, i, listOfDays[4]])
             userExerciseId +=1 
 
-        for i in range(23,28): # will insert legs exercises for sixth day 
+        for i in range(58,63): # will insert legs exercises for sixth day 
             userExerciseData.append([userExerciseId, self.userObject.getUserId(), 3, 10, 0, 0])
             userExerciseId = userExerciseData[-1][0]
             userExerciseJunction.append([userExerciseId, i, listOfDays[5]])
@@ -304,7 +307,7 @@ class MyProfileController():
         # will insert cardio exercises for seventh day 
         userExerciseData.append([userExerciseId, self.userObject.getUserId(),0 ,0, 0, 0])
         userExerciseId = userExerciseData[-1][0]
-        userExerciseJunction.append([userExerciseId, 44, listOfDays[6]])
+        userExerciseJunction.append([userExerciseId, 47, listOfDays[6]])
         return userExerciseData, userExerciseJunction
         
 

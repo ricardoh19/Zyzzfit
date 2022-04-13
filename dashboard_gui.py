@@ -15,6 +15,7 @@ class DashboardGUI():
         self.master.title("Dashboard")
         self.userObject = userObject
         self.exerciseObject = exerciseObject
+        self.day = None
         self.dashboardControllerObject = dashboard_controller.DashboardController(userObject, exerciseObject)
         self.createMainFrame()
         
@@ -96,7 +97,7 @@ class DashboardGUI():
         self.tree.column("Reps", stretch=NO, width=75)
 
         self.day = self.dashboardControllerObject.getDay()
-
+        
         DayCount = 0
         if self.exerciseObject != None:
             for exerciseName in self.exerciseObject.keys():
