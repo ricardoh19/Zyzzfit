@@ -132,7 +132,11 @@ class ExerciseData():
 
     """Removes specific exercise from exercise data"""
     def removeExercise(self, exerciseName):
-        del self.currentExerciseData[exerciseName]
+        try:
+            del self.currentExerciseData[exerciseName]
+        except KeyError:
+            return None
+       
 
 
 

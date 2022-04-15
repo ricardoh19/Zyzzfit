@@ -21,12 +21,12 @@ class AddExerciseController():
     def createAddExerciseGUI(self):
         root = Tk()
         root.geometry("600x450")
-        userInformationGUIObject = addExercise_gui.AddExerciseGUI(root, self.userObject, self.exerciseObject, self.allExercises)
+        addExerciseGUIObject = addExercise_gui.AddExerciseGUI(root, self.userObject, self.exerciseObject, self.allExercises)
         root.mainloop()
 
     '''
     Intent: All exercises obtained frmo database will be gotten and search for bodyPart parameter. 
-    Exercise pertianing to that body part will be returned in a list.
+    Exercise pertianing to that body part will be returned in a list. returns a list of all exercises 
     '''
     def searchBodyPart(self, bodyPart):
         
@@ -42,7 +42,10 @@ class AddExerciseController():
     '''
     def addExercise(self, exerciseName, day, addExerciseGUI):
         # get last userExerciseId
-        largestExerciseId = self.exerciseObject.getUserExerciseId(list(self.exerciseObject.keys())[0])
+        try:
+            largestExerciseId = self.exerciseObject.getUserExerciseId(list(self.exerciseObject.keys())[0])
+        except IndexError:
+            largestExerciseId = 0
         for data in self.exerciseObject.keys():
             if self.exerciseObject.getUserExerciseId(data) > largestExerciseId:
                 largestExerciseId = self.exerciseObject.getUserExerciseId(data)

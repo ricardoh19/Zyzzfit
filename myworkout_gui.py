@@ -136,7 +136,6 @@ class MyWorkoutGUI():
             popupGUI = PopUpGUI("Please choose exercise to edit.")
             popupGUI.createPopUp()
             return False
-        print(type(exerciseName))
         self.myWorkoutControllerObject.createEditExerciseController(exerciseName ,self.master)
 
     '''
@@ -275,6 +274,7 @@ class MyWorkoutGUI():
     * Post1. Changes are not pushed to database beacause connection to database could not be established.
     '''
     def handleLogoutEvent(self):
+        
         self.myWorkoutControllerObject.handleLogoutEvent()
         self.closeWindow()
         self.dashboardControllerObject.openLoginGUI()
