@@ -36,11 +36,11 @@ class AddExerciseGUI():
         
         self.varBodyPart = StringVar()
         self.varBodyPart.set("None")
-        bodyPartEntry = OptionMenu(self.master, self.varBodyPart, "Chest", "Back", "Shoulders", "Biceps", "Triceps", "Legs", "Cardio")
+        bodyPartEntry = OptionMenu(self.master, self.varBodyPart, "chest", "back", "shoulders", "biceps", "triceps", "legs", "cardio")
         bodyPartEntry.grid(row = 1,column=1,pady=5, sticky="w")       
-        
 
         enterButton = Button(self.master,text="Enter Body Part", borderwidth=0, command=lambda:self.getExercisesBasedOnBodyPart(self.varBodyPart.get()),  highlightthickness=0).grid(row = 1,column=1, pady=5,padx=5,sticky="e")
+        enterLabel = Label(self.master, text="After choosing an exercise, \nplease press Enter!",font=("Fixedsys", 12), borderwidth=0, background='#3E3C3C', foreground='white').grid(row=2,column=0, pady=5)
 
         exercise = Label(self.master, text="Exercise",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=3,column=0, sticky='w', pady=5)
         self.varExercise = StringVar()
@@ -50,7 +50,7 @@ class AddExerciseGUI():
         
         trainingDay = Label(self.master, text="Training Day",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=4,column=0, sticky='w', pady=5)
         self.varTrainingDay = StringVar()
-        listOfDays = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+        listOfDays = self.userObject.getTrainingDays()
         trainingDayEntry = OptionMenu(self.master, self.varTrainingDay, *listOfDays)
         trainingDayEntry.grid(row = 4,column=1,pady=5)       
 
@@ -63,7 +63,7 @@ class AddExerciseGUI():
     Inputs list of returned exercises into exercise optionMenu.
     '''
     def getExercisesBasedOnBodyPart(self, bodyPart):
-        listOfExercises = self.addExerciseControllerObject.searchBodyPart(bodyPart.lower())
+        listOfExercises = self.addExerciseControllerObject.searchBodyPart(bodyPart)
         
         exerciseEntry = OptionMenu(self.master, self.varExercise, *listOfExercises)
         exerciseEntry.grid(row = 3,column=1,pady=5) 

@@ -24,10 +24,10 @@ legs,Squat
 legs,RDL
 legs,Leg Press
 legs,Leg Extension
-chest,Military Press
-chest,Close Grip Bench Press
+shoulders,Military Press
+shoulders,Close Grip Bench Press
 chest,Cable Flies
-chest,Overhead Tricep Extension
+triceps,Overhead Tricep Extension
 triceps,Tricep Extension
 shoulders,Dumbbell Shoulder Press
 biceps,Preacher Curl Machine
@@ -52,8 +52,8 @@ triceps,Overhead Tricep Extension
 shoulders,Lateral Raises
 back,Pull Downs
 biceps,Seated Cable Row
-biceps,Cable Pullover Curls
-back,Hammer Curls 
+biceps,Cable Curls
+biceps,Hammer Curls 
 biceps,Dumbbell Curls
 legs,Deadlift
 legs,Goblet Squat
