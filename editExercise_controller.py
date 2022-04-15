@@ -7,9 +7,10 @@ import myworkout_controller
 
 """This class controls the logic for user changing information about a specific exercise."""
 class EditExerciseController():
-    def __init__(self, userObject, exerciseObject):
+    def __init__(self, userObject, exerciseObject, allExercises):
         self.exerciseObject = exerciseObject
         self.userObject = userObject
+        self.allExercises = allExercises
        
 
     '''
@@ -23,7 +24,7 @@ class EditExerciseController():
     def createEditExerciseGUI(self, exerciseName):
         root = Tk()
         root.geometry("600x450")
-        editExerciseGUIObject = editExercise_gui.EditExerciseGUI(root, self.userObject, self.exerciseObject, exerciseName)
+        editExerciseGUIObject = editExercise_gui.EditExerciseGUI(root, self.userObject, self.exerciseObject, exerciseName, self.allExercises)
         root.mainloop()
 
 
@@ -44,7 +45,7 @@ class EditExerciseController():
         editExerciseGUI.destroy() # close dit exercise GUI
 
         # create MYWorkout controller and display GUI
-        myWorkoutController = myworkout_controller.MyWorkoutsController(self.userObject, self.exerciseObject)
+        myWorkoutController = myworkout_controller.MyWorkoutsController(self.userObject, self.exerciseObject, self.allExercises)
         myWorkoutController.createMyWorkoutsGUI()
 
 

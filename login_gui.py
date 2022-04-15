@@ -13,6 +13,8 @@ class LoginGUI():
         self.master = master
         self.master.configure(background= "#3E3C3C")
         self.master.title("Log In or Register")
+        self.usernameEntry = None
+        self.passwordEntry = None
         self.createMainFrame()
 
     '''
@@ -24,11 +26,11 @@ class LoginGUI():
     '''
     def createMainFrame(self): 
         # logo on top left side
-        self.welcomeTitle = Label(self.master, text="Welcome to",font=("Fixedsys", 14),height = 0, width = 40,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=0,column=0, pady=10, padx=0, sticky='w')
-        self.title = Label(self.master, text="Zyzzfit",font=("Fixedsys", 40, "bold"),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=1,column=0, pady=0, padx=0)
+        welcomeTitle = Label(self.master, text="Welcome to",font=("Fixedsys", 14),height = 0, width = 40,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=0,column=0, pady=10, padx=0, sticky='w')
+        title = Label(self.master, text="Zyzzfit",font=("Fixedsys", 40, "bold"),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=1,column=0, pady=0, padx=0)
         self.createUsernamePasswordFrame()
         self.createLoginSignUpForgetPasswordFrame()
-        self.exitButton = Button(self.master,text="Exit", command=lambda:self.closeWindow(), borderwidth=0).grid(row = 4,column=0)
+        exitButton = Button(self.master,text="Exit", command=lambda:self.closeWindow(), borderwidth=0).grid(row = 4,column=0)
 
     '''
     Intent: creates the username and password frame for the login GUI
@@ -38,13 +40,13 @@ class LoginGUI():
     '''
     def createUsernamePasswordFrame(self):
             # top credentials frame
-        self.credentials = Frame(self.master, width = 500, height = 170,borderwidth=0, background='LightGray').grid(row = 2,column=0, ipadx = 5, ipady = 5)
-        self.usernameLabel = Label(self.credentials, text="Username",font='Helvetica 13 bold',borderwidth=0, background='LightGray').grid(row = 2,column=0, padx=100, pady=15, ipadx=5, ipady=5, sticky='nw')
-        self.passwordLabel = Label(self.credentials, text="Password",font='Helvetica 13 bold',borderwidth=0, background='LightGray').grid(row=2, column=0, padx=100, pady=15, ipadx=5, ipady=5,sticky="sw")
+        credentials = Frame(self.master, width = 500, height = 170,borderwidth=0, background='LightGray').grid(row = 2,column=0, ipadx = 5, ipady = 5)
+        usernameLabel = Label(credentials, text="Username",font='Helvetica 13 bold',borderwidth=0, background='LightGray').grid(row = 2,column=0, padx=100, pady=15, ipadx=5, ipady=5, sticky='nw')
+        passwordLabel = Label(credentials, text="Password",font='Helvetica 13 bold',borderwidth=0, background='LightGray').grid(row=2, column=0, padx=100, pady=15, ipadx=5, ipady=5,sticky="sw")
         
-        self.usernameEntry = Entry(self.credentials)
+        self.usernameEntry = Entry(credentials)
         self.usernameEntry.grid(row = 2,column=0, padx=100, pady=15, ipadx=2, ipady=2, sticky="ne")
-        self.passwordEntry = Entry(self.credentials, show="*")
+        self.passwordEntry = Entry(credentials, show="*")
         self.passwordEntry.grid(row = 2,column=0, padx=100, pady=15, ipadx=2, ipady=2, sticky="se")
     
     '''
@@ -55,10 +57,10 @@ class LoginGUI():
     '''
     def createLoginSignUpForgetPasswordFrame(self):
         # bottom button frame
-        self.buttons= Frame(self.master, width = 500, height = 150, borderwidth=0, background='LightGray').grid(row = 3,column=0,pady=5, padx=5, ipadx = 5, ipady = 5)
-        self.logInButton = Button(self.buttons, text="Log In", borderwidth=0, command=lambda:self.handleLoginEvent()).grid(row = 3,column=0,padx=100,pady=15,ipadx=2,ipady=2, sticky="nw")
-        self.RegisterButton = Button(self.buttons, text="Register", borderwidth=0,command=lambda:self.createSignUpGUI()).grid(row = 3,column=0,padx=100,pady=15,ipadx=2,ipady=2, sticky="ne")
-        self.ForgotButton = Button(self.buttons, text="Forgot Password",borderwidth=0, command=lambda:self.createForgetPasswordGUI()).grid(row = 3,column=0,padx=30,pady=25,ipadx=2,ipady=2, sticky="s")
+        buttons= Frame(self.master, width = 500, height = 150, borderwidth=0, background='LightGray').grid(row = 3,column=0,pady=5, padx=5, ipadx = 5, ipady = 5)
+        logInButton = Button(buttons, text="Log In", borderwidth=0, command=lambda:self.handleLoginEvent()).grid(row = 3,column=0,padx=100,pady=15,ipadx=2,ipady=2, sticky="nw")
+        RegisterButton = Button(buttons, text="Register", borderwidth=0,command=lambda:self.createSignUpGUI()).grid(row = 3,column=0,padx=100,pady=15,ipadx=2,ipady=2, sticky="ne")
+        ForgotButton = Button(buttons, text="Forgot Password",borderwidth=0, command=lambda:self.createForgetPasswordGUI()).grid(row = 3,column=0,padx=30,pady=25,ipadx=2,ipady=2, sticky="s")
     
 
     '''
@@ -105,10 +107,11 @@ class LoginGUI():
         self.loginlogout_ControllerObject.createForgottenPasswordGUI()
     
 
-def main():
+def mainLoginGUI():
     root = Tk()
     root.geometry("650x550")
     loginGUIObject = LoginGUI(root)
     root.mainloop()
+
 if __name__ == "__main__":
-    main()
+    mainLoginGUI()

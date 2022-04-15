@@ -1,6 +1,6 @@
 from tkinter import *
 import os
-from login_gui import LoginGUI
+from login_gui import mainLoginGUI
 
 
 def set_env_variables():
@@ -13,11 +13,7 @@ def set_env_variables():
 
 def main():
     set_env_variables()
-    
-    root = Tk()
-    root.geometry("650x550")
-    loginGUIObject = LoginGUI(root)
-    root.mainloop()
+    mainLoginGUI()
 
 if __name__ == "__main__":
     main()

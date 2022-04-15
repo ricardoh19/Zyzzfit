@@ -41,11 +41,15 @@ class LoginLogoutControllers():
         self.getSnapshotOfDatabase()
         
         # insert all exercises into system
-        exercisesInDatabase = self.databaseManagerObject.getDatabaseExerciseData()
-        if exercisesInDatabase == []:
+        self.exercisesInDatabase = self.databaseManagerObject.getDatabaseExerciseData()
+        if self.exercisesInDatabase == []:
             self.databaseManagerObject.insertAllExercisesIntoDatabase()
 
 
+
+
+    def returnAllExercises(self):
+        return self.exercisesInDatabase
         
        
 
@@ -607,7 +611,7 @@ class LoginLogoutControllers():
         self.userObject = self.createUserObject(username)
         self.exerciseUserObject = self.createUserExerciseObject(username)
 
-        dashboardController = dashboard_controller.DashboardController(self.userObject, self.exerciseUserObject)
+        dashboardController = dashboard_controller.DashboardController(self.userObject, self.exerciseUserObject, self.exercisesInDatabase)
         dashboardController.createDashboardGUI()
     
     

@@ -4,17 +4,17 @@ import dashboard_gui
 import loginlogout_controller
 import myProfile_controller
 import myworkout_controller
-import requests
 import datetime
+import requests
 
 
 """This class is the intersection of App traffic after login. """
 class DashboardController():
-    def __init__(self, userObject, userExerciseObject):
+    def __init__(self, userObject, userExerciseObject, allExercises):
         self.loginlogout_controller = loginlogout_controller.LoginLogoutControllers()
-        self.dashboardGUIObject = None
         self.userObject = userObject
         self.exerciseObject = userExerciseObject
+        self.allExercises = allExercises
         self.popup_GUI_object = None
         
         
@@ -23,7 +23,7 @@ class DashboardController():
     def createDashboardGUI(self):
         root = Tk()
         root.geometry("1400x700")
-        self.dashboardGUIObject = dashboard_gui.DashboardGUI(root, self.userObject, self.exerciseObject)
+        dashboardGUIObject = dashboard_gui.DashboardGUI(root, self.userObject, self.exerciseObject, self.allExercises)
         root.mainloop()
 
     """This function creates the Dashboard GUI Object"""
@@ -36,7 +36,7 @@ class DashboardController():
         dashboardGUI.destroy() # close the dashboard GUI
 
         # create my profile controller and GUI
-        myWorkoutsControllerObject = myworkout_controller.MyWorkoutsController(self.userObject, self.exerciseObject)
+        myWorkoutsControllerObject = myworkout_controller.MyWorkoutsController(self.userObject, self.exerciseObject, self.allExercises)
         myWorkoutsControllerObject.createMyWorkoutsGUI()
     
     """This function creates the My Profile Controller"""
@@ -45,7 +45,7 @@ class DashboardController():
 
         # create my profile controller and GUI
         windowOpenedFrom = "dashboard"
-        myProfileControllerObject = myProfile_controller.MyProfileController(self.userObject, self.exerciseObject, windowOpenedFrom)
+        myProfileControllerObject = myProfile_controller.MyProfileController(self.userObject, self.exerciseObject, windowOpenedFrom, self.allExercises)
         myProfileControllerObject.createMyProfileGUI()
 
 

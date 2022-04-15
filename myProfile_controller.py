@@ -5,16 +5,17 @@ import myworkout_controller
 import myProfile_GUI
 from user import User
 from exerciseData import ExerciseData
-from database_manager import DB
+import loginlogout_controller
 
 
 """This class controls the logic for user changing their personal information or training days."""
 class MyProfileController():
-    def __init__(self, userObject, exerciseObject, windowOpenedFrom):
+    def __init__(self, userObject, exerciseObject, windowOpenedFrom, allExercises):
         self.userObject = userObject
         self.exerciseObject = exerciseObject
         self.windowOpenedFrom = windowOpenedFrom
-        self.databaseManagerObject = DB()
+        self.allExercises = allExercises
+        self.loginLogoutControllerObject = loginlogout_controller.LoginLogoutControllers()
 
     '''
     Intent: creates My Profile GUI
@@ -27,7 +28,7 @@ class MyProfileController():
     def createMyProfileGUI(self):
         root = Tk()
         root.geometry("710x550")
-        userInformationGUIObject = myProfile_GUI.MyProfileGUI(root, self.userObject, self.exerciseObject, self.windowOpenedFrom)
+        userInformationGUIObject = myProfile_GUI.MyProfileGUI(root, self.userObject, self.exerciseObject, self.windowOpenedFrom, self.allExercises)
         root.mainloop()
 
 
@@ -75,10 +76,10 @@ class MyProfileController():
 
         # create dashboard controller or myWorkouts controller
         if windowOpenedFrom == "dashboard":
-            dashboardController = dashboard_controller.DashboardController(userObject, exerciseObject)
+            dashboardController = dashboard_controller.DashboardController(userObject, exerciseObject, self.allExercises)
             dashboardController.createDashboardGUI()
         else:
-            myWorkoutsController = myworkout_controller.MyWorkoutsController(userObject, exerciseObject)
+            myWorkoutsController = myworkout_controller.MyWorkoutsController(userObject, exerciseObject, self.allExercises)
             myWorkoutsController.createMyWorkoutsGUI()
 
 
@@ -92,7 +93,7 @@ class MyProfileController():
     * Post1. exercise object is returned as None.
     '''
     def createUserExerciseObject(self, currentUserExerciseData, currentUserJunctionData):
-        allExercises = self.databaseManagerObject.getDatabaseExerciseData() # gets all exercises from database
+        allExercises = self.loginLogoutControllerObject.returnAllExercises() # gets all exercises from database
         self.userExerciseObject =  ExerciseData(currentUserExerciseData, currentUserJunctionData, allExercises) # create exercise object
         return self.userExerciseObject
 

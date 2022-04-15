@@ -4,13 +4,6 @@ import mysql.connector
 from mysql.connector import errorcode
 import os
 
-#export variables to environment
-os.environ["ZYZZFIT_DB_NAME"]= "ZyzzfitDB"
-os.environ['SQLUser']='root'
-os.environ['SQLPassword']= 'Rhern_19'
-os.environ['SQLHost'] = "localhost"
-os.environ['DB_NAME'] ='ZyzzfitDB'
-
 
 # This class creates and maintains the Zyzzfit database.
 class DB():
@@ -155,10 +148,10 @@ class DB():
             cursor.execute(f"USE {self.DB_NAME}")
             
         except mysql.connector.Error as err:
-            print(f"Database { self.DB_NAME} does not exists.")
+            
             if err.errno == errorcode.ER_BAD_DB_ERROR:
                 create_database(cursor)
-                print(f"Database { self.DB_NAME} created successfully.")
+                
                 cnx.database =  self.DB_NAME
                 
             else:
@@ -170,16 +163,15 @@ class DB():
         for table_name in TABLES:
             table_description = TABLES[table_name]
             try:
-                print("Creating table {}: ".format(table_name), end='')
+               
                 cursor.execute(table_description)
             except mysql.connector.Error as err:
                 if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
-                    print("already exists.")
-                
+                    
+                    table_exists = True
                 else:
                     print(err.msg)
-            else:
-                print("OK")
+           
 
         
         cursor.close()
@@ -448,31 +440,85 @@ class DB():
         cursor.execute(query)
         cnx.commit()
 
-
+    '''
+    Intent: Updates user age in User table.
+    * Preconditions: 
+    * DB_Name is equal to 'ZyzzfitDB'.
+    * Table that is being updated to is "User" and already exists.
+    * cursor is connected to correct database (ZyzzfitDB)
+    * Postconditions:
+    * PostO. age is updated in the database if connection to database is successful.
+    * Post1. age is not updated into the database if connection to database fails.
+    * Post2. age is not updated into the database if a parameter or all parameters are equal to None.
+    '''
     def updateUserAge(self, username, newAge):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
         query = (f"UPDATE User SET age = '{newAge}' WHERE username = '{username}'")
         cursor.execute(query)
         cnx.commit()
 
+    '''
+    Intent: Updates user weight in User table.
+    * Preconditions: 
+    * DB_Name is equal to 'ZyzzfitDB'.
+    * Table that is being updated to is "User" and already exists.
+    * cursor is connected to correct database (ZyzzfitDB)
+    * Postconditions:
+    * PostO. weight is updated in the database if connection to database is successful.
+    * Post1. weight is not updated into the database if connection to database fails.
+    * Post2. weight is not updated into the database if a parameter or all parameters are equal to None.
+    '''
     def updateUserWeight(self, username, newWeight):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
         query = (f"UPDATE User SET weight = '{newWeight}' WHERE username = '{username}'")
         cursor.execute(query)
         cnx.commit()
 
+    '''
+    Intent: Updates user height in User table.
+    * Preconditions: 
+    * DB_Name is equal to 'ZyzzfitDB'.
+    * Table that is being updated to is "User" and already exists.
+    * cursor is connected to correct database (ZyzzfitDB)
+    * Postconditions:
+    * PostO. height is updated in the database if connection to database is successful.
+    * Post1. height is not updated into the database if connection to database fails.
+    * Post2. height is not updated into the database if a parameter or all parameters are equal to None.
+    '''
     def updateUserHeight(self, username, newHeight):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
         query = (f"UPDATE User SET height = '{newHeight}' WHERE username = '{username}'")
         cursor.execute(query)
         cnx.commit()
 
+    '''
+    Intent: Updates user gender in User table.
+    * Preconditions: 
+    * DB_Name is equal to 'ZyzzfitDB'.
+    * Table that is being updated to is "User" and already exists.
+    * cursor is connected to correct database (ZyzzfitDB)
+    * Postconditions:
+    * PostO. gender is updated in the database if connection to database is successful.
+    * Post1. gender is not updated into the database if connection to database fails.
+    * Post2. gender is not updated into the database if a parameter or all parameters are equal to None.
+    '''
     def updateUserGender(self, username, newGender):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
         query = (f"UPDATE User SET gender = '{newGender}' WHERE username = '{username}'")
         cursor.execute(query)
         cnx.commit()
 
+    '''
+    Intent: Updates user calorie goal in User table.
+    * Preconditions: 
+    * DB_Name is equal to 'ZyzzfitDB'.
+    * Table that is being updated to is "User" and already exists.
+    * cursor is connected to correct database (ZyzzfitDB)
+    * Postconditions:
+    * PostO. calorie goal is updated in the database if connection to database is successful.
+    * Post1. calorie goal is not updated into the database if connection to database fails.
+    * Post2. calorie goal is not updated into the database if a parameter or all parameters are equal to None.
+    '''
     def updateUserCalorieGoal(self, username, newCalorieGoal):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
         query = (f"UPDATE User SET calorieGoal = '{newCalorieGoal}' WHERE username = '{username}'")
@@ -481,17 +527,16 @@ class DB():
 
     
         
-
-
     '''
-    Intent: Update junction data of specific user 
-    '''
-    def updateUserJunctionData(self):
-        pass
-    
-
-    '''
-    Intent: Update sets of specific exercise
+    Intent: Update sets of specific exercise in the UserExerciseInfo table.
+    * Preconditions: 
+    * DB_Name is equal to 'ZyzzfitDB'.
+    * Table that is being updated to is "UserExerciseInfo" and already exists.
+    * cursor is connected to correct database (ZyzzfitDB)
+    * Postconditions:
+    * PostO. sets is updated in the database if connection to database is successful.
+    * Post1. sets is not updated into the database if connection to database fails.
+    * Post2. sets is not updated into the database if a parameter or all parameters are equal to None.
     '''
     def updateUserExerciseSets(self, newSets, userExerciseId):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
@@ -500,7 +545,15 @@ class DB():
         cnx.commit()
 
     '''
-    Intent: Update reps of specific exercise 
+    Intent: Update repetitions of specific exercise in the UserExerciseInfo table.
+    * Preconditions: 
+    * DB_Name is equal to 'ZyzzfitDB'.
+    * Table that is being updated to is "UserExerciseInfo" and already exists.
+    * cursor is connected to correct database (ZyzzfitDB)
+    * Postconditions:
+    * PostO. repetitions is updated in the database if connection to database is successful.
+    * Post1. repetitions is not updated into the database if connection to database fails.
+    * Post2. repetitions is not updated into the database if a parameter or all parameters are equal to None.
     '''
     def updateUserExerciseReps(self, newReps, userExerciseId):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
@@ -509,7 +562,15 @@ class DB():
         cnx.commit()
 
     '''
-    Intent: Update max weight of specific exercise 
+    Intent: Update maxweight of specific exercise in the UserExerciseInfo table.
+    * Preconditions: 
+    * DB_Name is equal to 'ZyzzfitDB'.
+    * Table that is being updated to is "UserExerciseInfo" and already exists.
+    * cursor is connected to correct database (ZyzzfitDB)
+    * Postconditions:
+    * PostO. maxweight is updated in the database if connection to database is successful.
+    * Post1. maxweight is not updated into the database if connection to database fails.
+    * Post2. maxweight is not updated into the database if a parameter or all parameters are equal to None.
     '''
     def updateUserExerciseMaxWeight(self, newMaxWeight, userExerciseId):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
@@ -518,7 +579,15 @@ class DB():
         cnx.commit()
 
     '''
-    Intent: Update original weight of specific exercise 
+    Intent: Update originalweight of specific exercise in the UserExerciseInfo table.
+    * Preconditions: 
+    * DB_Name is equal to 'ZyzzfitDB'.
+    * Table that is being updated to is "UserExerciseInfo" and already exists.
+    * cursor is connected to correct database (ZyzzfitDB)
+    * Postconditions:
+    * PostO. originalweight is updated in the database if connection to database is successful.
+    * Post1. originalweight is not updated into the database if connection to database fails.
+    * Post2. originalweight is not updated into the database if a parameter or all parameters are equal to None.
     '''
     def updateUserExerciseOriginalWeight(self, newOriginalWeight, userExerciseId):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
@@ -529,6 +598,17 @@ class DB():
 
     # delete methods
 
+    '''
+    Intent: Deleted user exercise info from UserExerciseInfo table
+    * Preconditions: 
+    * DB_Name is equal to 'ZyzzfitDB'.
+    * Table that is being updated to is "UserExerciseInfo" and already exists.
+    * cursor is connected to correct database (ZyzzfitDB)
+    * Postconditions:
+    * PostO. user exercise info is deleted in the database if connection to database is successful.
+    * Post1. user exercise info is not deleted into the database if connection to database fails.
+    * Post2. user exercise info is not deleted into the database if a parameter or all parameters are equal to None.
+    '''
     def deleteDatabaseExerciseData(self, userExerciseId):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
         query = (f"SET FOREIGN_KEY_CHECKS={0};")
@@ -538,8 +618,17 @@ class DB():
         cnx.commit()
 
 
+
     '''
     Intent: deletes user training days if they are changed
+    * Preconditions: 
+    * DB_Name is equal to 'ZyzzfitDB'.
+    * Table that is being deleted from to is "TrainingDay" and already exists.
+    * cursor is connected to correct database (ZyzzfitDB)
+    * Postconditions:
+    * PostO. user training days are deleted in the database if connection to database is successful.
+    * Post1. user training days are not deleted into the database if connection to database fails.
+    * Post2. user training days are not deleted into the database if a parameter or all parameters are equal to None.
     '''
     def deleteUserTrainingDays(self, userId):
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)

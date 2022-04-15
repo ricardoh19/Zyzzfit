@@ -13,19 +13,32 @@ import myworkout_controller
 # this class controls the graphical user interface of the My Profile window. Its methods include createMainFrame, createDaysFrame,
 # handleSaveInformationEvent, and closeWindow
 class MyProfileGUI():
-    def __init__(self, master, userObject, exerciseObject, windowOpenedFrom):
-        self.loginlogout_ControllerObject = loginlogout_controller.LoginLogoutControllers()
+    def __init__(self, master, userObject, exerciseObject, windowOpenedFrom, allExercises):
         self.master = master
         self.master.configure(background= "#3E3C3C")
         self.master.title("My Profile Information")
-        self.myProfileController = myProfile_controller.MyProfileController(userObject ,exerciseObject, windowOpenedFrom)
+        self.allExercises = allExercises
+        self.myProfileController = myProfile_controller.MyProfileController(userObject ,exerciseObject, windowOpenedFrom, allExercises)
         self.userObject = userObject
         self.exerciseObject = exerciseObject
         self.windowOpenedFrom = windowOpenedFrom
         self.listOfDays = self.userObject.getTrainingDays()
         self.originalUserObject = {"age":self.userObject.getAge(), "Weight":self.userObject.getWeight(), "height": self.userObject.getHeight(),"gender": self.userObject.getGender(), "Calorie Goal": self.userObject.getCalorieGoal(), "Training days":self.userObject.getTrainingDays()}
-
         self.currentUserData = [self.userObject.getUserId(), self.userObject.getUsername(), self.userObject.getPassword(), "DummyData", self.userObject.getAge(), self.userObject.getWeight(),  self.userObject.getHeight(),self.userObject.getGender(), self.userObject.getCalorieGoal()]
+        self.monday = None
+        self.varMonday = None
+        self.tuesday = None
+        self.varTuesday = None
+        self.wednesday = None
+        self.varWednesday = None
+        self.thursday = None
+        self.varThursday = None
+        self.friday = None
+        self.varFriday = None
+        self.saturday = None
+        self.varSaturday = None
+        self.sunday = None
+        self.varSunday = None
         self.createMainFrame()
 
     '''
@@ -35,41 +48,41 @@ class MyProfileGUI():
     * Post0. main frame for userInformation is created
     '''
     def createMainFrame(self): 
-        self.title = Label(self.master, text="My Profile",font=("Fixedsys", 40, "bold"),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=1,column=0, columnspan=2, pady=0, padx=0)
+        title = Label(self.master, text="My Profile",font=("Fixedsys", 40, "bold"),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=1,column=0, columnspan=2, pady=0, padx=0)
         
         
-        self.age = Label(self.master, text="Age",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=2,column=0, sticky='w')
+        age = Label(self.master, text="Age",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=2,column=0, sticky='w')
         self.ageEntry = Entry(self.master)
         self.ageEntry.insert(0, self.userObject.getAge())
 
         self.ageEntry.grid(row = 2,column=1)
-        self.weight = Label(self.master, text="Weight (Lbs.)",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=3,column=0, sticky='w')
+        weight = Label(self.master, text="Weight (Lbs.)",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=3,column=0, sticky='w')
         self.weightEntry = Entry(self.master)
         self.weightEntry.grid(row = 3,column=1)
         self.weightEntry.insert(0, self.userObject.getWeight())
 
-        self.height = Label(self.master, text="Height (Inches)",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=4,column=0, sticky='w')
+        height = Label(self.master, text="Height (Inches)",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=4,column=0, sticky='w')
         self.heightEntry = Entry(self.master)
         self.heightEntry.grid(row = 4,column=1)
         self.heightEntry.insert(0, self.userObject.getHeight())
         
-        self.gender = Label(self.master, text="Gender",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=5,column=0, sticky='w')
+        gender = Label(self.master, text="Gender",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=5,column=0, sticky='w')
         self.clickedGender = StringVar()
         self.clickedGender.set(str(self.userObject.getGender()))
-        self.chooseGender = OptionMenu(self.master, self.clickedGender, "Man", "Woman", "Other")
-        self.chooseGender.grid(row=5,column=1)
+        chooseGender = OptionMenu(self.master, self.clickedGender, "Man", "Woman", "Other")
+        chooseGender.grid(row=5,column=1)
 
-        self.goal = Label(self.master, text="What is your goal?",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=6,column=0, sticky='w')
+        goal = Label(self.master, text="What is your goal?",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=6,column=0, sticky='w')
         self.clickedGoal = StringVar()
         self.clickedGoal.set(str(self.userObject.getCalorieGoal()))
-        self.chooseGoal = OptionMenu(self.master, self.clickedGoal, "Lose", "Maintain", "Gain")
-        self.chooseGoal.grid(row=6,column=1)
+        chooseGoal = OptionMenu(self.master, self.clickedGoal, "Lose", "Maintain", "Gain")
+        chooseGoal.grid(row=6,column=1)
 
         self.createDaysFrame()
         self.selectDays()
 
-        self.saveButton = Button(self.master,text="Save", borderwidth=0, command=lambda:self.handleSaveInformationEvent(),  highlightthickness=0).grid(row = 14,column=1, pady=50,padx=5,sticky="w")
-        self.cancelButton = Button(self.master,text="Cancel", borderwidth=0,  highlightthickness=0, command=lambda:self.closeWindow()).grid(row = 14, column=1, pady=50, padx=5)
+        saveButton = Button(self.master,text="Save", borderwidth=0, command=lambda:self.handleSaveInformationEvent(),  highlightthickness=0).grid(row = 14,column=1, pady=50,padx=5,sticky="w")
+        cancelButton = Button(self.master,text="Cancel", borderwidth=0,  highlightthickness=0, command=lambda:self.closeWindow()).grid(row = 14, column=1, pady=50, padx=5)
 
     
     '''
@@ -79,7 +92,7 @@ class MyProfileGUI():
     * Post0. day frame for My Profile GUI is created
     '''
     def createDaysFrame(self):
-        self.days = Label(self.master, text="How many days are you\n exercising?",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=7,column=0, sticky='w', ipadx=10)
+        days = Label(self.master, text="How many days are you\n exercising?",font=("Fixedsys", 15),height = 2, width = 20,borderwidth=0, background='#3E3C3C', foreground='white').grid(row=7,column=0, sticky='w', ipadx=10)
     
 
         self.varMonday = StringVar()
@@ -176,9 +189,9 @@ class MyProfileGUI():
             age = int(self.ageEntry.get())
             weight = int(self.weightEntry.get())
             height = int(self.heightEntry.get())
-            self.newCurrentUserData = [self.userObject.getUserId(), self.userObject.getUsername(), self.userObject.getPassword(), "SecurityQuestionAnswer", age, weight, height, self.clickedGender.get(), self.clickedGoal.get()]
+            newCurrentUserData = [self.userObject.getUserId(), self.userObject.getUsername(), self.userObject.getPassword(), "SecurityQuestionAnswer", age, weight, height, self.clickedGender.get(), self.clickedGoal.get()]
             #return userObject and pass it into craeteController function
-            self.myProfileController.createController(self.newCurrentUserData, self.listOfDays, self.exerciseObject, self.windowOpenedFrom, self.master)
+            self.myProfileController.createController(newCurrentUserData, self.listOfDays, self.exerciseObject, self.windowOpenedFrom, self.master)
         except ValueError:
             popupGUI = PopUpGUI("Please provide an appropriate age, weight, or height.")
             popupGUI.createPopUp()
@@ -198,8 +211,8 @@ class MyProfileGUI():
         self.master.destroy() # close the myProfile GUI
 
         if self.windowOpenedFrom == "dashboard":
-            dashboardController = dashboard_controller.DashboardController(self.userObject, self.exerciseObject)
+            dashboardController = dashboard_controller.DashboardController(self.userObject, self.exerciseObject,self.allExercises)
             dashboardController.createDashboardGUI()
         else:
-            myWorkoutsController = myworkout_controller.MyWorkoutsController(self.userObject, self.exerciseObject)
+            myWorkoutsController = myworkout_controller.MyWorkoutsController(self.userObject, self.exerciseObject,self.allExercises)
             myWorkoutsController.createMyWorkoutsGUI()

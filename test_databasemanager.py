@@ -52,7 +52,7 @@ def test_database_manager():
     # get UserExerciseJunction with day and exercise
     #print(databaseTest.getDatabaseUserExerciseJucntionData()) # (userId, exerciseId, trainingdayid)
 
-    #databaseTest.deleteDatabase()
+    databaseTest.deleteDatabase()
 
 
 

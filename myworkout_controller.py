@@ -7,16 +7,17 @@ import myProfile_controller
 import addExerciseController
 
 class MyWorkoutsController():
-    def __init__(self, userObject, exerciseObject):
+    def __init__(self, userObject, exerciseObject, allExercises):
         self.userObject = userObject
         self.exerciseObject = exerciseObject
-        self.dashboardControllerObject = dashboard_controller.DashboardController(self.userObject, self.exerciseObject)
+        self.allExercises = allExercises
+        self.dashboardControllerObject = dashboard_controller.DashboardController(self.userObject, self.exerciseObject, allExercises)
 
     """This function creates the My Workouts GUI Object"""
     def createMyWorkoutsGUI(self):
         root = Tk()
         root.geometry("1200x650")
-        myWorkoutsGUIObject = myworkout_gui.MyWorkoutGUI(root, self.userObject, self.exerciseObject)
+        myWorkoutsGUIObject = myworkout_gui.MyWorkoutGUI(root, self.userObject, self.exerciseObject, self.allExercises)
         root.mainloop()
 
     """This function creates the My Profile Controller"""
@@ -25,7 +26,7 @@ class MyWorkoutsController():
 
         # create my profile controller and my profile GUI
         windowOpenedFrom = "myWorkouts"
-        myProfileControllerObject = myProfile_controller.MyProfileController(self.userObject, self.exerciseObject, windowOpenedFrom)
+        myProfileControllerObject = myProfile_controller.MyProfileController(self.userObject, self.exerciseObject, windowOpenedFrom, self.allExercises)
         myProfileControllerObject.createMyProfileGUI()
 
 
@@ -36,7 +37,7 @@ class MyWorkoutsController():
         myWorkoutsGUI.destroy() # close myWorkouts GUI window
 
         # create dashboard controller and dashboard GUI
-        dashboardController = dashboard_controller.DashboardController(self.userObject, self.exerciseObject)
+        dashboardController = dashboard_controller.DashboardController(self.userObject, self.exerciseObject,self.allExercises)
         dashboardController.createDashboardGUI()
 
     '''
@@ -66,9 +67,9 @@ class MyWorkoutsController():
     '''
     def createEditExerciseController(self, exerciseName, myWorkoutGUI):
         myWorkoutGUI.destroy() # close myWorkouts GUI window
-
+       
         # create edit exercise controller and display edit Exercise GUI
-        editExercise_controllerObject = editExercise_controller.EditExerciseController(self.userObject, self.exerciseObject)
+        editExercise_controllerObject = editExercise_controller.EditExerciseController(self.userObject, self.exerciseObject, self.allExercises)
         editExercise_controllerObject.createEditExerciseGUI(exerciseName)
 
     '''
@@ -76,7 +77,7 @@ class MyWorkoutsController():
     '''
     def createAddExerciseController(self, myWorkoutGUI):
         myWorkoutGUI.destroy() # close myWorkouts GUI window
-        addExerciseControllerObject = addExerciseController.AddExerciseController(self.userObject, self.exerciseObject)
+        addExerciseControllerObject = addExerciseController.AddExerciseController(self.userObject, self.exerciseObject, self.allExercises)
         addExerciseControllerObject.createAddExerciseGUI()
    
     '''

@@ -9,9 +9,8 @@ class ExerciseData():
 
         if current_user_exerciseData != None and current_user_exerciseData != []: # does not add exercise data if there is not any associated with user
             self.user_exercise_data_to_dict(current_user_exerciseData, current_user_junctionData, allExerciseData)
-        else:
-            print("Info: No exercise data associated with user.")
-
+        
+        
     def __iter__(self):
         return iter(self.currentExerciseData)
 
@@ -66,7 +65,10 @@ class ExerciseData():
 
     "returns all exercise information"
     def getExerciseInfo(self, exerciseName):
-        return self.currentExerciseData[exerciseName]
+        try:
+            return self.currentExerciseData[exerciseName]
+        except KeyError:
+            return None
 
     "returns userexerciseID based on exerciseName"
     def getUserExerciseId(self, exerciseName):
@@ -74,24 +76,38 @@ class ExerciseData():
     
     "returns sets based on exerciseName"
     def getSets(self, exerciseName):
-        return self.currentExerciseData[exerciseName]["sets"]
+        try:
+            return self.currentExerciseData[exerciseName]["sets"]
+        except KeyError:
+            return None
 
     "returns reps based on exerciseName"
     def getReps(self, exerciseName):
-        return self.currentExerciseData[exerciseName]["reps"]
+        try:
+            return self.currentExerciseData[exerciseName]["reps"]
+        except KeyError:
+            return None
     
     "returns max weight based on exerciseName"
     def getMaxWeight(self, exerciseName):
-        return self.currentExerciseData[exerciseName]["Max Weight"]
+        try:
+            return self.currentExerciseData[exerciseName]["Max Weight"]
+        except KeyError:
+            return None
 
     "returns original weight based on exerciseName"
     def getOriginalWeight(self, exerciseName):
-        return self.currentExerciseData[exerciseName]["Original weight"]
+        try:
+            return self.currentExerciseData[exerciseName]["Original weight"]
+        except KeyError:
+            return None
      
     "returns training day based on exerciseName"
     def getTrainingDay(self, exerciseName):
-        return self.currentExerciseData[exerciseName]["training Day"]
-
+        try:
+            return self.currentExerciseData[exerciseName]["training Day"]
+        except KeyError:
+            return None
 
     # SET methods
 

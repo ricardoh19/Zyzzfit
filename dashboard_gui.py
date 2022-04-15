@@ -9,14 +9,13 @@ from PIL import ImageTk,Image
 # this class controls the graphical user interface of the dashboard window. Its methods include createMainframe, createMenuFrame, createDateFrame, createWorkoutFrame, openMyWorkoutGUI, 
 # createQuoteFrame, createDaysFrame, createCaloriesFrame, handleLogoutEvent, and closeWindow. 
 class DashboardGUI():
-    def __init__(self, master, userObject, exerciseObject):
+    def __init__(self, master, userObject, exerciseObject, allExercises):
         self.master = master
         self.master.configure(background= "#3E3C3C")
         self.master.title("Dashboard")
         self.userObject = userObject
         self.exerciseObject = exerciseObject
-        self.day = None
-        self.dashboardControllerObject = dashboard_controller.DashboardController(userObject, exerciseObject)
+        self.dashboardControllerObject = dashboard_controller.DashboardController(userObject, exerciseObject, allExercises)
         self.createMainFrame()
         
 
@@ -48,8 +47,8 @@ class DashboardGUI():
     def createMenuFrame(self):
         menuFrame = Frame(self.master, height=555, width = 150, relief="solid", background='white').grid(row=0,column=0, pady=5, padx=15, rowspan=4)
         menu = Label(menuFrame, text="Zyzzfit",font='fixedsys 25 bold', background='white').grid(row=0,column=0)
-        self.dashboardButton = Button(menuFrame, text="Dashboard",font='fixedsys 10 bold', borderwidth=0).grid(row=1,column=0, sticky='ne', padx=20) 
-        self.myWorkoutsButton = Button(menuFrame, text="My Workouts",font='fixedsys 10 bold', borderwidth=0, command=lambda:self.openMyWorkoutsGUI()).grid(row=1,column=0, sticky='se', padx=20) 
+        dashboardButton = Button(menuFrame, text="Dashboard",font='fixedsys 10 bold', borderwidth=0).grid(row=1,column=0, sticky='ne', padx=20) 
+        myWorkoutsButton = Button(menuFrame, text="My Workouts",font='fixedsys 10 bold', borderwidth=0, command=lambda:self.openMyWorkoutsGUI()).grid(row=1,column=0, sticky='se', padx=20) 
         image = Image.open("assets/dashboard.png")
         resize_image = image.resize((15,15))
         img = ImageTk.PhotoImage(resize_image)
@@ -84,34 +83,34 @@ class DashboardGUI():
     def createWorkoutFrame(self):
         title = Label(self.master, text="Today's Workout",font='fixedsys 10 bold', height=1, width = 20, borderwidth=0, background='#3E3C3C', foreground="white").grid(row=2,column=1, sticky='w')
 
-        self.tree = ttk.Treeview(self.master, column=("Exercise", "Sets","Reps"), show='headings', height=12)
-        self.tree.grid(row=2,column=1, pady=5, padx=3, rowspan=2, columnspan=2, sticky='s')
+        tree = ttk.Treeview(self.master, column=("Exercise", "Sets","Reps"), show='headings', height=12)
+        tree.grid(row=2,column=1, pady=5, padx=3, rowspan=2, columnspan=2, sticky='s')
         
-        self.tree.heading('Exercise', text='Exercise')
-        self.tree.column("Exercise", stretch=NO, width=400)
+        tree.heading('Exercise', text='Exercise')
+        tree.column("Exercise", stretch=NO, width=400)
 
-        self.tree.heading('Sets', text='Sets')
-        self.tree.column("Sets", stretch=NO, width=75)
+        tree.heading('Sets', text='Sets')
+        tree.column("Sets", stretch=NO, width=75)
 
-        self.tree.heading('Reps', text='Reps')
-        self.tree.column("Reps", stretch=NO, width=75)
+        tree.heading('Reps', text='Reps')
+        tree.column("Reps", stretch=NO, width=75)
 
-        self.day = self.dashboardControllerObject.getDay()
+        day = self.dashboardControllerObject.getDay()
         
         DayCount = 0
         if self.exerciseObject != None:
             for exerciseName in self.exerciseObject.keys():
-                if self.exerciseObject.getTrainingDay(exerciseName) == self.day:
+                if self.exerciseObject.getTrainingDay(exerciseName) == day:
                     DayCount +=1 
                     try:
-                        self.sets = self.exerciseObject.getSets(exerciseName)
-                        self.reps = self.exerciseObject.getReps(exerciseName)
-                        self.tree.insert('', 'end', text=exerciseName, values=(exerciseName, self.sets, self.reps))
+                        sets = self.exerciseObject.getSets(exerciseName)
+                        reps = self.exerciseObject.getReps(exerciseName)
+                        tree.insert('', 'end', text=exerciseName, values=(exerciseName, sets, reps))
                     except KeyError:
-                        self.tree.insert('', 'end', text=exerciseName, values=(exerciseName, "N/A", "N/A"))
+                        tree.insert('', 'end', text=exerciseName, values=(exerciseName, "N/A", "N/A"))
                 
         if DayCount == 0:
-            self.tree.insert('', 'end', text='', values=("No Exercises Today", "N/A", "N/A"))
+            tree.insert('', 'end', text='', values=("No Exercises Today", "N/A", "N/A"))
         
         
     '''
@@ -144,8 +143,7 @@ class DashboardGUI():
     '''
     def createQuoteFrame(self):
         quoteAPI = self.dashboardControllerObject.getQuote()
-        print(quoteAPI)
-        self.quote = Label(self.master, text="{}\n{}\n-{}".format(quoteAPI['q'][:100], quoteAPI['q'][100:], quoteAPI['a']),font='fixedsys 10 bold', height=4, width = 78, borderwidth=0, background='white').grid(row=1,column=1, columnspan=2)
+        quote = Label(self.master, text="{}\n{}\n-{}".format(quoteAPI['q'][:100], quoteAPI['q'][100:], quoteAPI['a']),font='fixedsys 10 bold', height=4, width = 78, borderwidth=0, background='white').grid(row=1,column=1, columnspan=2)
 
     
     '''

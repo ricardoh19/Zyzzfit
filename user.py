@@ -8,9 +8,7 @@ class User():
         
         if current_user_data != None and current_user_data != []: 
             self.user_data_to_dict(current_user_data, current_user_training_days)
-            
-        else:
-            print("Info: No data associated with user.")
+        
 
 
     def __str__(self):
