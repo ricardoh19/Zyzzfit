@@ -16,7 +16,7 @@ class MyWorkoutsController():
     """This function creates the My Workouts GUI Object"""
     def createMyWorkoutsGUI(self):
         root = Tk()
-        root.geometry("1200x650")
+        root.geometry("1200x675")
         myWorkoutsGUIObject = myworkout_gui.MyWorkoutGUI(root, self.userObject, self.exerciseObject, self.allExercises)
         root.mainloop()
 
@@ -56,7 +56,7 @@ class MyWorkoutsController():
         if dayLength == 6:
             suggestion = "Suggested structure of workout for 6 days: DAY 1: Chest, Shoulders, Triceps DAY 2: Back, Biceps DAY 3: Legs \nDAY 4: Chest, Shoulders, Triceps DAY 5: Back, Biceps DAY 6: Legs"
         if dayLength == 7:
-            suggestion = "Suggested structure of workout for 6 days: DAY 1: Chest, Shoulders, Triceps DAY 2: Back, Biceps DAY 3: Legs \nDAY 4: Chest, Shoulders, Triceps DAY 5: Back, Biceps DAY 6: Legs DAY 7: Cardio"
+            suggestion = "Suggested structure of workout for 7 days: DAY 1: Chest, Shoulders, Triceps DAY 2: Back, Biceps DAY 3: Legs \nDAY 4: Chest, Shoulders, Triceps DAY 5: Back, Biceps DAY 6: Legs DAY 7: Cardio"
         return "Try to keep compound movements in the beginning of a workout.\n \
         Some examples of compound Movements are Bench Press, Deadlift, Squat, and PullUps.\n\n" + suggestion
 

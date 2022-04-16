@@ -46,7 +46,7 @@ class DashboardGUI():
     '''
     def createMenuFrame(self):
         menuFrame = Frame(self.master, height=555, width = 150, relief="solid", background='white').grid(row=0,column=0, pady=5, padx=15, rowspan=4)
-        menu = Label(menuFrame, text="Zyzzfit",font='fixedsys 25 bold', background='white').grid(row=0,column=0)
+        menu = Label(menuFrame, text="Zyzzfit",font='fixedsys 23 bold', background='white').grid(row=0,column=0)
         dashboardButton = Button(menuFrame, text="Dashboard",font='fixedsys 10 bold', borderwidth=0).grid(row=1,column=0, sticky='ne', padx=20) 
         myWorkoutsButton = Button(menuFrame, text="My Workouts",font='fixedsys 10 bold', borderwidth=0, command=lambda:self.openMyWorkoutsGUI()).grid(row=1,column=0, sticky='se', padx=20) 
         image = Image.open("assets/dashboard.png")
@@ -72,7 +72,7 @@ class DashboardGUI():
     '''
     def createDateFrame(self):
         date = self.dashboardControllerObject.getFullDate()
-        date = Label(self.master, text=date,font='fixedsys 17 bold', height=2, width = 29, background='lightGray', foreground="black").grid(row=1,column=3, columnspan=2)
+        date = Label(self.master, text=date,font='fixedsys 15 bold', height=2, width = 30, background='lightGray', foreground="black").grid(row=1,column=3, columnspan=2)
 
     '''
     Intent: creates the workout frame for GUI
@@ -143,7 +143,7 @@ class DashboardGUI():
     '''
     def createQuoteFrame(self):
         quoteAPI = self.dashboardControllerObject.getQuote()
-        quote = Label(self.master, text="{}\n{}\n-{}".format(quoteAPI['q'][:100], quoteAPI['q'][100:], quoteAPI['a']),font='fixedsys 10 bold', height=4, width = 78, borderwidth=0, background='white').grid(row=1,column=1, columnspan=2)
+        quote = Label(self.master, text="{}\n{}\n-{}".format(quoteAPI['q'][:80], quoteAPI['q'][80:], quoteAPI['a']),font='fixedsys 9 bold', height=4, width = 78, borderwidth=0, background='white').grid(row=1,column=1, ipadx=15,columnspan=2)
 
     
     '''
