@@ -32,7 +32,7 @@ class AddExerciseController():
         
         allExercisesList = []
         for exercise in self.allExercises:
-            if exercise[1] == bodyPart and exercise[2] not in allExercisesList:
+            if exercise[1] == bodyPart and exercise[2] not in allExercisesList: # if body parts match
                 allExercisesList.append(exercise[2])
         return allExercisesList
 

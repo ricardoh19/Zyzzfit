@@ -92,6 +92,7 @@ class AddExerciseGUI():
             popupGUI.createPopUp()
             return False
 
+        # create add exercise controller
         self.addExerciseControllerObject.addExercise(exerciseName, day, self.master)
         
         
@@ -104,6 +105,8 @@ class AddExerciseGUI():
     * Post0. closes the add exercise window
     '''
     def closeWindow(self):
-        self.master.destroy()
+        self.master.destroy() # close the add exercise window
+
+        # create the my Workouts controller and displays my workouts GUI
         myWorkoutController = myworkout_controller.MyWorkoutsController(self.userObject, self.exerciseObject, self.allExercises)
         myWorkoutController.createMyWorkoutsGUI()

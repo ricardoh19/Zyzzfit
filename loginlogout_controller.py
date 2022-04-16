@@ -132,12 +132,13 @@ class LoginLogoutControllers():
         userData = self.setCurrentUserData(username)
         userId = userData[0]
 
+        currentUserTrainingDays = []
         # search database for trainingDays pertaining to user with username parameter
         for data in self.databaseUserTrainingDays:
             if data[2] == userId:
-                self.currentUserTrainingDays.append(data)
+                currentUserTrainingDays.append(data)
         
-        return self.currentUserTrainingDays
+        return currentUserTrainingDays
         
 
 
@@ -547,6 +548,7 @@ class LoginLogoutControllers():
         self.currentUserData = self.setCurrentUserData(username)
         userId = self.currentUserData[0]
         # insert training day for user
+        
         for day in listOfDays:
             self.databaseManagerObject.insertTrainingDays(day, userId)
 
@@ -610,7 +612,6 @@ class LoginLogoutControllers():
     def createDashboardController(self,username):
         self.userObject = self.createUserObject(username)
         self.exerciseUserObject = self.createUserExerciseObject(username)
-
         dashboardController = dashboard_controller.DashboardController(self.userObject, self.exerciseUserObject, self.exercisesInDatabase)
         dashboardController.createDashboardGUI()
     
@@ -624,8 +625,7 @@ class LoginLogoutControllers():
     '''
     def createUserObject(self, username):
         self.currentUserData = self.setCurrentUserData(username)
-        self.currentUserTrainingDays = self.setCurrentTrainingDays(username)
-        self.currentUserTrainingDays = [i[1] for i in self.currentUserTrainingDays]
+        self.currentUserTrainingDays = [i[1] for i in self.setCurrentTrainingDays(username)]
         self.userObject =  User(self.currentUserData, self.currentUserTrainingDays) # create user object
         return self.userObject
 
@@ -824,7 +824,22 @@ class LoginLogoutControllers():
     '''
     def logout_push_changes_to_database(self, username, finalUserObject, finalExerciseObject):
         self.compareUserObjects(username, finalUserObject)
+        userObject = self.createUserObject(username)
+
+        # if user has changed training days to create new workouts
+        if userObject.getTrainingDays() != finalUserObject.getTrainingDays():
+            self.databaseManagerObject.deleteUserTrainingDays(self.userObject.getUserId()) # delete training days
+            for day in finalUserObject.getTrainingDays(): # add the new training days
+                self.databaseManagerObject.insertTrainingDays(day,self.userObject.getUserId())
+
+            self.databaseManagerObject.deleteUserIdDatabaseExerciseData(self.userObject.getUserId()) # delete exercise data pertaining to user
+            userExerciseIds = self.databaseManagerObject.getUserExerciseJunctionInfo()
+            for id in userExerciseIds:
+                self.databaseManagerObject.deleteUserExerciseJunction(id[0]) # delete exercise Junction data pertaining to user
+            
+            
         self.compareExerciseObjects(username, finalExerciseObject)
+
 
     '''
     Intent: creates forgot password GUI
@@ -837,6 +852,7 @@ class LoginLogoutControllers():
     def compareUserObjects(self, username, finalUserObject):
         userObject = self.createUserObject(username)
 
+        # compare user objects and its attributes
         if userObject.getAge() != finalUserObject.getAge():
             self.databaseManagerObject.updateUserAge(username, finalUserObject.getAge())
         if userObject.getWeight() != finalUserObject.getWeight():
@@ -847,11 +863,10 @@ class LoginLogoutControllers():
             self.databaseManagerObject.updateUserGender(username, finalUserObject.getGender())
         if userObject.getCalorieGoal() != finalUserObject.getCalorieGoal():
             self.databaseManagerObject.updateUserCalorieGoal(username, finalUserObject.getCalorieGoal())
-        if userObject.getTrainingDays() != finalUserObject.getTrainingDays():
-            self.databaseManagerObject.deleteUserTrainingDays(self.userObject.getUserId()) # delete training days
-            for day in finalUserObject.getTrainingDays(): # add the new training days
-                self.databaseManagerObject.insertTrainingDays(day,self.userObject.getUserId()) 
+        
+                
 
+   
 
     '''
     Intent: compares exercise objects. The original and the most recent exercise Object when logout button is clicked. 
@@ -866,7 +881,9 @@ class LoginLogoutControllers():
 
         self.deleteExercises(exerciseObject, finalExerciseObject)
 
-        # traverse thorugh the object and compare values
+       
+        
+        # traverse thorugh the object and compare exercisevalues
         for exercise in finalExerciseObject.keys():
             if exercise in exerciseObject.keys():
                 if exerciseObject.getSets(exercise) != finalExerciseObject.getSets(exercise):
@@ -882,14 +899,13 @@ class LoginLogoutControllers():
                     userExerciseId = exerciseObject.getUserExerciseId(exercise)
                     self.databaseManagerObject.updateUserExerciseOriginalWeight(finalExerciseObject.getOriginalWeight(exercise), userExerciseId)
             
-
-        # create a list with new exercise objects
-        newList = [i for i in finalExerciseObject if i not in exerciseObject]
+       
         userId = self.userObject.getUserId()
         allExercises = self.databaseManagerObject.getDatabaseExerciseData()
-
+        
+        
         # traverse and compare if exerciseObject contains new Object
-        for exercise in newList:
+        for exercise in finalExerciseObject:
             exerciseId = self.searchForExerciseId(allExercises, exercise, "newExercise")
             sets = finalExerciseObject.getSets(exercise)
             reps = finalExerciseObject.getReps(exercise)
@@ -904,7 +920,7 @@ class LoginLogoutControllers():
             userExerciseId = self.currentUserExerciseData[-1][0]
             self.databaseManagerObject.insertDatabaseUserExerciseJunction(userExerciseId, exerciseId, day)
         
-            
+        
         
     '''
     Intent: searches for specific exercies's exerciseId. 
@@ -931,6 +947,7 @@ class LoginLogoutControllers():
     * Post0. exercise data is removed from database pertaining to specific user.
     '''
     def deleteExercises(self, exerciseObject, finalExerciseObject):
+        # Traverse through both objects and deletes exercise that is not in final exercise object
         for i in exerciseObject.keys():
             if i not in finalExerciseObject.keys():
                 self.databaseManagerObject.deleteDatabaseExerciseData(exerciseObject.getUserExerciseId(i))

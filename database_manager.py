@@ -616,6 +616,63 @@ class DB():
         query = (f"DELETE FROM UserExerciseInfo WHERE userexerciseId = '{userExerciseId}'")
         cursor.execute(query)
         cnx.commit()
+    
+
+    '''
+    Intent: deletes a row from UserExerciseInfo table depending on the userId parameter
+    * Preconditions: 
+    * DB_Name is equal to 'ZyzzfitDB'.
+    * Table that is being deleted from to is "UserExerciseInfo" and already exists.
+    * cursor is connected to correct database (ZyzzfitDB)
+    * Postconditions:
+    * PostO. row from UserExerciseInfo is deleted in the database if connection to database is successful.
+    * Post1. row from UserExerciseInfo is not deleted into the database if connection to database fails.
+    * Post2. row from UserExerciseInfo is not deleted into the database if a parameter or all parameters are equal to None.
+    '''
+    def deleteUserIdDatabaseExerciseData(self, userId):
+        cursor, cnx = self.connect_to_db(db=self.DB_NAME)
+        query = (f"SET FOREIGN_KEY_CHECKS={0};")
+        cursor.execute(query)
+        query = (f"DELETE FROM UserExerciseInfo WHERE userId = '{userId}'")
+        cursor.execute(query)
+        cnx.commit()
+
+    '''
+    Intent: deletes a row from UserExerciseJunction table depending on the userexerciseId parameter
+    * Preconditions: 
+    * DB_Name is equal to 'ZyzzfitDB'.
+    * Table that is being deleted from to is "UserExerciseJunction" and already exists.
+    * cursor is connected to correct database (ZyzzfitDB)
+    * Postconditions:
+    * PostO. row from UserExerciseJunction is deleted in the database if connection to database is successful.
+    * Post1. row from UserExerciseJunction is not deleted into the database if connection to database fails.
+    * Post2. row from UserExerciseJunction is not deleted into the database if a parameter or all parameters are equal to None.
+    '''
+    def deleteUserExerciseJunction(self, userExerciseId):
+        cursor, cnx = self.connect_to_db(db=self.DB_NAME)
+        query = (f"SET FOREIGN_KEY_CHECKS={0};")
+        cursor.execute(query)
+        query = (f"DELETE FROM UserExerciseJunction WHERE userexerciseId = '{userExerciseId}'")
+        cursor.execute(query)
+        cnx.commit()
+
+    '''
+    Intent: gets data from UserExerciseJunction table. Returns a list of the result
+    * Preconditions: 
+    * DB_Name is equal to 'ZyzzfitDB'.
+    * Table that is being deleted from to is "UserExerciseJunction" and already exists.
+    * cursor is connected to correct database (ZyzzfitDB)
+    * Postconditions:
+    * PostO. data from UserExerciseJunction table is returned if connection to database is successful.
+    * Post1. data from UserExerciseJunction table is not returned if connection to database fails.
+    * Post2. data from UserExerciseJunction table is not returned if a parameter or all parameters are equal to None.
+    '''
+    def getUserExerciseJunctionInfo(self):
+        cursor, cnx = self.connect_to_db(db=self.DB_NAME)
+        query = (f"SELECT * FROM UserExerciseJunction")
+        cursor.execute(query)
+        result = [list(i) for i in cursor]
+        return result
 
 
 
