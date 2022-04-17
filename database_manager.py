@@ -285,7 +285,17 @@ class DB():
     * Post1. Data is not inserted into the database if connection to database fails.
     * Post2. Data is not inserted into the database if a parameter or all parameters are equal to None.
     '''
-    def insertDatabaseUserData(self, username, password, securityQuestionAnswer, age, weight, height, gender, calorieGoal):
+    def insertDatabaseUserData(self, userInformationObject):
+        # get values from userInformation object
+        username = userInformationObject["username"]
+        password = userInformationObject["password"]
+        securityQuestionAnswer = userInformationObject["security question"]
+        age = userInformationObject["age"]
+        weight = userInformationObject["weight"]
+        height = userInformationObject["height"]
+        gender = userInformationObject["gender"]
+        calorieGoal = userInformationObject["calorie goal"]
+        
         cursor, cnx = self.connect_to_db(db=self.DB_NAME)
         query = ("INSERT INTO User "
                     "(username,password,securityQuestionAnswer,age,weight,height,gender,calorieGoal) "

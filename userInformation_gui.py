@@ -124,7 +124,8 @@ class UserInformationGUI():
             self.listOfDays.append('Sunday')
         
         
-        self.loginlogout_ControllerObject.userInformationProcessing(self.username, self.password, self.securityQuestion, self.ageEntry.get(), self.weightEntry.get(), self.heightEntry.get(), self.clickedGender.get(), self.clickedGoal.get(), self.listOfDays, self.master)
+        userInformationDict = {"username":self.username, "password":self.password, "security question":self.securityQuestion, "age":self.ageEntry.get(), "weight":self.weightEntry.get(), "height":self.heightEntry.get(), "gender":self.clickedGender.get(), "calorie goal":self.clickedGoal.get()}
+        self.loginlogout_ControllerObject.userInformationProcessing(userInformationDict, self.listOfDays, self.master)
         
         
 

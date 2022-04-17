@@ -528,7 +528,15 @@ class LoginLogoutControllers():
     * Postconditions:
     * Post0. user is signed in and information is saved. userInformationGUI is closed and dashboard controller is created
     '''
-    def userInformationProcessing(self, username, password, securityQuestion, age, weight, height, gender, calorieGoal, listOfDays, userInformationGUI):
+    def userInformationProcessing(self, userInformationObject, listOfDays, userInformationGUI):
+        # get values from userInformation object
+        username = userInformationObject["username"]
+        age = userInformationObject["age"]
+        weight = userInformationObject["weight"]
+        height = userInformationObject["height"]
+        gender = userInformationObject["gender"]
+
+        # Error handling
         if len(listOfDays) < 2:
             popupGUI = PopUpGUI("Please choose atleast two days to exercise.")
             popupGUI.createPopUp()
@@ -546,7 +554,8 @@ class LoginLogoutControllers():
             popupGUI.createPopUp()
             return False
 
-        self.databaseManagerObject.insertDatabaseUserData(username, password, securityQuestion, age, weight, height, gender, calorieGoal)
+        # insert data into User table
+        self.databaseManagerObject.insertDatabaseUserData(userInformationObject)
         self.getSnapshotOfDatabase()
 
         # get userId
