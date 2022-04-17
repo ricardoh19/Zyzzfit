@@ -186,9 +186,9 @@ class MyProfileGUI():
             return False
 
         try: 
-            age = int(self.ageEntry.get())
-            weight = int(self.weightEntry.get())
-            height = int(self.heightEntry.get())
+            age = abs(int(self.ageEntry.get()))
+            weight = abs(int(self.weightEntry.get()))
+            height = abs(int(self.heightEntry.get()))
             newCurrentUserData = [self.userObject.getUserId(), self.userObject.getUsername(), self.userObject.getPassword(), "SecurityQuestionAnswer", age, weight, height, self.clickedGender.get(), self.clickedGoal.get()]
             #return userObject and pass it into craeteController function
             self.myProfileController.createController(newCurrentUserData, self.listOfDays, self.exerciseObject, self.windowOpenedFrom, self.master)

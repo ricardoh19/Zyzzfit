@@ -538,9 +538,9 @@ class LoginLogoutControllers():
             popupGUI.createPopUp()
             return False
         try: 
-            age = int(age)
-            weight = int(weight)
-            height = int(height)
+            age = abs(int(age))
+            weight = abs(int(weight))
+            height = abs(int(height))
         except ValueError:
             popupGUI = PopUpGUI("Please provide an appropriate age, weight, or height.")
             popupGUI.createPopUp()
