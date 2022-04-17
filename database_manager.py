@@ -402,15 +402,6 @@ class DB():
 
 
 
-    # testing purposes
-    def deleteDatabase(self):
-        cursor, cnx = self.connect_to_db(db=self.DB_NAME)
-        query = (f"DROP DATABASE {self.DB_NAME}")
-        cursor.execute(query)
-        cnx.commit()
-
-
-
 
     #UPDATE Methods
 
@@ -596,10 +587,11 @@ class DB():
         cnx.commit()
 
 
+
     # delete methods
 
     '''
-    Intent: Deleted user exercise info from UserExerciseInfo table
+    Intent: Delete user exercise info from UserExerciseInfo table
     * Preconditions: 
     * DB_Name is equal to 'ZyzzfitDB'.
     * Table that is being updated to is "UserExerciseInfo" and already exists.

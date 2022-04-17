@@ -29,7 +29,7 @@ class EditExerciseController():
 
 
     '''
-    Intent: This class compares the original exercise object with exercise object created in GUI. Information will be replaced if there
+    Intent: This function compares the original exercise object with exercise object created in GUI. Information will be replaced if there
     are any changes. editExerciseGUI is also closed and myWorkouts controller is created and displayed.
     '''
     def compareExerciseObjects(self, exerciseName, newExerciseObject, editExerciseGUI):

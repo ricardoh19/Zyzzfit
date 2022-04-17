@@ -46,10 +46,6 @@ class LoginLogoutControllers():
             self.databaseManagerObject.insertAllExercisesIntoDatabase()
 
 
-
-
-    def returnAllExercises(self):
-        return self.exercisesInDatabase
         
        
 
@@ -65,6 +61,15 @@ class LoginLogoutControllers():
         self.loginGUIObject = login_gui.LoginGUI(root)
         root.mainloop()
         
+    
+    '''
+    Intent: returns all exercises obtained from database.
+    * Preconditions: self.exercisesInDatabase exists 
+    * Postconditions:
+    * Post0. exercisesInDatbase is returned
+    '''
+    def returnAllExercises(self):
+        return self.exercisesInDatabase
     
 
     '''
@@ -842,12 +847,11 @@ class LoginLogoutControllers():
 
 
     '''
-    Intent: creates forgot password GUI
+    Intent: compares user object and updates the user object accordingly in the database.
     * Preconditions: 
-    * Tkinter is imported and working
-    * signUpGUI exists
+    * databaseManagerObject is connected to the database.
     * Postconditions:
-    * Post0. forgot password GUI is created
+    * Post0. user object is updated and changes are made in the database.
     '''
     def compareUserObjects(self, username, finalUserObject):
         userObject = self.createUserObject(username)

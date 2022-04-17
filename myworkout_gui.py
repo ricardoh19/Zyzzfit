@@ -17,8 +17,6 @@ class MyWorkoutGUI():
         self.dashboardControllerObject = dashboard_controller.DashboardController(userObject, exerciseObject, allExercises)
         self.myWorkoutControllerObject = myworkout_controller.MyWorkoutsController(userObject, exerciseObject, allExercises)
         self.tree = None
-        userObject = None
-        exerciseObject = None
         self.createMainFrame()
 
     '''

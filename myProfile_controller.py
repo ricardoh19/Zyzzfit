@@ -54,11 +54,12 @@ class MyProfileController():
         
 
     '''
-    Intent: Creates Dashboard Controller and calls functions to create user and exercise objects and dashboard GUI.
+    Intent: Creates Dashboard Controller or myWorkoutsController depending on the windowsOpenedFrom parameter and calls functions to create user and exercise objects and dashboard GUI.
     * Preconditions: 
-    * dashboardController() exists
+    * dashboardController() and MyWorkoutsController exists
     * Postconditions:
     * Post0. dashboard controller class is created.
+    * Post1. MyWokrouts controller is created.
     '''
     def createController(self, currentUserData, trainingDaysList, exerciseObject, windowOpenedFrom, myProfileGUI):
         myProfileGUI.destroy() # close the MyProfile GUI

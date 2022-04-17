@@ -63,46 +63,46 @@ class ExerciseData():
 
     # GET methods
 
-    "returns all exercise information"
+    '''returns all exercise information'''
     def getExerciseInfo(self, exerciseName):
         try:
             return self.currentExerciseData[exerciseName]
         except KeyError:
             return None
 
-    "returns userexerciseID based on exerciseName"
+    '''returns userexerciseID based on exerciseName'''
     def getUserExerciseId(self, exerciseName):
         return self.currentExerciseData[exerciseName]["userexerciseId"]
     
-    "returns sets based on exerciseName"
+    '''returns sets based on exerciseName'''
     def getSets(self, exerciseName):
         try:
             return self.currentExerciseData[exerciseName]["sets"]
         except KeyError:
             return None
 
-    "returns reps based on exerciseName"
+    '''returns reps based on exerciseName'''
     def getReps(self, exerciseName):
         try:
             return self.currentExerciseData[exerciseName]["reps"]
         except KeyError:
             return None
     
-    "returns max weight based on exerciseName"
+    '''returns max weight based on exerciseName'''
     def getMaxWeight(self, exerciseName):
         try:
             return self.currentExerciseData[exerciseName]["Max Weight"]
         except KeyError:
             return None
 
-    "returns original weight based on exerciseName"
+    '''returns original weight based on exerciseName'''
     def getOriginalWeight(self, exerciseName):
         try:
             return self.currentExerciseData[exerciseName]["Original weight"]
         except KeyError:
             return None
      
-    "returns training day based on exerciseName"
+    '''returns training day based on exerciseName'''
     def getTrainingDay(self, exerciseName):
         try:
             return self.currentExerciseData[exerciseName]["training Day"]
@@ -139,7 +139,7 @@ class ExerciseData():
        
 
 
-
+    ''' Inserts exercise into exercise data'''
     def insertExercise(self, exerciseName, largestExerciseId, day):
         count = 0
         for data in self.currentExerciseData:

@@ -15,7 +15,7 @@ class DashboardController():
         self.userObject = userObject
         self.exerciseObject = userExerciseObject
         self.allExercises = allExercises
-        self.popup_GUI_object = None
+
         
         
 
@@ -66,7 +66,7 @@ class DashboardController():
 
     """This function returns dictionary with quote and author fetched from zenquotes API"""
     def getQuote(self):
-        fullresponse = requests.get("https://zenquotes.io/api/quotes/random")
+        fullresponse = requests.get("https://zenquotes.io/api/quotes/random") # API
         response = fullresponse.json()[0]
         quote = response['q']
         author = response['a']
